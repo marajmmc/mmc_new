@@ -319,4 +319,19 @@ $lang['education_type_general']='সাধারণ শিক্ষা';
 $lang['education_type_madrasha']='মাদ্রাসা শিক্ষা ';
 $lang['SCHOOL_CLASS_INFORMATION_SUBMITED']='আপনার প্রতিবেদন দাখিল  হয়েছে ';
 
+/////////  DASHBOARD
+
+$lang['INSTITUTE']=' শিক্ষা প্রতিষ্ঠান ';
+$lang['NUMBER_OF_APPROVED_ALL_INSTITUTE']='নিবন্ধিত শিক্ষা প্রতিষ্ঠান ';
+$lang['NUMBER_OF_APPROVED_GENERAL_INSTITUTE']='সাধারণ  শিক্ষা প্রতিষ্ঠান ';
+$lang['NUMBER_OF_APPROVED_MADRASHA_INSTITUTE']='মাদ্রাসা  শিক্ষা প্রতিষ্ঠান ';
+$lang['NUMBER_OF_PRIMARY_LEVEL']='প্রাথমিক স্তর  ';
+$lang['NUMBER_OF_SECONDARY_LEVEL']='মাধ্যমিক স্তর  ';
+$lang['NUMBER_OF_INTERMEDIATE_LEVEL']='উচ্চমাধ্যমিক স্তর ';
+$lang['NUMBER_OF_APPLIED_INSTITUTE']='আবেদনকৃতর সংখ্যা ';
+$lang['NUMBER_OF_USERS']='ব্যবহারকারীর সংখ্যা ';
+$lang['MMC_TOTAL']='এমএমসি ';
+$lang['YESTERDAY']='গতকাল ';
+$lang['NUMBER_OF_UNION_YESTERDAY']='সেরা ইউনিয়ন (গতকাল) ';
+
 

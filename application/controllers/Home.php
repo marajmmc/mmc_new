@@ -7,17 +7,15 @@ class Home extends Root_Controller
     {
         //
         parent::__construct();
-   //     $this->load->model("nstitute/Institute");
-        $this->load->model("institute/Institute_model");
-       
-        $this->load->helper('url');
-       
+        //     $this->load->model("nstitute/Institute");
+        //$this->load->model("institute/Institute_model");
+        //$this->load->helper('url');
+
     }
     
     public function index()
     {
         $ajax['status']=true;
-
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("website","",true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
 
@@ -27,23 +25,33 @@ class Home extends Root_Controller
     }
     public function dashboard()
     {
-        $CI =& get_instance();
         $user=User_helper::get_user();
         if($user)
         {
-        //    $this->dashboard_page();
-          $data['userinfo']=$this->Institute_model->get_user_information($user->id);
-     //     $instituteinfo=$this->Institute_model->get_user_information($user->id);
-         // print_r($instituteinfo);
-            $ajax['status']=true;
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/dashboard",$data,true));
-            $this->jsonReturn($ajax);
+            $this->dashboard_page();
         }
         else
         {
             $this->login_page();
         }
+
+        //        $CI =& get_instance();
+        //        $user=User_helper::get_user();
+        //        if($user)
+        //        {
+        //        //    $this->dashboard_page();
+        //          $data['userinfo']=$this->Institute_model->get_user_information($user->id);
+        //        //     $instituteinfo=$this->Institute_model->get_user_information($user->id);
+        //         // print_r($instituteinfo);
+        //            $ajax['status']=true;
+        //            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+        //            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/dashboard",$data,true));
+        //            $this->jsonReturn($ajax);
+        //        }
+        //        else
+        //        {
+        //            $this->login_page();
+        //        }
     }
     public function login()
     {
@@ -58,12 +66,12 @@ class Home extends Root_Controller
             {
                 if(User_helper::login($this->input->post("username"),$this->input->post("password")))
                 {
-                            //          $user=User_helper::get_user();
-                         //              $user_info['user_id']=$user->id;
-                         //              $user_info['login_time']=time();
-                        //             $user_info['ip_address']=$this->input->ip_address();
-                        //              $user_info['request_headers']=json_encode($this->input->request_headers());
-                       //                Query_helper::add($this->config->item('table_user_login_history'),$user_info);
+                    $user=User_helper::get_user();
+                    $user_info['user_id']=$user->id;
+                    $user_info['login_time']=time();
+                    $user_info['ip_address']=$this->input->ip_address();
+                    $user_info['request_headers']=json_encode($this->input->request_headers());
+                    Query_helper::add($this->config->item('table_user_login_history'),$user_info);
                     $this->dashboard_page($this->lang->line("MSG_LOGIN_SUCCESS"));
                 }
                 else
@@ -90,70 +98,66 @@ class Home extends Root_Controller
         redirect(base_url());
     }
     
-    public function registration(){
-    //    $this->load->library('form');
-            $this->load->library('form_validation');
-            $ajax['status']=true;
-            $data=array();
-            $data['title']=$this->lang->line("REGISTRATION_TITLE");
+    public function registration()
+    {
+        //    $this->load->library('form');
+        $this->load->library('form_validation');
+        $ajax['status']=true;
+        $data=array();
+        $data['title']=$this->lang->line("REGISTRATION_TITLE");
             
-       if($this->input->post())
-            {
-           
-           if(!$this->check_validation())
+        if($this->input->post())
         {
-            $ajax['status']=false;
-            $ajax['system_message']=$this->message;
-            $this->jsonReturn($ajax);
-        }
-        
-        else {
-            
-     //       echo $this->input->post('registration[institute]');
-  //    $this->load->model("institute/Institute");   
-    $data = array(
-    'name' => $this->input->post('registration[institute]'),
-    'code' => $this->input->post('registration[em]'),
-    'inipassword' => $this->input->post('registration[password]'),
-    'email' => $this->input->post('registration[email]'),
-    'education_type_ids' => $this->input->post('registration[education_type]'),
-    'divid' => $this->input->post('registration[divid]'),
-    'zillaid' => $this->input->post('registration[zilla]'),
-    'upozillaid' => $this->input->post('registration[upozilla]'),
-    'applied_date' => date('Y-m-d'),
-    'is_primary' => $this->input->post('registration[primary]'),
-    'is_secondary' => $this->input->post('registration[secondary]'),
-    'is_higher' => $this->input->post('registration[higher]'),
-    'user_id' => 999999,
-    'mobile' => $this->input->post('registration[mobile]'),
-    'status' => 1,
-    'approved_by' => NULL,
-    'approved_date' => NULL,
-    'comment' => NULL
-    
-);
-//print_r($data);
-     $this->Institute_model->form_insert($data);
-   // $data['message'] = 'Data Inserted Successfully';
-      $ajax['system_message']=$this->lang->line("SUCESS_MESSAGE");
-   //   $this->jsonReturn($ajax);    
-    //  redirect("/home/registration","refresh");
-            $data['divisions']=Query_helper::get_info($this->config->item('table_divisions'),array('divid value', 'divname text'), array());
-            $data['education_type']=Query_helper::get_info($this->config->item('table_education_type'),array('id value', 'name text'), array());        
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/registration",$data,true));       
-            $this->jsonReturn($ajax);
-        }
+            if(!$this->check_validation())
+            {
+                $ajax['status']=false;
+                $ajax['system_message']=$this->message;
+                $this->jsonReturn($ajax);
+            }
+            else
+            {
+                //       echo $this->input->post('registration[institute]');
+                //    $this->load->model("institute/Institute");
+                $data = array
+                (
+                    'name' => $this->input->post('registration[institute]'),
+                    'code' => $this->input->post('registration[em]'),
+                    'inipassword' => $this->input->post('registration[password]'),
+                    'email' => $this->input->post('registration[email]'),
+                    'education_type_ids' => $this->input->post('registration[education_type]'),
+                    'divid' => $this->input->post('registration[divid]'),
+                    'zillaid' => $this->input->post('registration[zilla]'),
+                    'upozillaid' => $this->input->post('registration[upozilla]'),
+                    'applied_date' => date('Y-m-d'),
+                    'is_primary' => $this->input->post('registration[primary]'),
+                    'is_secondary' => $this->input->post('registration[secondary]'),
+                    'is_higher' => $this->input->post('registration[higher]'),
+                    'user_id' => 999999,
+                    'mobile' => $this->input->post('registration[mobile]'),
+                    'status' => 1,
+                    'approved_by' => NULL,
+                    'approved_date' => NULL,
+                    'comment' => NULL
+                );
 
-       }
-        
-           $data['divisions']=Query_helper::get_info($this->config->item('table_divisions'),array('divid value', 'divname text'), array());
-           $data['education_type']=Query_helper::get_info($this->config->item('table_education_type'),array('id value', 'name text'), array());
-             
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/registration",$data,true));   
-        
-         $this->jsonReturn($ajax);
+                //print_r($data);
+                $this->Institute_model->form_insert($data);
+                // $data['message'] = 'Data Inserted Successfully';
+                $ajax['system_message']=$this->lang->line("SUCESS_MESSAGE");
+                //   $this->jsonReturn($ajax);
+                //  redirect("/home/registration","refresh");
+                $data['divisions']=Query_helper::get_info($this->config->item('table_divisions'),array('divid value', 'divname text'), array());
+                $data['education_type']=Query_helper::get_info($this->config->item('table_education_type'),array('id value', 'name text'), array());
+                $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+                $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/registration",$data,true));
+                $this->jsonReturn($ajax);
+            }
+        }
+        $data['divisions']=Query_helper::get_info($this->config->item('table_divisions'),array('divid value', 'divname text'), array());
+        $data['education_type']=Query_helper::get_info($this->config->item('table_education_type'),array('id value', 'name text'), array());
+        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/registration",$data,true));
+        $this->jsonReturn($ajax);
     }
 
     
@@ -175,102 +179,118 @@ class Home extends Root_Controller
         $this->jsonReturn($ajax);
     }
     
-    public function education_level(){
+    public function education_level()
+    {
         
-    $education_level=$this->input->post('education_level');
-    $educationlevel=Query_helper::get_info($this->config->item('table_classes'),array('id value', 'name text'), array('education_level_id = '.$education_level));
-    $ajax['status']=true;
-    $ajax['system_content'][]=array("id"=>"#classes","html"=>$this->load_view("dropdown",array('drop_down_options'=>$educationlevel),true));
-    $this->jsonReturn($ajax);   
-        
-    }
-    
-    public function education_levelnew(){
-        
-    $education_level=$this->input->post('education_level');
-    $num=$this->input->post('num');
-    $educationlevel=Query_helper::get_info($this->config->item('table_classes'),array('id value', 'name text'), array('education_level_id = '.$education_level));
-    $ajax['status']=true;
-    $ajax['system_content'][]=array("id"=>"#classesid".$num."","html"=>$this->load_view("dropdown",array('drop_down_options'=>$educationlevel),true));
-    $this->jsonReturn($ajax);   
+        $education_level=$this->input->post('education_level');
+        $educationlevel=Query_helper::get_info($this->config->item('table_classes'),array('id value', 'name text'), array('education_level_id = '.$education_level));
+        $ajax['status']=true;
+        $ajax['system_content'][]=array("id"=>"#classes","html"=>$this->load_view("dropdown",array('drop_down_options'=>$educationlevel),true));
+        $this->jsonReturn($ajax);
         
     }
     
-     public function education_classes(){
+    public function education_levelnew()
+    {
         
-    $education_level=$this->input->post('education_level');
-    $classes=$this->input->post('classes');
-    $education_type_ids=$this->input->post('education_type_ids');
-   
-    if ($classes) {
-             if ($classes < 6) {
+        $education_level=$this->input->post('education_level');
+        $num=$this->input->post('num');
+        $educationlevel=Query_helper::get_info($this->config->item('table_classes'),array('id value', 'name text'), array('education_level_id = '.$education_level));
+        $ajax['status']=true;
+        $ajax['system_content'][]=array("id"=>"#classesid".$num."","html"=>$this->load_view("dropdown",array('drop_down_options'=>$educationlevel),true));
+        $this->jsonReturn($ajax);
+        
+    }
+    
+     public function education_classes()
+     {
+        
+        $education_level=$this->input->post('education_level');
+        $classes=$this->input->post('classes');
+        $education_type_ids=$this->input->post('education_type_ids');
+
+        if ($classes)
+        {
+             if ($classes < 6)
+             {
                  $education_level = 5;
-             }elseif( 5< $classes && $classes< 11){
+             }
+             elseif
+             ( 5< $classes && $classes< 11)
+             {
                  $education_level = 6;
-             }elseif( $classes > 10){
+             }
+             elseif( $classes > 10)
+             {
                  $education_level = 7 ;
              }
-         }
+        }
          
         $this->db->where(array('class_id' => $classes, 'education_level_id' => $education_level, 'education_type_id' => $education_type_ids));
         $query = $this->db->get($this->config->item('table_subject'));
         $subjects = array();
         $subjectname = '';
-        if($query->result()){
-            foreach ($query->result() as $subject) {
-            $subjects[$subject->id] = $subject->name;
-         
-            $subjectname .= '<input name="subject['.$subject->id.']['.$subject->name.']" type="checkbox" value="'.$subject->id.'" /><label for='.$subject->name.'>'.$subject->name.'</label>';
+        if($query->result())
+        {
+            foreach ($query->result() as $subject)
+            {
+                $subjects[$subject->id] = $subject->name;
+                $subjectname .= '<input name="subject['.$subject->id.']['.$subject->name.']" type="checkbox" value="'.$subject->id.'" /><label for='.$subject->name.'>'.$subject->name.'</label>';
             }
-        //    return $subjects;
-            
+            //    return $subjects;
             $this->jsonReturn($subjectname); 
         }
-
     }
     
     
-    public function education_classesnew(){
+    public function education_classesnew()
+    {
         
-    $education_level=$this->input->post('education_level');
-    $classes=$this->input->post('classes');
-    $education_type_ids=$this->input->post('education_type_ids');
-   
-    if ($classes) {
-             if ($classes < 6) {
+        $education_level=$this->input->post('education_level');
+        $classes=$this->input->post('classes');
+        $education_type_ids=$this->input->post('education_type_ids');
+
+        if ($classes)
+        {
+             if ($classes < 6)
+             {
                  $education_level = 5;
-             }elseif( 5< $classes && $classes< 11){
+             }elseif( 5< $classes && $classes< 11)
+             {
                  $education_level = 6;
-             }elseif( $classes > 10){
+             }
+             elseif( $classes > 10)
+             {
                  $education_level = 7 ;
              }
-         }
+        }
          
         $this->db->where(array('class_id' => $classes, 'education_level_id' => $education_level, 'education_type_id' => $education_type_ids));
         $query = $this->db->get($this->config->item('table_subject'));
         $subjects = array();
         $subjectname = '';
-        if($query->result()){
-            foreach ($query->result() as $subject) {
-            $subjects[$subject->id] = $subject->name;
-         
-            $subjectname .= '<input name="subject['.$subject->id.']['.$subject->name.']" type="checkbox" value="'.$subject->id.'" /><label for='.$subject->name.'>'.$subject->name.'</label>';
+        if($query->result())
+        {
+            foreach ($query->result() as $subject)
+            {
+                $subjects[$subject->id] = $subject->name;
+                $subjectname .= '<input name="subject['.$subject->id.']['.$subject->name.']" type="checkbox" value="'.$subject->id.'" /><label for='.$subject->name.'>'.$subject->name.'</label>';
             }
-        //    return $subjects;
-            
+            //    return $subjects;
             $this->jsonReturn($subjectname); 
         }
 
     }
 
     
-    public function education_classescollege(){
+    public function education_classescollege()
+    {
         
-    $classes=$this->input->post('classes');
-    $educationlevel=Query_helper::get_info($this->config->item('table_classes'),array('id value', 'name text'), array('education_level_id = '.$classes));
-    $ajax['status']=true;
-    $ajax['system_content'][]=array("id"=>"#classes","html"=>$this->load_view("dropdown",array('drop_down_options'=>$educationlevel),true));
-    $this->jsonReturn($ajax);   
+        $classes=$this->input->post('classes');
+        $educationlevel=Query_helper::get_info($this->config->item('table_classes'),array('id value', 'name text'), array('education_level_id = '.$classes));
+        $ajax['status']=true;
+        $ajax['system_content'][]=array("id"=>"#classes","html"=>$this->load_view("dropdown",array('drop_down_options'=>$educationlevel),true));
+        $this->jsonReturn($ajax);
         
     }
     
@@ -300,22 +320,24 @@ class Home extends Root_Controller
     }
     
     
-    public function isEMExist($key) {
-  //$this->Institute->EM_exists($key);
+    public function isEMExist($key)
+    {
+        //$this->Institute->EM_exists($key);
         
         $CI =& get_instance();
         $this->db->where('code', $key);
-	$query = $this->db->get($CI->config->item('table_institute'));
+	    $query = $this->db->get($CI->config->item('table_institute'));
         
  
-    if ($query->num_rows() > 0){
-        $this->form_validation->set_message('isEMExist', 'This %s already registred');
-        return FALSE;
+        if ($query->num_rows() > 0)
+        {
+            $this->form_validation->set_message('isEMExist', 'This %s already registred');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
     }
-    else{
-        return TRUE;
-    }
-}
 
-    
 }
