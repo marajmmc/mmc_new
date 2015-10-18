@@ -67,6 +67,8 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                             <?php
                             }
                             ?>
+                            <th><?php echo $this->lang->line('DATE');?></th>
+                            <th><?php echo $this->lang->line('SUBJECT');?></th>
                         </tr>
                     </thead>
                     <tbody>

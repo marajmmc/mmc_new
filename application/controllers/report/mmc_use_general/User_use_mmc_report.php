@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Approved_institute_report extends CI_Controller
+class User_use_mmc_report extends CI_Controller
 {
     public $permissions;
     function __construct()
@@ -13,7 +13,7 @@ class Approved_institute_report extends CI_Controller
         //check security and loged user
         $this->lang->load("report", $this->config->item('GET_LANGUAGE'));
         $this->lang->load("my", $this->config->item('GET_LANGUAGE'));
-        $this->load->model("report/approved_institute_report_model");
+        $this->load->model("report/user_use_mmc_report_model");
     }
 
     public function index($task="search",$id=0)
@@ -46,17 +46,18 @@ class Approved_institute_report extends CI_Controller
             $data['to_date']=$to_date;
             $data['report_status']=$status;
 
-            $data['title']=$this->lang->line("REPORT_APPROVED_INSTITUTE_TITLE");
+            $data['title']=$this->lang->line("REPORT_USER_USE_MMC_TITLE");
             $upazila=$this->input->get('upazila');
             $union=$this->input->get('union');
-            $data['reports']=$this->approved_institute_report_model->get_approved_institute_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, 1);
-            $this->load->view('default/report/institute/approved_institute_report',$data);
+            $data['reports']=$this->user_use_mmc_report_model->get_user_use_mmc_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, 1);
+            $this->load->view('default/report/mmc_use_general/user_use_mmc_report',$data);
         }
         else
         {
 
-            $this->load->model("report/approved_institute_report_model");
-            $data['title']=$this->lang->line("REPORT_APPROVED_INSTITUTE_TITLE");
+            $this->load->model("report/user_use_mmc_report_model");
+            $data['title']=$this->lang->line("REPORT_USER_USE_MMC_TITLE");
+
             $division=$this->input->get('division');
             $zilla=$this->input->get('zilla');
             $upazila=$this->input->get('upazila');
@@ -65,8 +66,9 @@ class Approved_institute_report extends CI_Controller
             $to_date=$this->input->get('to_date');
             $data['from_date']=$from_date;
             $data['to_date']=$to_date;
-            $data['reports']=$this->approved_institute_report_model->get_approved_institute_list($division, $zilla, $upazila, $union, $from_date, $to_date);
-            $html=$this->load->view('default/report/institute/approved_institute_report',$data,true);
+
+            $data['reports']=$this->user_use_mmc_report_model->get_user_use_mmc_list($division, $zilla, $upazila, $union, $from_date, $to_date);
+            $html=$this->load->view('default/report/mmc_use_general/user_use_mmc_report',$data,true);
             //echo $html;
             System_helper::get_pdf($html);
         }

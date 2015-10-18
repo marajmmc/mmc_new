@@ -40,44 +40,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['REPORT_HEADER_TITLE']		= 'মাল্টিমিডিয়া ক্লাসরুম ম্যানেজমেন্ট সিস্টেম';
 $lang['REPORT_CURRENT_DATE_VIEW']		= 'প্রতিবেদনের তারিখ:  '. System_helper::Get_Eng_to_Bng(date('d-m-Y'));
+$lang['DO_DATA_FOUND'] = 'তথ্য খুজে পাওয়া যায়নি।';
 $lang['FROM_DATE'] = 'তারিখ হইতে';
 $lang['TO_DATE'] = 'তারিখ পর্যন্ত';
+$lang['SUBJECT'] = 'বিষয়';
+
+$lang['ALL'] = 'সকল';
+$lang['LEVEL_PRIMARY'] = 'প্রাথমিক';
+$lang['LEVEL_SECONDARY'] = 'মাধ্যমিক';
+$lang['LEVEL_HIGHER'] = 'উচ্চমাধ্যমিক';
 
 
-//// //UISC REGISTRATION
-$lang['REPORT_UISC_REGISTRATION_TITLE']		= 'রেজিস্ট্রেশানকৃত ইউনিয়নের তালিকা ';
-$lang['REPORT_UISC_REGISTRATION_MUNICIPAL_TITLE']		= 'রেজিস্ট্রেশানকৃত পৌরসভার  তালিকা ';
-$lang['REPORT_UISC_REGISTRATION_CITY_CORPORATION_TITLE']		= 'রেজিস্ট্রেশনকৃত সিটি কর্পোরেশনের তালিকা ';
-$lang['REPORT_COUNTRY_WISE_UNION_MONTHLY_INCOME_TITLE']		= 'ইউনিয়নের মাসিক আয়ের তথ্য প্রতিবেদন ( সারাদেশ )';
-$lang['REPORT_COUNTRY_WISE_MUNICIPAL_MONTHLY_INCOME_TITLE']		= 'পৌরসভার  মাসিক আয়ের তথ্য প্রতিবেদন ( সারাদেশ )';
-$lang['REPORT_COUNTRY_WISE_CITY_CORPORATION_MONTHLY_INCOME_TITLE']		= 'সিটি কর্পোরেশনের মাসিক আয়ের তথ্য প্রতিবেদন ( সারাদেশ )';
-$lang['REPORT_UISC_REGISTRATION_UNION_USER_TITLE']		= 'রেজিস্ট্রেশনকৃত ইউনিয়ন ইউজারের তালিকা ';
-$lang['REPORT_UISC_REGISTRATION_MUNICIPAL_USER_TITLE']		= 'রেজিস্ট্রেশনকৃত পৌরসভার ইউজারের তালিকা ';
-$lang['REPORT_UISC_REGISTRATION_CITY_CORPORATION_USER_TITLE']		= 'রেজিস্ট্রেশনকৃত সিটি কর্পোরেশনের ইউজারের তালিকা ';
-$lang['REPORT_INVESTED_MONEY_UNION_TITLE']		= 'ইউনিয়নের বিনিয়োগ সম্পর্কিত তথ্য তালিকা ';
-$lang['REPORT_INVESTED_MONEY_MUNICIPAL_TITLE']		= 'পৌরসভার  বিনিয়োগ সম্পর্কিত তথ্য তালিকা ';
-$lang['REPORT_INVESTED_MONEY_CITY_CORPORATION_TITLE']		= 'সিটি কর্পোরেশনের  বিনিয়োগ সম্পর্কিত তথ্য তালিকা ';
-$lang['REPORT_SERVICE_RELATED_TITLE'] = 'সেবা সম্পর্কিত তথ্য';
-$lang['SERVICE_NAME'] = 'সেবার নাম';
-$lang['REPORT_INCOME_TITLE'] = 'আয় সম্পর্কিত তথ্য';
-$lang['SERVICE_RECEIVER'] = 'সেবা গ্রহীতার নাম';
-$lang['SERVICE'] = 'সেবার নাম';
-$lang['SERVICE_INCOME_TAKA'] = 'সেবা থেকে আয় (টাকা)';
 
-$lang['REPORT_SERVICE_RELATED_TITLE'] = 'সেবা সম্পর্কিত তথ্য';
-$lang['SERVICE_NAME'] = 'সেবার নাম';
-$lang['REPORT_INCOME_TITLE'] = 'আয় সম্পর্কিত তথ্য';
-$lang['SERVICE_RECEIVER'] = 'সেবা গ্রহীতার নাম';
-$lang['SERVICE'] = 'সেবার নাম';
-$lang['SERVICE_INCOME_TAKA'] = 'সেবা থেকে আয় (টাকা)';
-$lang['REPORT_DEVICE_TITLE'] = 'ডিভাইস সম্পর্কিত তথ্য';
-$lang['REPORT_ASSET_TITLE']='উপকরন সম্পর্কিত তথ্য';
-$lang['REPORT_INVESTED_MONEY_TITLE']='বিনিয়োগ সম্পর্কিত তথ্য ';
-$lang['RESOURCE_NAME']='উপকরনের নাম';
-$lang['RESOURCE_DETAIL']='বিস্তারিত';
-$lang['QUANTITY']='সংখ্যা';
-$lang['QUANTITY']='সংখ্যা';
-
-$lang['REPORT_UNO_ACTIVITIES_LOGIN_STATUS_TITLE']="ইউএনও এক্টিভিটি লগইন স্ট্যাটাস ";
-
-
+$lang['REPORT_APPROVED_INSTITUTE_TITLE'] = ' নিবন্ধিত সাধারণ শিক্ষা প্রতিষ্ঠানের প্রতিবেদন ';
+$lang['REPORT_APPROVED_INSTITUTE_MADRASHA_TITLE'] = ' নিবন্ধিত মাদ্রাসা শিক্ষা প্রতিষ্ঠানের প্রতিবেদন ';
+$lang['REPORT_USER_USE_MMC_TITLE'] = ' এমএমসি ব্যবহার সংক্রান্ত সাধারণ শিক্ষা প্রতিষ্ঠানের প্রতিবেদন ';
