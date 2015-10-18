@@ -38,6 +38,8 @@ class Approved_institute_madrasha_report extends CI_Controller
         {
             $division=$this->input->get('division');
             $zilla=$this->input->get('zilla');
+            $upazila=$this->input->get('upazila');
+            $union=$this->input->get('union');
             $data['report_type']=$this->input->get('report_type');
             $status=$this->input->get('status');
             $from_date=$this->input->get('from_date');
@@ -47,9 +49,8 @@ class Approved_institute_madrasha_report extends CI_Controller
             $data['report_status']=$status;
 
             $data['title']=$this->lang->line("REPORT_APPROVED_INSTITUTE_MADRASHA_TITLE");
-            $upazila=$this->input->get('upazila');
-            $union=$this->input->get('union');
-            $data['reports']=$this->approved_institute_report_model->get_approved_institute_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, 2);
+
+            $data['reports']=$this->approved_institute_report_model->get_approved_institute_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, $this->config->item('INSTITUTE_MADRASHA'));
             $this->load->view('default/report/institute_madrasha/approved_institute_madrasha_report',$data);
         }
         else
@@ -60,6 +61,8 @@ class Approved_institute_madrasha_report extends CI_Controller
 
             $division=$this->input->get('division');
             $zilla=$this->input->get('zilla');
+            $upazila=$this->input->get('upazila');
+            $union=$this->input->get('union');
             $data['report_type']=$this->input->get('report_type');
             $status=$this->input->get('status');
             $from_date=$this->input->get('from_date');
@@ -68,7 +71,7 @@ class Approved_institute_madrasha_report extends CI_Controller
             $data['to_date']=$to_date;
             $data['report_status']=$status;
 
-            $data['reports']=$this->approved_institute_report_model->get_approved_institute_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, 2);
+            $data['reports']=$this->approved_institute_report_model->get_approved_institute_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, $this->config->item('INSTITUTE_MADRASHA'));
             $html=$this->load->view('default/report/institute_madrasha/approved_institute_madrasha_report',$data,true);
             //echo $html;
             System_helper::get_pdf($html);

@@ -25,18 +25,18 @@ class Dashboard_helper
         }
         else if($user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_3'))
         {
-            $CI->db->where('institute.divid',$user->division);
+            $CI->db->where('institute.divid='.$user->division);
         }
         elseif($user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_3') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_4'))
         {
-            $CI->db->where('institute.divid',$user->division);
-            $CI->db->where('institute.zillaid',$user->zilla);
+            $CI->db->where('institute.divid='.$user->division);
+            $CI->db->where('institute.zillaid='.$user->zilla);
         }
         elseif($user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_1') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_2') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_3'))
         {
-            $CI->db->where('institute.divid',$user->division);
-            $CI->db->where('institute.zillaid',$user->zilla);
-            $CI->db->where('institute.upozillaid',$user->upazila);
+            $CI->db->where('institute.divid='.$user->division);
+            $CI->db->where('institute.zillaid='.$user->zilla);
+            $CI->db->where('institute.upozillaid='.$user->upazila);
         }
         else
         {
@@ -88,6 +88,7 @@ class Dashboard_helper
 
         $CI->db->from($CI->config->item('table_institute').' institute');
         $total=$CI->db->count_all_results();
+        //echo $CI->db->last_query();
         return $total;
     }
 
@@ -95,7 +96,7 @@ class Dashboard_helper
     {
 
         $CI = & get_instance();
-        $user=User_helper::get_user();
+        //$user=User_helper::get_user();
         $CI->db->from($CI->config->item('table_users').' core_01_users');
         $CI->db->where('core_01_users.user_group_id', $CI->config->item('USER_GROUP_INSTITUTE'));
         $total=$CI->db->count_all_results();
@@ -105,7 +106,7 @@ class Dashboard_helper
     public static function get_number_of_mmc_user($type=null)
     {
         $CI = & get_instance();
-        $user=User_helper::get_user();
+        //$user=User_helper::get_user();
         //$CI->db->select('id numrows');
         $CI->db->from($CI->config->item('table_class_details').' institute_class_details');
         if($type=="YESTERDAY")
@@ -118,6 +119,144 @@ class Dashboard_helper
         return $query->num_rows();
     }
 
+    public static function get_approved_institute_list()
+    {
+        $CI = & get_instance();
+        $user=User_helper::get_user();
+        if($user->user_group_id==$CI->config->item('SUPER_ADMIN_GROUP_ID'))
+        {
+            $CI->db->select('divisions.divname element_name, COUNT(divisions.divname) element_value');
+            $CI->db->group_by('institute.divid');
 
+        }
+        else if($user->user_group_id==$CI->config->item('A_TO_I_GROUP_ID'))
+        {
+            $CI->db->select('divisions.divname element_name, COUNT(divisions.divname) element_value');
+            $CI->db->group_by('institute.divid');
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_1') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_2') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_3') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_4'))
+        {
+            $CI->db->select('divisions.divname element_name, COUNT(divisions.divname) element_value');
+            $CI->db->group_by('institute.divid');
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_DONNER_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_3'))
+        {
+            $CI->db->select('divisions.divname element_name, COUNT(divisions.divname) element_value');
+            $CI->db->group_by('institute.divid');
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_3'))
+        {
+            $CI->db->select('zillas.zillaname element_name, COUNT(zillas.zillaname) element_value');
+            $CI->db->group_by('institute.divid, institute.zillaid');
+            $CI->db->where('institute.divid='.$user->division);
+        }
+        elseif($user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_3') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_4'))
+        {
+            $CI->db->select('upa_zilas.upazilaname element_name, COUNT(upa_zilas.upazilaname) element_value');
+            $CI->db->group_by('institute.divid, institute.zillaid, institute.upozillaid');
+            $CI->db->where('institute.divid='.$user->division);
+            $CI->db->where('institute.zillaid='.$user->zilla);
+        }
+        elseif($user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_1') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_2') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_3'))
+        {
+            $CI->db->select('upa_zilas.upazilaname element_name, COUNT(upa_zilas.upazilaname) element_value');
+            $CI->db->group_by('institute.divid, institute.zillaid, institute.upozillaid');
+            $CI->db->where('institute.divid='.$user->division);
+            $CI->db->where('institute.zillaid='.$user->zilla);
+            $CI->db->where('institute.upozillaid ='.$user->upazila);
+        }
+        else
+        {
+            //$CI->db->where('','');
+        }
+
+        $CI->db->from($CI->config->item('table_institute').' institute');
+        $CI->db->join($CI->config->item('table_divisions').' divisions','divisions.divid = institute.divid', 'INNER');
+        $CI->db->join($CI->config->item('table_zillas').' zillas','zillas.divid = institute.divid AND zillas.zillaid = institute.zillaid', 'INNER');
+        $CI->db->join($CI->config->item('table_upazilas').' upa_zilas','upa_zilas.zillaid = institute.zillaid AND upa_zilas.upazilaid = institute.upozillaid', 'INNER');
+        $CI->db->where('institute.status', $CI->config->item('STATUS_ACTIVE'));
+        $result = $CI->db->get()->result_array();
+        //echo $CI->db->last_query();
+        return $result;
+    }
+
+    public static function get_institute_type_list()
+    {
+        $CI = & get_instance();
+        $user=User_helper::get_user();
+        if($user->user_group_id==$CI->config->item('SUPER_ADMIN_GROUP_ID'))
+        {
+            $CI->db->select
+            ("
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_GENERAL').") general,
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_MADRASHA').") madrasha
+            ", false);
+        }
+        else if($user->user_group_id==$CI->config->item('A_TO_I_GROUP_ID'))
+        {
+            $CI->db->select
+            ("
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_GENERAL').") general,
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_MADRASHA').") madrasha
+            ", false);
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_1') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_2') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_3') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_4'))
+        {
+            $CI->db->select
+            ("
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_GENERAL').") general,
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_MADRASHA').") madrasha
+            ", false);
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_DONNER_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_3'))
+        {
+            $CI->db->select
+            ("
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_GENERAL').") general,
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_MADRASHA').") madrasha
+            ", false);
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_3'))
+        {
+            $CI->db->select
+            ("
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_GENERAL')." AND ig.divid=institute.divid) general,
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_MADRASHA')." AND ig.divid=institute.divid) madrasha
+            ", false);
+            $CI->db->where('institute.divid='.$user->division);
+        }
+        elseif($user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_3') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_4'))
+        {
+            $CI->db->select
+            ("
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_GENERAL')." AND ig.divid=institute.divid AND ig.zillaid=institute.zillaid) general,
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_MADRASHA')." AND ig.divid=institute.divid AND ig.zillaid=institute.zillaid) madrasha
+            ", false);
+            $CI->db->where('institute.divid='.$user->division);
+            $CI->db->where('institute.zillaid='.$user->zilla);
+        }
+        elseif($user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_1') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_2') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_3'))
+        {
+            $CI->db->select
+            ("
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_GENERAL')." AND ig.divid=institute.divid AND ig.zillaid=institute.zillaid AND ig.upozillaid=institute.upozillaid) general,
+            (SELECT COUNT(ig.id) FROM ".$CI->config->item('table_institute')." ig WHERE ig.`status`=".$CI->config->item('STATUS_ACTIVE')." AND ig.education_type_ids=".$CI->config->item('INSTITUTE_MADRASHA')." AND ig.divid=institute.divid AND ig.zillaid=institute.zillaid AND ig.upozillaid=institute.upozillaid) madrasha
+            ", false);
+            $CI->db->where('institute.divid='.$user->division);
+            $CI->db->where('institute.zillaid='.$user->zilla);
+            $CI->db->where('institute.upozillaid ='.$user->upazila);
+        }
+        else
+        {
+            //$CI->db->where('','');
+        }
+
+        $CI->db->from($CI->config->item('table_institute').' institute');
+        $CI->db->where('institute.status', $CI->config->item('STATUS_ACTIVE'));
+        $CI->db->group_by('institute.status');
+        $result = $CI->db->get()->result_array();
+        //echo $CI->db->last_query();
+        return $result;
+    }
 
 }

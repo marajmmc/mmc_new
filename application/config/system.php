@@ -88,4 +88,8 @@ $config['month']['12'] = 'ডিসেম্বর';
 //report menu id
 $config['report_component_id']=3;
 
-// jibon
+// INSTITUTE TYPE
+$config['INSTITUTE_GENERAL']=1;
+$config['INSTITUTE_MADRASHA']=2;
+
+

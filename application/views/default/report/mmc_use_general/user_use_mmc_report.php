@@ -50,6 +50,20 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                         ?>
                         )
                     </h5>
+                    <hr />
+                    <div class="col-lg-4 text-center text-danger">
+                        <?php echo $this->lang->line('TOTAL_REGISTERED_INSTITUTE').": ".System_helper::Get_Eng_to_Bng(count($number_of_institute));?>
+                    </div>
+                    <div class="col-lg-4 text-center text-danger">
+                        <?php echo $this->lang->line('TOTAL_USING_USER').": ". System_helper::Get_Eng_to_Bng(count($number_of_user));?>
+                    </div>
+                    <div class="col-lg-4 text-center text-danger">
+                        <?php
+                        $percent=count($number_of_user)/count($number_of_institute);
+                        echo $this->lang->line('TOTAL_PARENTED').": ". System_helper::Get_Eng_to_Bng(number_format($percent*100, 2)).'%';
+                        ?>
+                    </div>
+
                 </div>
 
                 <table class="table table-responsive table-bordered">
@@ -59,15 +73,16 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                             <th><?php echo $this->lang->line('ZILLA');?></th>
                             <th><?php echo $this->lang->line('UPAZILLA');?></th>
                             <th><?php echo $this->lang->line('INSTITUTE');?></th>
-                            <?php
-                            if(empty($report_status))
-                            {
-                                ?>
-                                <th><?php echo $this->lang->line('TYPE');?></th>
-                            <?php
-                            }
-                            ?>
+                            <!--                            --><?php
+                            //                            if(empty($report_status))
+                            //                            {
+                            //                                ?>
+                            <!--                                <th>--><?php //echo $this->lang->line('TYPE');?><!--</th>-->
+                            <!--                            --><?php
+                            //                            }
+                            //                            ?>
                             <th><?php echo $this->lang->line('DATE');?></th>
+                            <th><?php echo $this->lang->line('CLASS_NAME');?></th>
                             <th><?php echo $this->lang->line('SUBJECT');?></th>
                         </tr>
                     </thead>
@@ -78,6 +93,9 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                         $division_name='';
                         $zilla_name='';
                         $upazilla_name='';
+                        $institute_name='';
+                        $class_name='';
+                        $class_date='';
                         foreach($reports as $row)
                         {
                         ?>
@@ -142,34 +160,95 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                                     }
                                     ?>
                                 </td>
-                                <td><?php echo $row['name'];?></td>
-                                <?php
-                                if(empty($report_status))
-                                {
+                                <td>
+                                    <?php
+                                    if ($institute_name == '')
+                                    {
+                                        echo $row['name'];
+                                        $institute_name = $row['name'];
+                                        //$currentDate = $preDate;
+                                    }
+                                    else if ($institute_name == $row['name'])
+                                    {
+                                        //exit;
+                                        echo "&nbsp;";
+                                    }
+                                    else
+                                    {
+                                        echo $row['name'];
+                                        $institute_name = $row['name'];
+                                    }
                                     ?>
-                                    <td>
-                                        <?php
-                                        if($row['is_primary']==1)
-                                        {
-                                            echo $this->lang->line('LEVEL_PRIMARY');
-                                        }
-                                        elseif($row['is_secondary']==1)
-                                        {
-                                            echo $this->lang->line('LEVEL_SECONDARY');
-                                        }
-                                        elseif($row['is_higher']==1)
-                                        {
-                                            echo $this->lang->line('LEVEL_HIGHER');
-                                        }
-                                        else
-                                        {
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($class_date == '')
+                                    {
+                                        echo $row['class_date'];
+                                        $class_date = $row['class_date'];
+                                        //$class_date = $preDate;
+                                    }
+                                    else if ($class_date == $row['class_date'])
+                                    {
+                                        //exit;
+                                        echo "&nbsp;";
+                                    }
+                                    else
+                                    {
+                                        echo $row['class_date'];
+                                        $class_date = $row['class_date'];
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($class_name == '')
+                                    {
+                                        echo $row['class_name'];
+                                        $class_name = $row['class_name'];
+                                        //$class_date = $preDate;
+                                    }
+                                    else if ($class_name == $row['class_name'])
+                                    {
+                                        //exit;
+                                        echo "&nbsp;";
+                                    }
+                                    else
+                                    {
+                                        echo $row['class_name'];
+                                        $class_name = $row['class_name'];
+                                    }
+                                    ?>
+                                </td>
+                                <td><?php echo $row['subject_name'];?></td>
+                            <!--                                --><?php
+                            //                                if(empty($report_status))
+                            //                                {
+                            //                                    ?>
+                            <!--                                    <td>-->
+                            <!--                                        --><?php
+                            //                                        if($row['is_primary']==1)
+                            //                                        {
+                            //                                            echo $this->lang->line('LEVEL_PRIMARY');
+                            //                                        }
+                            //                                        elseif($row['is_secondary']==1)
+                            //                                        {
+                            //                                            echo $this->lang->line('LEVEL_SECONDARY');
+                            //                                        }
+                            //                                        elseif($row['is_higher']==1)
+                            //                                        {
+                            //                                            echo $this->lang->line('LEVEL_HIGHER');
+                            //                                        }
+                            //                                        else
+                            //                                        {
+                            //
+                            //                                        }
+                            //                                        ?>
+                            <!--                                    </td>-->
+                            <!--                                --><?php
+                            //                                }
+                            //                                ?>
 
-                                        }
-                                        ?>
-                                    </td>
-                                <?php
-                                }
-                                ?>
                             </tr>
                         <?php
                         }

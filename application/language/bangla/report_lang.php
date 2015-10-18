@@ -44,6 +44,7 @@ $lang['DO_DATA_FOUND'] = 'তথ্য খুজে পাওয়া যায়ন
 $lang['FROM_DATE'] = 'তারিখ হইতে';
 $lang['TO_DATE'] = 'তারিখ পর্যন্ত';
 $lang['SUBJECT'] = 'বিষয়';
+$lang['CLASS_NAME'] = 'শ্রেণী';
 
 $lang['ALL'] = 'সকল';
 $lang['LEVEL_PRIMARY'] = 'প্রাথমিক';
@@ -55,3 +56,8 @@ $lang['LEVEL_HIGHER'] = 'উচ্চমাধ্যমিক';
 $lang['REPORT_APPROVED_INSTITUTE_TITLE'] = ' নিবন্ধিত সাধারণ শিক্ষা প্রতিষ্ঠানের প্রতিবেদন ';
 $lang['REPORT_APPROVED_INSTITUTE_MADRASHA_TITLE'] = ' নিবন্ধিত মাদ্রাসা শিক্ষা প্রতিষ্ঠানের প্রতিবেদন ';
 $lang['REPORT_USER_USE_MMC_TITLE'] = ' এমএমসি ব্যবহার সংক্রান্ত সাধারণ শিক্ষা প্রতিষ্ঠানের প্রতিবেদন ';
+$lang['REPORT_USER_USE_MMC_MADRASHA_TITLE'] = ' এমএমসি ব্যবহার সংক্রান্ত মাদ্রাসা শিক্ষা প্রতিষ্ঠানের প্রতিবেদন ';
+
+$lang['TOTAL_REGISTERED_INSTITUTE'] = 'রেজিস্ট্রারকৃত বিদ্যালয়';
+$lang['TOTAL_USING_USER'] = 'এমএমসি ব্যবহার করেছেন';
+$lang['TOTAL_PARENTED'] = 'শতকরা';

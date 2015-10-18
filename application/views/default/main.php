@@ -77,8 +77,8 @@ $user=User_helper::get_user();
     <script type="text/javascript" src="<?php echo base_url().'assets/'; ?>js/zebra_datepicker/zebra_datepicker.js"></script>
     <script type="text/javascript" src="<?php echo base_url().'assets/'; ?>js/zebra_datepicker/core.js"></script>
 <!--    //for chart libray-->
- <!--    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="http://code.highcharttable.org/master/jquery.highchartTable-min.js"></script>-->
+    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/highcharts.js"></script>
+    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/jquery.highchartTable-min.js"></script>
     <!--    <script type="text/javascript" src="--><?php //echo base_url().'assets/'; ?>
     
 <!--       PHOTO SLIDER HOME PAGE -->
@@ -135,18 +135,18 @@ $user=User_helper::get_user();
                         <div class="region region-footer-menu">
                             <div class="block block-menu" id="block-menu-menu-footer-menu">
                                 <div class="content">
-                                    <ul class="menu">
-                                        <li class="first leaf menu"><a class="active" title="" href="/">প্রথম পাতা</a><div></div></li>
-                                        <li class="leaf menu"><a title="" href="/content/feedback">রেজিস্ট্রেশন</a><div></div></li>
-                                        <li class="leaf menu"><a class="active" title="" href="/">উদ্যোক্তা লগ ইন</a><div></div></li>
-                                        <li class="leaf menu"><a class="active" title="" href="/">এডমিন লগ ইন</a><div></div></li>
-                                        <li class="leaf menu"><a class="active" title="" href="/">ই-সেবাসমূহ</a><div></div></li>
-                                        <li class="last menu" style="border-right:none !important;"><a title="" href="/contact">যোগাযোগ</a><div></div></li>
-                                    </ul>
+                                    <!--                                    <ul class="menu">-->
+                                    <!--                                        <li class="first leaf menu"><a class="active" title="" href="/">প্রথম পাতা</a><div></div></li>-->
+                                    <!--                                        <li class="leaf menu"><a title="" href="/content/feedback">রেজিস্ট্রেশন</a><div></div></li>-->
+                                    <!--                                        <li class="leaf menu"><a class="active" title="" href="/">উদ্যোক্তা লগ ইন</a><div></div></li>-->
+                                    <!--                                        <li class="leaf menu"><a class="active" title="" href="/">এডমিন লগ ইন</a><div></div></li>-->
+                                    <!--                                        <li class="leaf menu"><a class="active" title="" href="/">ই-সেবাসমূহ</a><div></div></li>-->
+                                    <!--                                        <li class="last menu" style="border-right:none !important;"><a title="" href="/contact">যোগাযোগ</a><div></div></li>-->
+                                    <!--                                    </ul>-->
                                     <ul>
                                         <li style="text-align: center;">
                                             <span helvetica="" >
-                                                Managed by <a style="color:#fff; font-family: arial, sans-serif;" target="_blank" href="http://www.softbdltd.com">SOFTBD Ltd.</a> on  behalf of DCMS
+                                                Managed by <a style="color:#fff; font-family: arial, sans-serif;" target="_blank" href="http://www.softbdltd.com">SOFTBD Ltd.</a> on  behalf of MMC
                                             </span>
                                         </li>
                                     </ul>
