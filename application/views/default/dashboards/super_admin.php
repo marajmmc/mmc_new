@@ -215,7 +215,7 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
             },
             tooltip: {
                 formatter: function() {
-                    return this.x + this.series.name+ ' এর মোট নিবন্ধিত শিক্ষা প্রতিষ্ঠান ' + this.y + ' হাজার ';
+                    return this.x + this.series.name+ ' এর মোট নিবন্ধিত শিক্ষা প্রতিষ্ঠান ' + this.y;
                 }
             },
             series:

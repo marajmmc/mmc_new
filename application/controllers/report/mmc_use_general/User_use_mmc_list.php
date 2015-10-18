@@ -11,7 +11,7 @@ class User_use_mmc_list extends Root_Controller
     {
         parent::__construct();
         $this->message='';
-        $this->permissions=Menu_helper::get_permission('report/mmc_user_general/user_use_mmc_list');
+        $this->permissions=Menu_helper::get_permission('report/mmc_use_general/user_use_mmc_list');
         //$this->controller_url='report/upload_report_model';
         $this->lang->load("report", $this->get_language());
         //$this->load->model("basic_setup/mmc_user_general/user_use_mmc_list_model");
@@ -77,8 +77,8 @@ class User_use_mmc_list extends Root_Controller
         $ajax['status']=true;
         $data['title']=$this->lang->line("REPORT_USER_USE_MMC_TITLE");
         $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("report/mmc_user_general/user_use_mmc_list",$data,true));
-        $ajax['system_page_url']=$this->get_encoded_url('report/mmc_user_general/user_use_mmc_list');
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("report/mmc_use_general/user_use_mmc_list",$data,true));
+        $ajax['system_page_url']=$this->get_encoded_url('report/mmc_use_general/user_use_mmc_list');
         $this->jsonReturn($ajax);
     }
 }
