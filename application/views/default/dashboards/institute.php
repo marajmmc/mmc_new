@@ -78,7 +78,7 @@ $user=User_helper::get_user();
 			<li colore="emerald">
                 <div class="contenuto">
                     <span class="titolo">সর্বোচ্চ আয়</span>
-                    <span class="descrizione"><?php echo sprintf($CI->lang->line('TAKA_WITH_DATA'),Dashboard_helper::get_max_income_uisc($user->zilla,$user->upazila,$user->unioun)); ?></span>
+                    <span class="descrizione"><?php //echo sprintf($CI->lang->line('TAKA_WITH_DATA'),Dashboard_helper::get_max_income_uisc($user->zilla,$user->upazila,$user->unioun)); ?></span>
                     <!-- <span class="valore"></span>	 -->
                 </div>
             </li>
@@ -86,14 +86,14 @@ $user=User_helper::get_user();
             <li colore="red">
                 <div class="contenuto">
                     <span class="titolo">সর্বনিম্ন আয়</span>
-                    <span class="descrizione"><?php echo sprintf($CI->lang->line('TAKA_WITH_DATA'),Dashboard_helper::get_min_income_uisc($user->zilla,$user->upazila,$user->unioun)); ?></span>
+                    <span class="descrizione"><?php //echo sprintf($CI->lang->line('TAKA_WITH_DATA'),Dashboard_helper::get_min_income_uisc($user->zilla,$user->upazila,$user->unioun)); ?></span>
                 </div>
             </li>
 
             <li colore="yellow">
                 <div class="contenuto">
                     <span class="titolo">বিনিয়োগকৃত টাকা</span>
-                    <span class="descrizione"><?php echo sprintf($CI->lang->line('TAKA_WITH_DATA'),Dashboard_helper::get_investment_uisc($user->uisc_id,$user->id)); ?></span>
+                    <span class="descrizione"><?php //echo sprintf($CI->lang->line('TAKA_WITH_DATA'),Dashboard_helper::get_investment_uisc($user->uisc_id,$user->id)); ?></span>
                 </div>
             </li>
 
@@ -102,7 +102,7 @@ $user=User_helper::get_user();
                     <span class="titolo">সেন্টারের ধরন</span>
                     <span class="descrizione">
                         <?php
-                            $center_location =  Dashboard_helper::get_loacation_info_uisc($user->uisc_id,$user->id);
+                            $center_location ='';//  Dashboard_helper::get_loacation_info_uisc($user->uisc_id,$user->id);
                             $config = $this->config->item('center_location_info');
                             if(isset($center_location['center_type']))
                             {
@@ -117,7 +117,7 @@ $user=User_helper::get_user();
                     <span class="titolo">বিদ্যুৎ</span>
                     <span class="descrizione">
                         <?php
-                            $data = Dashboard_helper::get_electricity_info_uisc($user->uisc_id,$user->id);
+                            $data ='';// Dashboard_helper::get_electricity_info_uisc($user->uisc_id,$user->id);
                             if(isset($data['electricity']) && $data['electricity'] == 1)
                             {
                                 echo $CI->lang->line('YES');
@@ -145,69 +145,5 @@ $user=User_helper::get_user();
 <br/>
 <br/>
 <?php
-$week = Dashboard_helper::get_uisc_weekly_income($user);
+$week = '';//Dashboard_helper::get_uisc_weekly_income($user);
 ?>
-<script>
-    $(function () {
-        $('#container').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: '<?php echo $CI->lang->line('REPORT_TITLE_UISC');?>'
-            },
-            xAxis: {
-                categories: [<?php
-             $index=0;
-             foreach($week as $day)
-             {
-                if($index==0)
-                {
-                    echo "'".$day['day']."'";
-                }
-                else
-                {
-                    echo ",'".$day['day']."'";
-                }
-                $index++;
-             }
-            ?>]
-            },
-            yAxis : {
-                title : {
-                    text : '<?php echo $CI->lang->line('TAKA');?>'
-                },
-                min : 0
-            },
-            plotOptions: {
-                series: {
-                    pointWidth: 35//width of the column bars irrespective of the chart size
-                }
-            },
-            tooltip: {
-                formatter: function() {
-                    return this.x + this.series.name+ ' এর মোট আয় ' + this.y + ' টাকা';
-                }
-            },
-            series: [{
-                name : ' <?php echo $CI->lang->line('DAY') ?>',
-                data: [<?php
-             $index=0;
-             foreach($week as $day)
-             {
-                if($index==0)
-                {
-                    echo $day['income'];
-                }
-                else
-                {
-                    echo ",".($day['income']);
-                }
-                $index++;
-             }
-            ?>]
-            }]
-        });
-    });
-
-</script>
