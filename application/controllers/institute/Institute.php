@@ -240,7 +240,7 @@ endif;
         
     }
     
-    public function classadd(){
+   public function classadd(){
         
         $user=User_helper::get_user();
      //   print_r($user);
@@ -257,114 +257,131 @@ endif;
         
     }
     
-    public function classsave(){
-         $CI =& get_instance();
-    //    print_r($_POST['subject']);
-          $institute=$this->input->post('institute');
-          $classes=$this->input->post('classesid');
-          $education_type_ids=$this->input->post('education_type_ids');
-          if($classes==1){
-              $class_name='প্রথম শ্রেণী';
-          }
-           elseif($classes==2){
-              $class_name='দ্বিতীয় শ্রেণী';
-          }
-           elseif($classes==3){
-              $class_name='তৃতীয় শ্রেণী';
-          }
-           elseif($classes==4){
-              $class_name='চুতুর্থ শ্রেণী';
-          }
-          
-           elseif($classes==5){
-              $class_name='পঞ্চম শ্রেণী';
-          }
-          
-           elseif($classes==6){
-              $class_name='ষষ্ঠ শ্রেণী';
-          }
-          
-           elseif($classes==7){
-              $class_name='সপ্তম শ্রেণী';
-          }
-          
-          elseif($classes==8){
-              $class_name='অষ্টম শ্রেণী';
-          }
-          
-          elseif($classes==9){
-              $class_name='নবম শ্রেণী';
-          }
-          
-          elseif($classes==10){
-              $class_name='দশম শ্রেণী';
-          }
-          
-          elseif($classes==11){
-              $class_name='১ম বর্ষ';
-          }
-          
-          else
-              $class_name='২য় বর্ষ';
-        
-       
-        foreach($_POST['subject'] as $key_t => $val){
-        //    echo $key_t.'---'.$val; 
-        //  echo $key_t;
-  $subjects = array();
-  $subjects[] = (int) $key_t;
-        
+    public function classsave()
+    {
+        $CI =& get_instance();
+
+        $institute=$this->input->post('institute');
+        $education_level=$this->input->post('education_level');
+        $classes=$this->input->post('classesid');
+        $classdate=$this->input->post('cladddate');
+        $subject=$this->input->post('subject');
+
+        $education_type_ids=$this->input->post('education_type_ids');
+
+        $classname = array();
+        $classes_date = array();
+        $val_class = array();
+        $subject_list=array();
+        $subjects = array();
             
-    
-    $this->db->where('id', $key_t);
-    $q = $this->db->get($CI->config->item('table_subject'))->row_array();
-//    print_r($q);
-//echo $q->name;
-  //  echo $q['name'];
-   
-   
-    $datain = array(
-'institude_id' => $institute,
-'class_name' => $class_name,
-'class_id' => $classes,
-'subject_id' => $key_t,
-'subject_name' => $q['name'],
-'education_type_id' => $education_type_ids,
-'class_date' => date("Y-m-d"),
-);
-     $this->Institute_model->form_insertclass($datain);
- //$this->db->insert('institute_class_details', $datain);   
-// $this->db->insert($CI->config->item('table_class_details'), $datain);
- 
- 
- 
- 
- $subject_list[$key_t] = $subjects;
- 
- 
-        }
-        $new_array = $subject_list;
+       for($i=0; $i < count($education_level); $i++)
+       {
+           
+           if(isset($subject[$education_level[$i]][$classes[$i]]) && !empty($education_level[$i]) && !empty($classes[$i]))
+           {
+               
+               for($s=0; $s<count($subject[$education_level[$i]][$classes[$i]]); $s++)
+               {
+                  $subjects[] = (int) $subject[$education_level[$i]][$classes[$i]][$s];  
+                    if(isset($subject[$education_level[$i]][$classes[$i]][$s]))
+                    {
+                         $this->db->where('id',$subject[$education_level[$i]][$classes[$i]][$s]);
+                         $q = $this->db->get($CI->config->item('table_subject'))->row_array();
+                         
+                            if($classes[$i]==1)
+                            {
+                                $class_name='প্রথম শ্রেণী';
+                            }
+                             elseif($classes[$i]==2){
+                                $class_name='দ্বিতীয় শ্রেণী';
+                            }
+                             elseif($classes[$i]==3){
+                                $class_name='তৃতীয় শ্রেণী';
+                            }
+                             elseif($classes[$i]==4){
+                                $class_name='চুতুর্থ শ্রেণী';
+                            }
+
+                             elseif($classes[$i]==5){
+                                $class_name='পঞ্চম শ্রেণী';
+                            }
+
+                             elseif($classes[$i]==6){
+                                $class_name='ষষ্ঠ শ্রেণী';
+                            }
+
+                             elseif($classes[$i]==7){
+                                $class_name='সপ্তম শ্রেণী';
+                            }
+
+                            elseif($classes[$i]==8){
+                                $class_name='অষ্টম শ্রেণী';
+                            }
+
+                            elseif($classes[$i]==9){
+                                $class_name='নবম শ্রেণী';
+                            }
+
+                            elseif($classes[$i]==10){
+                                $class_name='দশম শ্রেণী';
+                            }
+
+                            elseif($classes[$i]==11){
+                                $class_name='১ম বর্ষ';
+                            }
+
+                            else
+                            {
+                                $class_name='২য় বর্ষ';
+                            }
+                      
+                        $datain = array
+                        (
+                            'institude_id' => $institute,
+                            'class_name' => $class_name,
+                            'class_id' => $classes[$i],
+                            'subject_id' => $subject[$education_level[$i]][$classes[$i]][$s],
+                            'subject_name' => $q['name'],
+                            'education_type_id' => $education_type_ids,
+                            'class_date' =>$classdate[$i]
+                        );
+                        $this->Institute_model->form_insertclass($datain);
+                       
+                   
+                    }
+        //$subject_list[$classes[$i]] = $subject;
+                    
+               }
+                $subject_list[$classes[$i]] = $subjects; 
+               
+                $new_array = $subject_list;       
+                $itemcount = count($subject_list);
+
+                $dataseri = array
+                (
+                'education_type_id' => $education_type_ids,
+                'class_ids' => $classes[$i],
+                'no_of_class' => $itemcount,
+                'subject_ids' => serialize($new_array),
+                'no_of_subjects' => $itemcount,
+                'date' =>$classdate[$i],
+                'institude_id' => $institute,
+                'education_level_id' =>$education_type_ids,
+                );
+
+                $this->Institute_model->form_insertclasssumm($dataseri);
+                
+                
+           }
+                          
         
-    $serializedada=serialize($new_array);
-    
-    $itemcount = count($subject_list);
- 
- $new_array = $subject_list;    
-        $dataseri = array(
-'education_type_id' => $education_type_ids,
-'class_ids' => $classes,
-'no_of_class' => $itemcount,
-'subject_ids' => serialize($new_array),
-'no_of_subjects' => $itemcount,
-'date' => date("Y-m-d"),
-'institude_id' => $institute,
-'education_level_id' =>$education_type_ids,
-);
-   
-        $this->Institute_model->form_insertclasssumm($dataseri);
-         $ajax['system_message']=$this->lang->line("SCHOOL_CLASS_INFORMATION_SUBMITED");
-         $this->jsonReturn($ajax);
-        
+
+        } // end count loop
+
+       $ajax['system_message']=$this->lang->line("SCHOOL_CLASS_INFORMATION_SUBMITED");
+       $this->jsonReturn($ajax);
+
     }
     
 }

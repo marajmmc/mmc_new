@@ -179,14 +179,13 @@ class Home extends Root_Controller
         $this->jsonReturn($ajax);
     }
     
-    public function education_level()
-    {
+   public function education_level(){
         
-        $education_level=$this->input->post('education_level');
-        $educationlevel=Query_helper::get_info($this->config->item('table_classes'),array('id value', 'name text'), array('education_level_id = '.$education_level));
-        $ajax['status']=true;
-        $ajax['system_content'][]=array("id"=>"#classes","html"=>$this->load_view("dropdown",array('drop_down_options'=>$educationlevel),true));
-        $this->jsonReturn($ajax);
+    $education_level=$this->input->post('education_level');
+    $educationlevel=Query_helper::get_info($this->config->item('table_classes'),array('id value', 'name text'), array('education_level_id = '.$education_level));
+    $ajax['status']=true;
+    $ajax['system_content'][]=array("id"=>"#classes","html"=>$this->load_view("dropdown",array('drop_down_options'=>$educationlevel),true));
+    $this->jsonReturn($ajax);   
         
     }
     
@@ -202,44 +201,38 @@ class Home extends Root_Controller
         
     }
     
-     public function education_classes()
-     {
+     public function education_classes(){
         
-        $education_level=$this->input->post('education_level');
-        $classes=$this->input->post('classes');
-        $education_type_ids=$this->input->post('education_type_ids');
-
-        if ($classes)
-        {
-             if ($classes < 6)
-             {
+    $education_level=$this->input->post('education_level');
+    $classes=$this->input->post('classes');
+    $education_type_ids=$this->input->post('education_type_ids');
+   
+    if ($classes) {
+             if ($classes < 6) {
                  $education_level = 5;
-             }
-             elseif
-             ( 5< $classes && $classes< 11)
-             {
+             }elseif( 5< $classes && $classes< 11){
                  $education_level = 6;
-             }
-             elseif( $classes > 10)
-             {
+             }elseif( $classes > 10){
                  $education_level = 7 ;
              }
-        }
+         }
          
         $this->db->where(array('class_id' => $classes, 'education_level_id' => $education_level, 'education_type_id' => $education_type_ids));
         $query = $this->db->get($this->config->item('table_subject'));
         $subjects = array();
         $subjectname = '';
-        if($query->result())
-        {
-            foreach ($query->result() as $subject)
-            {
-                $subjects[$subject->id] = $subject->name;
-                $subjectname .= '<input name="subject['.$subject->id.']['.$subject->name.']" type="checkbox" value="'.$subject->id.'" /><label for='.$subject->name.'>'.$subject->name.'</label>';
+        if($query->result()){
+            foreach ($query->result() as $subject) {
+            $subjects[$subject->id] = $subject->name;
+         
+            $subjectname .= '<input name="subject['.$education_level.']['.$classes.'][]" type="checkbox" value="'.$subject->id.'" /><label for='.$subject->name.'>'.$subject->name.'</label>';
+         //   $subjectname .= '<input name="subject['.$education_level.']['.$classes.']['.$subject->id.']" type="checkbox" value="'.$subject->id.'" /><label for='.$subject->name.'>'.$subject->name.'</label>';
             }
-            //    return $subjects;
+        //    return $subjects;
+            
             $this->jsonReturn($subjectname); 
         }
+
     }
     
     
@@ -305,7 +298,7 @@ class Home extends Root_Controller
         $this->form_validation->set_rules('registration[upozilla]',$this->lang->line('UPOZILLA_SELECT'),'required');
         $this->form_validation->set_rules('registration[education_type]',$this->lang->line('EDUCATION_TYPE'),'required');
         $this->form_validation->set_rules('registration[institute]',$this->lang->line('SCHOOL_NAME'),'required');
-        $this->form_validation->set_rules('registration[email]',$this->lang->line('SCHOOL_EMAIL'),'trim|required|valid_email');
+		$this->form_validation->set_rules('registration[email]',$this->lang->line('SCHOOL_EMAIL'),'trim|required|valid_email|callback_isemailExist');
         $this->form_validation->set_rules('registration[mobile]',$this->lang->line('SCHOOL_MOBILE'),'required');
        // $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'required');
        $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'trim|required|callback_isEMExist');
@@ -339,5 +332,83 @@ class Home extends Root_Controller
             return TRUE;
         }
     }
+	
+	
+	 public function isemailExist($key) {
+  //$this->Institute->EM_exists($key);
+        
+        $CI =& get_instance();
+        $this->db->where('email', $key);
+	$query = $this->db->get($CI->config->item('table_institute'));
+        
+ 
+    if ($query->num_rows() > 0){
+        $this->form_validation->set_message('isemailExist', 'এই ইমেইলটি  ইতিপূর্বে  নিবন্ধিত হয়েছে');
+        return FALSE;
+    }
+    else{
+        return TRUE;
+    }
+}
 
+public function communication(){
+    
+    $data['divisions']=Query_helper::get_info($this->config->item('table_divisions'),array(),array());
+    $data['zillas']=Query_helper::get_info($this->config->item('table_zillas'),array(),array());
+    $data['zillasdp']=Query_helper::get_info($this->config->item('table_zillas'),array('zillaid value', 'zillaname text'), array());
+    $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+    $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/communication",$data,true));
+    $this->jsonReturn($ajax);
+    
+    
+}
+
+
+
+ public function getUpazilacheckbox()
+    {
+        $zilla_id=$this->input->post('zilla_id');
+        
+         $this->db->where(array('visible' => 1, 'zillaid' => $zilla_id));
+        $query = $this->db->get($this->config->item('table_upazilas'));
+        $upazilas = array();
+         $upazilaname = '';
+        if($query->result())
+        {
+            foreach ($query->result() as $upazila)
+            {
+               
+                $upazilaname .= '<input name="upozila[]" type="checkbox" value="'.$upazila->upazilaid.'" /><label for='.$upazila->upazilaname.'>'.$upazila->upazilaname.'</label>';
+            }
+            //    return $subjects;
+            $this->jsonReturn($upazilaname); 
+        }
+        
+ 
+    }
+    
+    
+     public function getUpazilaschoolcheckbox()
+    {
+        $zilla_id=$this->input->post('zillaid');
+        $upozilla_id=$this->input->post('upozilla_id');
+        
+         $this->db->where(array('status' => 2, 'zillaid' => $zilla_id, 'upozillaid' => $upozilla_id));
+        $query = $this->db->get($this->config->item('table_institute'));
+        $institutes = array();
+        $institutesname = '';
+        if($query->result())
+        {
+            foreach ($query->result() as $institutes)
+            {
+               
+                $institutesname .= '<input name="institute[]" type="checkbox" value="'.$institutes->id.'" /><label for='.$institutes->name.'>'.$institutes->name.'</label>';
+            }
+            //    return $subjects;
+            $this->jsonReturn($institutesname); 
+        }
+        
+ 
+    }
+    
 }
