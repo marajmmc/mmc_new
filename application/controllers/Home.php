@@ -363,9 +363,147 @@ public function communication(){
     
 }
 
+ private function check_validationcommunication()
+    {
 
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('message',$this->lang->line('COMMINICATION_MESSAGE'),'required');
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->message=validation_errors();
+            return false;
+        }
+        return true;
+    }
+    
+public function communicationsave(){
+ //   $divisions=$this->input->post('division'); 
+  //  print_r($division);
+//  if(isset($this->input->post('division'))){
+//      
+//      echo '';
+//  }
+    
+     if($this->input->post())
+        {
+            if(!$this->check_validationcommunication())
+            {
+                $ajax['status']=false;
+                $ajax['system_message']=$this->message;
+                $this->jsonReturn($ajax);
+            }
+            
+            else{
+         $CI =& get_instance();       
+         $this->load->library('email');       
+        $config['protocol'] = 'sendmail';
+        $config['charset'] = 'iso-8859-1';
+        $config['wordwrap'] = TRUE;
+        $config['mailtype'] = 'html';
 
- public function getUpazilacheckbox()
+        $this->email->initialize($config);    
+                
+      //     print_r($division);
+      if($this->input->post('division')):
+          $divisions=$this->input->post('division');
+           foreach ($divisions as $key => $value){
+          //     echo $value;
+            $array = array('user_group_id' => $CI->config->item('USER_GROUP_DIVISION_1'), 'division' => $value, 'status' => 2);
+            $this->db->where($array);
+            $q = $this->db->get($CI->config->item('table_users'));
+            $datadivision = $q->result_array();
+        $this->load->model("institute/Institute_model");
+        $user=User_helper::get_user();
+   //     print_r($user);
+        $userinfo=$this->Institute_model->get_user_information($user->id);
+     //   print_r($userinfo);
+       // echo $userinfo['email'];
+        $this->email->from($userinfo['email'], $userinfo['name_en']);
+        $this->email->to($datadivision[0]['email']);
+
+        $this->email->subject('Message ');
+        $html = $this->input->post('message');
+        $this->email->message($html);
+        $this->email->send();
+        
+           }
+   //     $ajax['system_message']=$this->lang->line("SUCESS_MESSAGE_DIVISION");
+    //    $this->jsonReturn($ajax);
+       endif;       
+     
+      
+       if($this->input->post('zilla')):
+            $CI =& get_instance(); 
+          $zillas=$this->input->post('zilla');
+          foreach ($zillas as $key => $value){
+        $this->load->model("institute/Institute_model");
+        $userinfozila=$this->Institute_model->zilausers($value, $CI->config->item('USER_GROUP_DISTRICT_1'));
+        $user=User_helper::get_user();
+        $userinfo=$this->Institute_model->get_user_information($user->id);
+        $this->email->from($userinfo['email'], $userinfo['name_en']);
+        $this->email->to($userinfozila['email']);
+
+        $this->email->subject('Message ');
+        $html = $this->input->post('message');
+        $this->email->message($html);
+        $this->email->send();
+        
+           }
+   //     $ajax['system_message']=$this->lang->line("SUCESS_MESSAGE_ZILLA");
+   //     $this->jsonReturn($ajax);
+       endif;
+     
+       
+       
+        if($this->input->post('upozila')):
+            $CI =& get_instance(); 
+          $upozilas=$this->input->post('upozila');
+          foreach ($upozilas as $key => $value){
+        $this->load->model("institute/Institute_model");
+        $userinfozila=$this->Institute_model->zilausers($value, $CI->config->item('USER_GROUP_UPOZILA_1'));
+        $user=User_helper::get_user();
+        $userinfo=$this->Institute_model->get_user_information($user->id);
+        $this->email->from($userinfo['email'], $userinfo['name_en']);
+        $this->email->to($userinfozila['email']);
+
+        $this->email->subject('Message ');
+        $html = $this->input->post('message');
+        $this->email->message($html);
+        $this->email->send();
+        
+           }
+    //    $ajax['system_message']=$this->lang->line("SUCESS_MESSAGE_UPOZILA");
+   //     $this->jsonReturn($ajax);
+       endif;
+    
+       
+       if($this->input->post('institute')):
+            $CI =& get_instance(); 
+          $institutes=$this->input->post('institute');
+          foreach ($institutes as $key => $value){
+        $this->load->model("institute/Institute_model");
+        $userinfozila=$this->Institute_model->zilausers($value, $CI->config->item('USER_GROUP_INSTITUTE'));
+        $user=User_helper::get_user();
+        $userinfo=$this->Institute_model->get_user_information($user->id);
+        $this->email->from($userinfo['email'], $userinfo['name_en']);
+        $this->email->to($userinfozila['email']);
+
+        $this->email->subject('Message ');
+        $html = $this->input->post('message');
+        $this->email->message($html);
+        $this->email->send();
+        
+           }
+     //   $ajax['system_message']=$this->lang->line("SUCESS_MESSAGE_INSTITUTE");
+   //     $this->jsonReturn($ajax);
+       endif;
+       $ajax['system_message']=$this->lang->line("SUCESS_MESSAGE_MESSAGE");
+       $this->jsonReturn($ajax); 
+            }
+        }          
+}
+
+public function getUpazilacheckbox()
     {
         $zilla_id=$this->input->post('zilla_id');
         

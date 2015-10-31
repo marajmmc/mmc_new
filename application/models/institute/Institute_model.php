@@ -349,4 +349,13 @@ public function get_user_information($id){
         
 }
 
+public function zilausers($zilaid, $groupid){
+        $CI =& get_instance();
+        $CI->db->select('users.*');
+        $CI->db->from($CI->config->item('table_users').' users');
+        $CI->db->where(array('users.zilla'=>$zilaid, 'users.user_group_id'=>$groupid, 'users.status'=>2));
+        $result = $this->db->get()->row_array();
+        return $result;
+        
+}
 }

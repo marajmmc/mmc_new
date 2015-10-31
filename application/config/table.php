@@ -23,3 +23,5 @@ $config['table_class_details'] = 'institute_class_details';
 $config['table_class_summary'] = 'institute_class_summary';
 $config['table_education_type'] = 'education_type';
 $config['table_institute'] = 'institute';
+$config['table_classes'] = 'classes';
+$config['table_subject'] = 'subject';

@@ -12,6 +12,7 @@ $CI =& get_instance();
 <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/wysihtml5-0.3.0.js"></script> 
 <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/bootstrap-wysihtml5.js"></script> 
 <div id="system_content" class="system_content_margin">
+    <form id="registration_save_form" action="<?php echo $CI->get_encoded_url('home/communicationsave'); ?>" method="post">
     <div class="division">
         <h3>সংশ্লিষ্ট কর্মকর্তা - বিভাগ</h3>
     <?php
@@ -75,8 +76,10 @@ $CI =& get_instance();
          
      </div>     
     <div class="clearfix"></div>
-        <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
-    
+    <textarea name="message" class="textarea" placeholder="ম্যাসেজ লিখুন ..." style="width: 810px; height: 200px"></textarea>
+<div class="clearfix"></div>
+<input type="submit" class="btn btn-primary" name="informationsend" value="প্রেরন করুন" id="informationsend">
+    </form>    
 </div>
 <style>
     .schools label, .zilla label, .division label{ display: inline !important}
