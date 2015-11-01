@@ -13,6 +13,8 @@ $CI=& get_instance();
  //echo $user_division = $user->division.'dfdfd';
  //echo $this->config->item('DIVISION_GROUP_ID').'erere';
  //echo $user->user_group_id;
+
+             
 ?>
 <div id="system_content" class="system_content_margin">
     <div id="system_action_button_container" class="system_action_button_container">

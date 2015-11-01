@@ -8,7 +8,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 $CI=& get_instance();
  $user = User_helper::get_user();
- print_r($user);
+// print_r($user);
 //echo 'sdsdsdsdss';
  //echo $user_division = $user->division.'dfdfd';
  //echo $this->config->item('DIVISION_GROUP_ID').'erere';

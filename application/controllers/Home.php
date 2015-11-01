@@ -8,7 +8,7 @@ class Home extends Root_Controller
         //
         parent::__construct();
         //     $this->load->model("nstitute/Institute");
-        //$this->load->model("institute/Institute_model");
+        $this->load->model("institute/Institute_model");
         //$this->load->helper('url');
 
     }
@@ -97,8 +97,160 @@ class Home extends Root_Controller
         //$this->website();
         redirect(base_url());
     }
-    
-    public function registration()
+    public function resetpassword(){
+      
+      $CI =& get_instance();  
+      $this->load->library('form_validation');
+        if($this->input->post())
+        {
+     //$this->form_validation->set_rules('registration[email]',$this->lang->line('SCHOOL_EMAIL'),'trim|required|valid_email|callback_isemailExist');       
+     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|callback_email_checkreset');
+            
+     if ($this->form_validation->run() == FALSE)
+             {
+                $this->message=validation_errors();
+               $ajax['system_message']=$this->message;
+                $this->jsonReturn($ajax); 
+            }
+     
+                else{
+                    $passwordLink=md5(uniqid());
+                $data =array( 
+                'reset_link'=>$passwordLink);
+                
+        $this->db->where('email', $this->input->post('email'));
+        $this->db->update($CI->config->item('table_users'), $data);
+        
+        $this->load->model("institute/Institute_model");
+        $userinfo=$this->Institute_model->get_user_informationbymail($this->input->post('email'));
+        $uname=$userinfo['name_en'];
+        // Email  library with setting 
+        $this->load->library('email');       
+        $config['protocol'] = 'sendmail';
+        $config['charset'] = 'iso-8859-1';
+        $config['wordwrap'] = TRUE;
+        $config['mailtype'] = 'html';
+        
+        
+        $this->email->initialize($config); 
+       
+        
+        $this->email->from('noreply@mmc.gov.bd', 'MMC Reset Password');
+        $this->email->to($this->input->post('email'));
+
+            $passwordrecoverLink = "<a href=\"".$CI->get_encoded_url('home/recover?lnk='.$passwordLink.'')."\">".$CI->get_encoded_url('home/recover?lnk='.$passwordLink.'')."</a>";
+            $html = "Dear $uname,\r\n";
+            $html .= "Please visit the following link to reset your password:\r\n";
+            $html .= "-----------------------\r\n";
+            $html .= "$passwordrecoverLink\r\n";
+            $html .= "-----------------------\r\n";
+            $html .= "Please be sure to copy the entire link into your browser. The link will expire after 3 days for security reasons.\r\n\r\n";
+            $html .= "If you did not request this forgotten password email, no action is needed, your password will not be reset as long as the link above is not visited. However, you may want to log into your account and change your security password and answer, as someone may have guessed it.\r\n\r\n";
+            $html .= "Thanks,\r\n";
+            $html .= "-- MMC team";
+            
+            $this->email->subject('MMC Reset Password ');
+       // $html = $this->input->post('message');
+            $this->email->message($html);
+            $this->email->send();
+        
+       $ajax['system_message']=$this->lang->line("SUCESS_MESSAGE_RESET");
+       $this->jsonReturn($ajax); 
+
+                }
+        }
+      $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+      $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/resetpassword",'',true));
+      $this->jsonReturn($ajax);
+        
+      
+    }
+   
+       public function email_checkreset($str)
+      {
+           $CI =& get_instance();
+           $query = $this->db->get_where($CI->config->item('table_users'), array('email' => $str), 1);
+ 
+            if ($query->num_rows()== 1)
+            {
+
+                return true;
+
+            }
+            else
+            {    
+             $this->form_validation->set_message('email_checkreset', 'This Email does not exist.');
+             return false;
+      }
+      
+   } 
+   
+   public function recover(){
+     //  $this->input->get('lnk');
+
+           $CI =& get_instance();
+           $query = $this->db->get_where($CI->config->item('table_users'), array('reset_link' => $this->input->get('lnk')), 1);
+           
+            if ($query->num_rows()== 1)
+            {
+            $data['userinfo']=$this->Institute_model->get_user_informationbylink($this->input->get('lnk'));
+
+            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/newpassword",$data,true));
+            $this->jsonReturn($ajax);
+
+            }
+            else
+            {    
+         $ajax['system_message']=$this->lang->line("INVALIED_LINK");
+         $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/invalied",'',true));
+                
+         $this->jsonReturn($ajax);
+         
+      }
+      
+   }
+
+   public function recoversave(){
+       $CI=& get_instance();
+       $this->load->library('form_validation');
+       if($this->input->post())
+        {
+     //     $this->input->post('password');
+       //   $this->input->post('repassword');
+         
+         $this->form_validation->set_rules('password', 'New Password', 'required');
+         $this->form_validation->set_rules('repassword', 'Re Type New Password', 'required');
+          if ($this->form_validation->run() == FALSE)
+             {
+                $this->message=validation_errors();
+                $ajax['system_message']=$this->message;
+                $this->jsonReturn($ajax);  
+          }
+          
+          if($this->input->post('password')==$this->input->post('repassword')){
+             $datap =array( 
+                'password'=>  md5($this->input->post('repassword')));
+                
+        $this->db->where('id', $this->input->post('userid'));
+        $this->db->update($CI->config->item('table_users'), $datap);
+         $ajax['system_message']=$this->lang->line("PASSWORD_UPDATED");
+         $this->jsonReturn($ajax);
+              
+          }
+          else{
+            $ajax['system_message']=$this->lang->line("PASSWORD_NOT_SAME");
+            $this->jsonReturn($ajax);
+              
+          }
+              
+           
+       }
+       
+   }
+
+   public function registration()
     {
         //    $this->load->library('form');
         $this->load->library('form_validation');
@@ -298,7 +450,7 @@ class Home extends Root_Controller
         $this->form_validation->set_rules('registration[upozilla]',$this->lang->line('UPOZILLA_SELECT'),'required');
         $this->form_validation->set_rules('registration[education_type]',$this->lang->line('EDUCATION_TYPE'),'required');
         $this->form_validation->set_rules('registration[institute]',$this->lang->line('SCHOOL_NAME'),'required');
-		$this->form_validation->set_rules('registration[email]',$this->lang->line('SCHOOL_EMAIL'),'trim|required|valid_email|callback_isemailExist');
+        $this->form_validation->set_rules('registration[email]',$this->lang->line('SCHOOL_EMAIL'),'trim|required|valid_email|callback_isemailExist');
         $this->form_validation->set_rules('registration[mobile]',$this->lang->line('SCHOOL_MOBILE'),'required');
        // $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'required');
        $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'trim|required|callback_isEMExist');

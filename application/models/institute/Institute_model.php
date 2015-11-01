@@ -183,6 +183,7 @@ public function get_listdata(){
 public function get_listinactive(){
         $CI =& get_instance();
         $user = User_helper::get_user();
+     //   echo $user->user_group_id;
       //    $user_division = $user->division.'dfdfd';
   //  echo $user->user_group_id;
         // $config['USER_GROUP_DIVISION_1'] = 10;
@@ -252,10 +253,10 @@ public function get_listinactive(){
         
         elseif($user->user_group_id==$this->config->item('USER_GROUP_UPOZILA_1'))
         {
-            
+        //    echo 'fgfg';
             $user_division = $user->division;
-            $user_district = $user->zilla;
-            $user_upazilla = $user->upazila;
+             $user_district = $user->zilla;
+             $user_upazilla = $user->upazila;
             $CI->db->where('institute.status', 1);
            
             $CI->db->where('institute.divid',$user_division);
@@ -348,6 +349,32 @@ public function get_user_information($id){
         return $result;
         
 }
+
+
+public function get_user_informationbymail($email){
+    
+     $CI =& get_instance();
+
+        $CI->db->select('users.*');
+        $CI->db->from($CI->config->item('table_users').' users');
+        $CI->db->where('users.email', $email);
+        $result = $this->db->get()->row_array();
+        return $result;
+        
+}
+
+public function get_user_informationbylink($link){
+    
+     $CI =& get_instance();
+
+        $CI->db->select('users.*');
+        $CI->db->from($CI->config->item('table_users').' users');
+        $CI->db->where('users.reset_link', $link);
+        $result = $this->db->get()->row_array();
+        return $result;
+        
+}
+
 
 public function zilausers($zilaid, $groupid){
         $CI =& get_instance();
