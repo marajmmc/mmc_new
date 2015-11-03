@@ -16,7 +16,22 @@ class Home extends Root_Controller
     public function index()
     {
         $ajax['status']=true;
+        $data['page']="home_page";
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",$data,true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("website","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+
+        $ajax['system_page_url']=base_url();
+        $ajax['system_page_title']=$this->lang->line("WEBSITE_TITLE");
+        $this->jsonReturn($ajax);
+    }
+
+    public function notice()
+    {
+        $ajax['status']=true;
+        $data['page']="home_page";
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",$data,true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("notice","",true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
 
         $ajax['system_page_url']=base_url();

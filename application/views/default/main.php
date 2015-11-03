@@ -15,9 +15,11 @@ $user=User_helper::get_user();
         <title><?php echo $CI->lang->line('WEBSITE_TITLE');?></title>
         <link rel="icon" type="image/ico" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/images/ico.ico" />
 
+		<link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/typography.css">
         <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/jquery-ui/jquery-ui.min.css">
-        <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/jquery-ui/jquery-ui.theme.min.css">
+        <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/jquery-ui/jquery-ui.theme.css">
+        
         <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/ui.multiselect.css">
         <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/simple-sidebar.css">
         <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/style.css">
@@ -40,10 +42,26 @@ $user=User_helper::get_user();
 
 
 		<link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/camera.css">
-
+        
+        
+        <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/header.css">
+		<link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/search.css">
+        
+        <style>
+		#footer-top
+        {
+            background: #ebebeb none repeat scroll 0 0;
+            border-bottom: 1px solid #d8d8d8;
+            border-top: 3px solid #8bc643;
+            box-shadow: 0 0 35px -20px #999999;
+            line-height: 50px;
+            padding: 10px 0;
+        }
+		</style>
+        
     </head>
 
-<body>
+<body class="node-type-stream">
     <script src="<?php echo base_url().'assets/'; ?>js/jquery-2.1.1.js"></script>
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/bootstrap-filestyle.min.js"></script>
@@ -85,8 +103,12 @@ $user=User_helper::get_user();
 
 
     <script type='text/javascript' src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/jquery.mobile.customized.min.js"></script>
-    <script type='text/javascript' src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/jquery.easing.1.3.js"></script> 
-    <script type='text/javascript' src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/camera.min.js"></script> 
+    <script type='text/javascript' src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/jquery.easing.1.3.js"></script>
+    <script type='text/javascript' src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/camera.min.js"></script>
+    
+    
+    <script type='text/javascript' src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/dropcap.js"></script>
+    
     
     <!--js/jq/jqxgrid.grouping.js"></script>-->
     <!--    DCMS JS -->
@@ -103,74 +125,82 @@ $user=User_helper::get_user();
         var DELETE_CONFIRM = "<?php echo $CI->lang->line('DELETE_CONFIRM'); ?>";
 
     </script>
-    <div class="color-line"></div>
+    <!--<div class="color-line"></div>-->
 
-    <div class="container-fluid">
-        <?php
-        $CI->load_view('header');
-        ?>
+    <div class="container-fluid" style="background: #ffffff;">
+
+        <div id="top_header">
+            <?php
+            //$CI->load_view('header');
+            ?>
+        </div>
+        
+        
+        
         <div id="system_wrapper_top_menu" class="wrapper">
-        <?php
+        
+		
+		<?php
             //$CI->load_view('top_menu');
         ?>
         </div>
+        
+        
+        
         <div id="system_wrapper" class="wrapper">
             <div class="clearfix"></div>
             <!-- /#page-content-wrapper -->
         </div>
         
         <!--footer Start-->
-        <div class="col-sm-12">
-            <footer style="width: 101.5%; margin-left: -10px;">
-                <div id="footer-content">
-                    <div id="our-partners">
-                        <div id="our-parner-title"></div>
-                        <a id="undp" rel="http://www.undp.org.bd" title="UNDP" href="http://www.undp.org.bd">http://www.undp.org.bd</a>
+       
 
-                        <a id="usaid" rel="http://www.usaid.gov/where-we-work/asia/bangladesh" title="USAID" href="http://www.usaid.gov/where-we-work/asia/bangladesh">http://www.usaid.gov/where-we-work/asia/bangladesh</a>
+  
+    <!-- content-wrapper -->
+        <div class="clearfix"></div>
+        <div class="row">
+            <div id="footer" class="col-lg-12 footer_class">
+                <div class="row-fluid">
+                    <div class="col-lg-8" style="float:left;">
 
-                    </div><!-- end of our-partner -->
+                        <ul class="footer_list">
+                            <li class="footer_list_button">
+                                <a href="#">আমাদের সম্পর্কে</a>
+                            </li>
+                            <li class="footer_list_button">
+                                <a href="#">ব্যবহারের শর্তাবলি</a>
+                            </li>
+                            <li class="footer_list_button">
+                                <a href="#">গোপনীয়তার নীতিমালা</a>
+                            </li>
+                            <li class="footer_list_button">
+                                <a href="#">সহযোগিতায়</a>
+                            </li>
+                            <li class="footer_list_button">
+                                <a href="#">সচরাচর জিজ্ঞাসা</a>
+                            </li>
+                        </ul>
 
-                    <div id="footeer-menu">
-                        <div class="region region-footer-menu">
-                            <div class="block block-menu" id="block-menu-menu-footer-menu">
-                                <div class="content">
-                                    <!--                                    <ul class="menu">-->
-                                    <!--                                        <li class="first leaf menu"><a class="active" title="" href="/">প্রথম পাতা</a><div></div></li>-->
-                                    <!--                                        <li class="leaf menu"><a title="" href="/content/feedback">রেজিস্ট্রেশন</a><div></div></li>-->
-                                    <!--                                        <li class="leaf menu"><a class="active" title="" href="/">উদ্যোক্তা লগ ইন</a><div></div></li>-->
-                                    <!--                                        <li class="leaf menu"><a class="active" title="" href="/">এডমিন লগ ইন</a><div></div></li>-->
-                                    <!--                                        <li class="leaf menu"><a class="active" title="" href="/">ই-সেবাসমূহ</a><div></div></li>-->
-                                    <!--                                        <li class="last menu" style="border-right:none !important;"><a title="" href="/contact">যোগাযোগ</a><div></div></li>-->
-                                    <!--                                    </ul>-->
-                                    <ul>
-                                        <li style="text-align: center;">
-                                            <span helvetica="" >
-                                                Managed by <a style="color:#fff; font-family: arial, sans-serif;" target="_blank" href="http://www.softbdltd.com">SOFTBD Ltd.</a> on  behalf of MMC
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- end of footer-menu -->
-                    <div id="social-networks">
-                        <div id="social-network-title"></div>
-                        <a id="facebook" rel="https://www.facebook.com/A2IBangladesh" title="আমাদের ফেসবুকের পাতা" href="https://www.facebook.com/A2IBangladesh">https://www.facebook.com/A2IBangladesh</a>
-                        <a id="twitter" rel="http://www.twitter.com" title="আমাদের টুইটারের পাতা" href="http://www.twitter.com">http://www.twitter.com</a>
-                        <a id="rss" rel="rss.xml" title="আমাদের RSS ফিডসমূহ" href="rss.xml">rss.xml</a>
+                    <div class="col-lg-4" style="float:right;">
+                        <span>কারিগরি সহায়তায়: <img src="<?php echo base_url() ?>/images/logo/softbdlogo.png" width="120" /></span>
+                    </div>
 
-                    </div><!-- end of social-network -->
-                </div><!-- end of footer-content -->
-            </footer>
+                </div><!-- /Row Fluid -->
+            </div>
         </div>
+
+
 
         <!--footer end-->
 
     </div>
     <!-- /#wrapper -->
+    
+	</div>
+    <!-- /#wrapper -->
+    
     <!-- jQuery -->
 
     <!-- Menu Toggle Script -->

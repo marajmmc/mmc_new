@@ -101,12 +101,14 @@ class Root_Controller extends CI_Controller
         }
         //echo $file;
         //echo $view;
+
         return $this->load->view($view,$data,$display);
     }
     public function login_page($message="")
     {
         $ajax['status']=true;
-
+        $data['page']="inner_page";
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",$data,true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("login","",true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
         $ajax['system_content'][]=array("id"=>"#system_header","html"=>"","",true);
@@ -122,6 +124,8 @@ class Root_Controller extends CI_Controller
     public function dashboard_page($message="")
     {
         $ajax['status']=true;
+        $data['page']='dashboard_page';
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",$data,true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home","",true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
         $ajax['system_content'][]=array("id"=>"#system_header","html"=>$this->load_view("header","",true));

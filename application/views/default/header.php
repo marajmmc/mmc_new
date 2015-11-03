@@ -4,46 +4,53 @@ $CI=& get_instance();
 $user = User_helper::get_user();
 //$modules=User_helper::get_task_module($CI->config->item('system_sidebar02'));
 ?>
-<div class="row panel-heading">
-    <div class="col-lg-1">
-        <a href="#">
-            <!--            <img src="--><?php //echo base_url().'assets/templates/'.$CI->get_template(); ?><!--/images/login_logo.png" class="img-responsive" alt="Cinque Terre" style="margin: auto;">-->
-            <img src="<?php echo base_url().'images/logo/bd.png';?>" class="img-responsive" alt="Cinque Terre" style="margin: auto; height:72px;">
-        </a>
+<style>
+    .index_header_slider
+    {
+        margin-left: -23px !important;
+        margin-right: -15px !important;
+        padding: 0;
+    }
+    .index_header_slider_12
+    {
+        margin-left: 5px !important;
+        padding: 0;
+    }
+
+</style>
+<?php
+
+if(isset($page) && $page=="home_page")
+{
+?>
+
+    <div class="row index_header_slider">
+        <div class="col-lg-12 index_header_slider_12">
+            <img src="<?php echo base_url();?>images/home/mmc-bg.png" />
+        </div>
     </div>
-    <div class="col-lg-10 text-center">
-        <h1>
-            <?php
-            if($user)
-            {
-                if($user->uisc_type==$CI->config->item('ONLINE_UNION_GROUP_ID'))
-                {
-                    echo $this->lang->line('WEBSITE_TITLE_UNION');
-                }
-                elseif($user->uisc_type==$CI->config->item('ONLINE_CITY_CORPORATION_WORD_GROUP_ID'))
-                {
-                    echo $this->lang->line('WEBSITE_TITLE_CITY');
-                }
-                elseif($user->uisc_type==$CI->config->item('ONLINE_MUNICIPAL_WORD_GROUP_ID'))
-                {
-                    echo $this->lang->line('WEBSITE_TITLE_MUNICIPAL');
-                }
-                else
-                {
-                    echo $this->lang->line('WEBSITE_TITLE');
-                }
-            }
-            else
-            {
-                echo $this->lang->line('WEBSITE_TITLE');
-            }
-            ?>
-        </h1>
+<?php
+}
+elseif(isset($page) && $page=="dashboard_page")
+{
+    ?>
+
+    <div class="row index_header_slider">
+        <div class="col-lg-12 index_header_slider_12">
+            <img src="<?php echo base_url();?>images/home/mmc-header-dashboard.jpg" />
+        </div>
     </div>
-    <div class="col-lg-1">
-        <a href="#">
-            <!--            <img src="--><?php //echo base_url().'assets/templates/'.$CI->get_template(); ?><!--/images/login_logo.png" class="img-responsive" alt="Cinque Terre" style="margin: auto;">-->
-            <img src="<?php echo base_url().'images/logo/a2i.png';?>" class="img-responsive" alt="Cinque Terre" style="margin: auto; height:72px;">
-        </a>
+<?php
+}
+else
+{
+?>
+    <div class="row index_header_slider">
+        <div class="col-lg-12 index_header_slider_12">
+            <img src="<?php echo base_url();?>images/home/mmc-header-bg-small.png" />
+        </div>
     </div>
-</div>
+<?php
+}
+?>
+

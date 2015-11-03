@@ -378,9 +378,18 @@ endif;
         
 
         } // end count loop
-
+        
+        $user=User_helper::get_user();
+        $user_id = $user->id;    
+        $data['institute']=$this->Institute_model->get_institute_information($user->id);  
+       $ajax['status']=true;
        $ajax['system_message']=$this->lang->line("SCHOOL_CLASS_INFORMATION_SUBMITED");
+       $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+       $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("institute/classadd",$data,true));
+     //       $this->jsonReturn($ajax);
+            
        $this->jsonReturn($ajax);
+      //  redirect('/institute/institute/classadd', 'refresh');
 
     }
     
