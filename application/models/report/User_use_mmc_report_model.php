@@ -96,17 +96,17 @@ class User_use_mmc_report_model extends CI_Model
 
         if (!empty($division))
         {
-            $this->db->where('divisions.divid',$division);
+            $this->db->where('institute.divid',$division);
             if (!empty($zilla))
             {
-                $this->db->where('zillas.zillaid',$zilla);
+                $this->db->where('institute.zillaid',$zilla);
                 if (!empty($upazila))
                 {
-                    $this->db->where('upa_zilas.upazilaid',$upazila);
-                    if (!empty($union))
-                    {
-                        $this->db->where('unions.unionid',$union);
-                    }
+                    $this->db->where('institute.upozillaid',$upazila);
+                    //                    if (!empty($union))
+                    //                    {
+                    //                        $this->db->where('unions.unionid',$union);
+                    //                    }
                 }
             }
         }
@@ -152,17 +152,17 @@ class User_use_mmc_report_model extends CI_Model
 
         if (!empty($division))
         {
-            $this->db->where('divisions.divid',$division);
+            $this->db->where('institute.divid',$division);
             if (!empty($zilla))
             {
-                $this->db->where('zillas.zillaid',$zilla);
+                $this->db->where('institute.zillaid',$zilla);
                 if (!empty($upazila))
                 {
-                    $this->db->where('upa_zilas.upazilaid',$upazila);
-                    if (!empty($union))
-                    {
-                        $this->db->where('unions.unionid',$union);
-                    }
+                    $this->db->where('institute.upozillaid',$upazila);
+                    //                    if (!empty($union))
+                    //                    {
+                    //                        $this->db->where('unions.unionid',$union);
+                    //                    }
                 }
             }
         }
