@@ -10,9 +10,9 @@
 
 .color-line {
     /*background: linear-gradient(to right, #34495e, #34495e 25%, #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%, #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%, #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%) no-repeat scroll 50% 100% / 100% 6px #f7f9fa;*/
-    background: red;
+    /*background: red;
     height: 3px;
-    width:100%;
+    width:100%;*/
 }
 /* ONLY LOGIN */
 .login_form {
@@ -719,7 +719,7 @@
 /* margin for the footer space*/
 #system_wrapper{
     margin-bottom: 30px;
-    min-height: 400px;
+    /*min-height: 400px;*/
 }
 .system_content_margin
 {
