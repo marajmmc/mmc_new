@@ -16,18 +16,24 @@
 }
 /* ONLY LOGIN */
 .login_form {
+     -webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+border: 1px solid #e6e6e6;
+background: #f2f2f2;
     position: relative;
-    background: #ffffff;
-    width: 350px;
-    margin: 40px auto 0;
+    
+    width: 490px;
+    margin: 4px auto 0;
     padding: 40px;
-    border-top: 5px solid #33b5e5;
+ /*   border-top: 5px solid #33b5e5;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     -webkit-box-shadow: 7px 6px 3px 1px rgba(2, 2, 3, 0.17);
     -moz-box-shadow: 7px 6px 3px 1px rgba(2, 2, 3, 0.17);
     box-shadow: 7px 6px 3px 1px rgba(2, 2, 3, 0.17);
+ */
 }
 .login_form .switch {
     cursor: pointer;
@@ -280,6 +286,7 @@
     background-color: #000000;
     padding: 10px;
     display: none;
+    z-index: 999999999999999;
 
 }
 
@@ -868,6 +875,7 @@ button, input, select, textarea {
     font-family: "nikoshBan" !important;
     font-size: 17px;
     width: 200px;
+    float: left;
 }
 select {
     background-color: white;
@@ -1024,3 +1032,28 @@ div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a
     font-weight:bold;
     font-family:'nikoshBan';
 }
+.borderradius{
+ -webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+border: 1px solid #e6e6e6;
+background: #f2f2f2;
+    
+} 
+form#registration_save_form label.registrationwidth{ width: 150px;}
+form#registration_save_form table tr td{ padding-left: 15px !important;}
+form#registration_save_form input[type="text"], input[type="password"], input[type="email"]{ float: left;}
+div.heloregistration ul li{ text-align: left; padding-left: 10px;padding-top: 8px; list-style: inside}
+
+div.heloregistration{
+     -webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+border: 1px solid #e6e6e6;
+background: #f2f2f2;
+}
+div.heloregistration ul { margin-bottom: 20px;}
+.trtr{ margin-top: -17px;}
+#resetpassword_form table tr td{ padding:0; margin: 0;}
+form#resetpassword_form input[type="text"], input[type="password"], input[type="email"]{ float: left;}
+.loginuser{padding: 6px 16px !important;}

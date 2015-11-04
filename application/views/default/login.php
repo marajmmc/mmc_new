@@ -14,27 +14,25 @@ $CI =& get_instance();
 
 
 <div class='login_form aniamted bounceIn'>
-    <div class='switch'>
-        <i class='fa fa-support'></i>
-        <div class='login_form tooltip'>Click Me</div>
-    </div>
+   
     <div class='login'>
         <h2><?php echo $this->lang->line('LOGIN_TITLE');?></h2>
-        <form action="<?php echo $CI->get_encoded_url("home/login");?>" method="post">
-            <input type="text"  placeholder="<?php echo $this->lang->line('USERNAME');?>" name="username" required autofocus>
-            <input type="password"  placeholder="<?php echo $this->lang->line('PASSWORD');?>" name="password" required>
-            <input type="submit" class="btn btn-lg btn-primary btn-block" value="<?php echo $this->lang->line('LOGIN');?>">
+        <form class="form-inline" action="<?php echo $CI->get_encoded_url("home/login");?>" method="post">
+     
+             <div class="form-group">
+
+    <input type="text"  class="form-control" placeholder="<?php echo $this->lang->line('USERNAME');?>" name="username" required autofocus>
+  </div>
+            
+             <div class="form-group">
+  <input type="password" class="form-control"  placeholder="<?php echo $this->lang->line('PASSWORD');?>" name="password" required>
+  </div>
+            
+            <input type="submit" class="btn btn-lg btn-primary loginuser" value="<?php echo $this->lang->line('LOGIN');?>">
         </form>
+        <a href="<?php echo base_url() ?>home/resetpassword">পাসওয়ার্ড   ভুলে গেছেন ?</a>
     </div>
-    <div class='register'>
-        <h2>Want Help</h2>
-        <div class='alert'>
-            <div class='fa fa-times-circle'></div>
-            User Manual
-            <br/>
-            Call Helpsystem
-        </div>
-    </div>
+    
 </div>
 
 

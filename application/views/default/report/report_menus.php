@@ -7,7 +7,7 @@ $modules=User_helper::get_reports_task_module();
 //echo "</pre>";
 ?>
 <div>
-    <div class="home_head_custom" style="">সারাদেশের প্রতিবেদন </div>
+    <div class="home_head_custom" style="">প্রতিবেদন </div>
     <div class="home_txt_div_custom" style="">
         <div>
             <ul>

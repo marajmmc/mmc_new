@@ -13,7 +13,14 @@ $CI =& get_instance();
 <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/bootstrap-wysihtml5.js"></script> 
 <div id="system_content" class="system_content_margin">
     <form id="registration_save_form" action="<?php echo $CI->get_encoded_url('home/communicationsave'); ?>" method="post">
-    <div class="division">
+        <div class="division">
+           <h3>মন্ত্রণালয়</h3> 
+           <input type="checkbox" name="" value="MOE"> <label for="মন্ত্রণালয়">শিক্ষা মন্ত্রণালয়</label>
+           
+            <input type="checkbox" name="" value="MOPME"> <label for="মন্ত্রণালয়">প্রাথমিক ও গণশিক্ষা মন্ত্রণালয়</label>
+            
+        </div>
+        <div class="division">
         <h3>সংশ্লিষ্ট কর্মকর্তা - বিভাগ</h3>
     <?php
  //   print_r($divisions);
@@ -171,5 +178,8 @@ $CI =& get_instance();
                 $("#upozilaname").val('');
             }
         });
-     $('.textarea').wysihtml5();
+   //  $('.textarea').wysihtml5();
+   $( document ).ready(function() {
+    $('.textarea').wysihtml5();
+    });
  </script>

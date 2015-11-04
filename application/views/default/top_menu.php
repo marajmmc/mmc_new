@@ -269,7 +269,7 @@ $('.main_nav li').hover(function() {
                     <div>
                         <ul class="main_nav">
                             <li><a href="<?php echo base_url();?>" class="index_page">প্রথম পাতা</a></li>
-                            <li><a href="#" class="home">নিবন্ধন</a></li>
+                            <li><a href="<?php echo base_url();?>/home/registration" class="home">নিবন্ধন</a></li>
                             <li><a href="<?php echo base_url();?>home/notice" class="about">বিজ্ঞপ্তি</a></li>
                             <li><a href="#" class="products">হেল্প ডেস্ক</a></li>
                             <li><a href="#" class="services">যোগাযোগ</a></li>

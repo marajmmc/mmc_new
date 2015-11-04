@@ -13,13 +13,14 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 ?>
 <div class="constant">
-    <div class="row" style="margin-top: 30px;">
-        <div class="col-md-8">
+    <div class="row"  style="margin-top: 30px;">
+        <div class="col-md-8 borderradius">
+            <h3 style="text-align: left;padding-left: 15px;">বিদ্যালয়ের নিবন্ধন</h3>
          <form id="registration_save_form" action="<?php echo $CI->get_encoded_url('home/registration'); ?>" method="post">
         <table width="100%" border="0">
   <tr>
     <td width="33%">
-        <label class="control-label pull-left"><?php echo $CI->lang->line('DIVISION_NAME_SELECT'); ?><span style="color:#FF0000">*</span></label>
+        <label class="control-label pull-left registrationwidth"><?php echo $CI->lang->line('DIVISION_NAME_SELECT'); ?><span style="color:#FF0000">*</span></label>
      <select name="registration[divid]" class="form-control" id="division_id">
       <?php
       $CI->load_view('dropdown',array('drop_down_options'=>$divisions,'drop_down_selected'=>''));
@@ -27,7 +28,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
     </select>
     </td>
      <td width="33%"> 
-         <label class="control-label pull-left"><?php echo $CI->lang->line('ZILLA_NAME_SELECT_BN'); ?><span style="color:#FF0000">*</span></label>
+         <label class="control-label pull-left registrationwidth"><?php echo $CI->lang->line('ZILLA_NAME_SELECT_BN'); ?><span style="color:#FF0000">*</span></label>
          <select name="registration[zilla]" id="zilla_id" class="selectbox-1 zilla validate[required]">
          <option value=""><?php echo $this->lang->line('SELECT');?></option>
          </select>
@@ -50,7 +51,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
        </select>
     </td>
               <td colspan="2">
-                  
+                  <label class="control-label pull-left">       বিদ্যালয়ের স্তর     </label>
      <?php           
              $dataa = array(
     'name'        => 'registration[primary]',
@@ -148,7 +149,7 @@ echo form_input($data);
     ?>     
       </td>
      <td>
-     <label class="control-label pull-left"><?php echo $CI->lang->line('SCHOOL_PASSWORD'); ?><span style="color:#FF0000">*</span></label>
+     <label class="control-label pull-left registrationwidth"><?php echo $CI->lang->line('SCHOOL_PASSWORD'); ?><span style="color:#FF0000">*</span></label>
     <?php
     $data = array(
         'name'          => 'registration[password]',
@@ -211,12 +212,13 @@ echo form_checkbox($dataa);
  */
  
              ?>
-         <input type="submit" style="cursor:pointer; margin-right: 37px !important;" class="myButton" id="submitRegistration" name="submitRegistration" value="<?php echo $this->lang->line('SAVE');?>" />
+         <input type="submit" style="cursor:pointer; margin-right: 37px !important; float: left; margin-left: 10px;" class="myButton" id="submitRegistration" name="submitRegistration" value="আবেদন করুন<?php //echo $this->lang->line('SAVE');?>" />
       </form> 
             
             </div>
-        <div class="col-md-4">
-            <div class="control-group">
+        <div class="col-md-4 ">
+            <div class="control-group heloregistration">
+                 <h3 style="text-align: left;padding-left: 15px;">বিদ্যালয় নিবন্ধনের নির্দেশাবলীঃ</h3>
                             <ul>
                                 <li>১ম ধাপঃ প্রথমে বিভাগ নির্বাচন করুন।</li>
                                 <li>২য় ধাপঃ জেলা নির্বাচন করুন।।</li>

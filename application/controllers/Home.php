@@ -466,7 +466,9 @@ class Home extends Root_Controller
         $this->form_validation->set_rules('registration[education_type]',$this->lang->line('EDUCATION_TYPE'),'required');
         $this->form_validation->set_rules('registration[institute]',$this->lang->line('SCHOOL_NAME'),'required');
         $this->form_validation->set_rules('registration[email]',$this->lang->line('SCHOOL_EMAIL'),'trim|required|valid_email|callback_isemailExist');
-        $this->form_validation->set_rules('registration[mobile]',$this->lang->line('SCHOOL_MOBILE'),'required');
+     //   $this->form_validation->set_rules('registration[mobile]',$this->lang->line('SCHOOL_MOBILE'),'required');
+        $this->form_validation->set_rules('registration[mobile]', $this->lang->line('SCHOOL_MOBILE'), 'required|min_length[4]|regex_match[/^0[0-9]{10}$/]'); //{11} for 11 digits number
+        //
        // $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'required');
        $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'trim|required|callback_isEMExist');
         $this->form_validation->set_rules('registration[password]',$this->lang->line('SCHOOL_PASSWORD'),'required');
@@ -519,10 +521,14 @@ class Home extends Root_Controller
 }
 
 public function communication(){
-    
+     
+    $data['page']='dashboard_page';
     $data['divisions']=Query_helper::get_info($this->config->item('table_divisions'),array(),array());
     $data['zillas']=Query_helper::get_info($this->config->item('table_zillas'),array(),array());
     $data['zillasdp']=Query_helper::get_info($this->config->item('table_zillas'),array('zillaid value', 'zillaname text'), array());
+    //$ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+    $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",$data,true));
+    $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("website","",true));
     $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
     $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/communication",$data,true));
     $this->jsonReturn($ajax);
