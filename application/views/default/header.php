@@ -7,14 +7,14 @@ $user = User_helper::get_user();
 <style>
     .index_header_slider
     {
-        margin-left: -23px !important;
-        margin-right: -15px !important;
-        padding: 0;
+        /*margin-left: -23px !important;*/
+        /*margin-right: -15px !important;*/
+        padding: 0 !important;
     }
     .index_header_slider_12
     {
         margin-left: 5px !important;
-        padding: 0;
+        padding: 0 !important;
     }
 
 </style>
@@ -23,7 +23,6 @@ $user = User_helper::get_user();
 if(isset($page) && $page=="home_page")
 {
 ?>
-
     <div class="row index_header_slider">
         <div class="col-lg-12 index_header_slider_12">
             <img src="<?php echo base_url();?>images/home/mmc-bg.png" />
@@ -34,10 +33,10 @@ if(isset($page) && $page=="home_page")
 elseif(isset($page) && $page=="dashboard_page")
 {
     ?>
-
     <div class="row index_header_slider">
         <div class="col-lg-12 index_header_slider_12">
-            <img src="<?php echo base_url();?>images/home/mmc-header-dashboard.jpg" />
+            <!--            <img src="--><?php //echo base_url();?><!--images/home/mmc-header-dashboard.jpg" />-->
+            <img src="<?php echo base_url();?>images/home/mmc-header-bg-small.png" />
         </div>
     </div>
 <?php
