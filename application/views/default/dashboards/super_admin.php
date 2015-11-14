@@ -14,7 +14,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/1-48.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_ALL_INSTITUTE');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE')); ?>)</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_ALL_INSTITUTE');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'))); ?>)</h4>
         </div>
     </div>
 
@@ -23,7 +23,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/institutional-icon.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_GENERAL_INSTITUTE');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','GENERAL'); ?>)</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_GENERAL_INSTITUTE');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','GENERAL')); ?>)</h4>
         </div>
     </div>
 
@@ -32,7 +32,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/mosque.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_MADRASHA_INSTITUTE');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','MADRASHA'); ?>)</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_MADRASHA_INSTITUTE');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','MADRASHA')); ?>)</h4>
         </div>
     </div>
 
@@ -41,7 +41,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/2-48.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY"); ?> )</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY")); ?> )</h4>
         </div>
     </div>
 
@@ -50,7 +50,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/9-48.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?> </span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY"); ?> )</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?> </span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY")); ?> )</h4>
         </div>
     </div>
 
@@ -59,7 +59,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/3-48.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE"); ?> )</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE")); ?> )</h4>
         </div>
     </div>
 
@@ -84,7 +84,9 @@ $user=User_helper::get_user();
                 <div class="contenuto">
                     <span class="titolo"><?php echo $this->lang->line('INSTITUTE');?></span>
                     <span class="descrizione"><?php echo $this->lang->line('NUMBER_OF_APPLIED_INSTITUTE');?></span>
-                    <span class="valore"><?php echo sprintf($CI->lang->line('TI'), Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_INACTIVE'), "")); ?></span>
+                    <span class="valore"><?php
+                     //   echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_INACTIVE'), ""));
+                        echo sprintf($CI->lang->line('TI'), Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_INACTIVE'), ""))); ?></span>
                 </div>
             </li>
 
@@ -92,7 +94,7 @@ $user=User_helper::get_user();
                 <div class="contenuto">
                     <span class="titolo"><?php echo $this->lang->line('TOTAL');?></span>
                     <span class="descrizione"><?php echo $this->lang->line('NUMBER_OF_USERS');?></span>
-                    <span class="valore"><?php echo sprintf($CI->lang->line('TI'), Dashboard_helper::get_number_of_user()); ?></span>
+                    <span class="valore"><?php echo sprintf($CI->lang->line('TI'), Dashboard_helper::bn2enNumber(Dashboard_helper::get_number_of_user())); ?></span>
                 </div>
             </li>
 
@@ -100,14 +102,14 @@ $user=User_helper::get_user();
                 <div class="contenuto">
                     <span class="titolo"><?php echo $this->lang->line('MMC_TOTAL');?></span>
                     <span class="descrizione"><?php echo $this->lang->line('NUMBER_OF_USERS');?></span>
-                    <span class="valore"><?php echo sprintf($CI->lang->line('TI'), Dashboard_helper::get_number_of_mmc_user()); ?></span>
+                    <span class="valore"><?php echo sprintf($CI->lang->line('TI'), Dashboard_helper::bn2enNumber(Dashboard_helper::get_number_of_mmc_user())); ?></span>
                 </div>
             </li>
             <li colore="orange">
                 <div class="contenuto">
                     <span class="titolo"><?php echo $this->lang->line('YESTERDAY');?></span>
                     <span class="descrizione"><?php echo $this->lang->line('NUMBER_OF_USERS');?></span>
-                    <span class="valore"><?php echo sprintf($CI->lang->line('TI'), Dashboard_helper::get_number_of_mmc_user("YESTERDAY")); ?></span>
+                    <span class="valore"><?php echo sprintf($CI->lang->line('TI'), Dashboard_helper::bn2enNumber(Dashboard_helper::get_number_of_mmc_user("YESTERDAY"))); ?></span>
                 </div>
             </li>
 

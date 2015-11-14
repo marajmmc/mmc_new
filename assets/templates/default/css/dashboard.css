@@ -57,6 +57,7 @@ div { box-sizing: border-box; }
     border-radius: 2px;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .2);
     font-size: 14px;
+    overflow: hidden;;
     /*font-family:nikoshBAN;*/
 
 }
@@ -83,12 +84,13 @@ div { box-sizing: border-box; }
 }
 
 #dashboard li .valore{
-    float:right;
+   /* float:right; */
     font-weight: bold;;
     border-radius: 2px;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
     color: #111;
     padding: 1px 3px 1px 3px;
+    text-align: center;
 
 }
 
