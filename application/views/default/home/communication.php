@@ -12,6 +12,7 @@ $CI =& get_instance();
 <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/wysihtml5-0.3.0.js"></script> 
 <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/bootstrap-wysihtml5.js"></script> 
 <div id="system_content" class="system_content_margin">
+    <div class="borderradius">
     <form id="registration_save_form" action="<?php echo $CI->get_encoded_url('home/communicationsave'); ?>" method="post">
         <div class="division">
            <h3>মন্ত্রণালয়</h3> 
@@ -87,6 +88,7 @@ $CI =& get_instance();
 <div class="clearfix"></div>
 <input type="submit" class="btn btn-primary" name="informationsend" value="প্রেরন করুন" id="informationsend">
     </form>    
+  </div>
 </div>
 <style>
     .schools label, .zilla label, .division label{ display: inline !important}

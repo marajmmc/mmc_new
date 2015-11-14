@@ -25,3 +25,4 @@ $config['table_education_type'] = 'education_type';
 $config['table_institute'] = 'institute';
 $config['table_classes'] = 'classes';
 $config['table_subject'] = 'subject';
+$config['table_communication'] = 'communication';

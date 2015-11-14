@@ -574,12 +574,24 @@ public function communicationsave(){
         $config['wordwrap'] = TRUE;
         $config['mailtype'] = 'html';
 
-        $this->email->initialize($config);    
-                
+        $this->email->initialize($config);
+
+                $user = User_helper::get_user();
+                echo $user->id;
       //     print_r($division);
       if($this->input->post('division')):
           $divisions=$this->input->post('division');
            foreach ($divisions as $key => $value){
+               $datasave = array(
+                   'sender_id'=>$user->id,
+                   'receiver_id'=>$value,
+                   'message'=>$this->input->post('message'),
+                   'message_date'=>date("Y-m-d"),
+                   'is_read'=>0,
+               );
+
+               $this->db->insert($CI->config->item('table_communication'),$datasave);
+
           //     echo $value;
             $array = array('user_group_id' => $CI->config->item('USER_GROUP_DIVISION_1'), 'division' => $value, 'status' => 2);
             $this->db->where($array);
@@ -609,6 +621,16 @@ public function communicationsave(){
             $CI =& get_instance(); 
           $zillas=$this->input->post('zilla');
           foreach ($zillas as $key => $value){
+              $datasave = array(
+                  'sender_id'=>$user->id,
+                  'receiver_id'=>$value,
+                  'message'=>$this->input->post('message'),
+                  'message_date'=>date("Y-m-d"),
+                  'is_read'=>0,
+              );
+
+              $this->db->insert($CI->config->item('table_communication'),$datasave);
+
         $this->load->model("institute/Institute_model");
         $userinfozila=$this->Institute_model->zilausers($value, $CI->config->item('USER_GROUP_DISTRICT_1'));
         $user=User_helper::get_user();
@@ -632,6 +654,16 @@ public function communicationsave(){
             $CI =& get_instance(); 
           $upozilas=$this->input->post('upozila');
           foreach ($upozilas as $key => $value){
+              $datasave = array(
+                  'sender_id'=>$user->id,
+                  'receiver_id'=>$value,
+                  'message'=>$this->input->post('message'),
+                  'message_date'=>date("Y-m-d"),
+                  'is_read'=>0,
+              );
+
+              $this->db->insert($CI->config->item('table_communication'),$datasave);
+
         $this->load->model("institute/Institute_model");
         $userinfozila=$this->Institute_model->zilausers($value, $CI->config->item('USER_GROUP_UPOZILA_1'));
         $user=User_helper::get_user();
@@ -654,6 +686,15 @@ public function communicationsave(){
             $CI =& get_instance(); 
           $institutes=$this->input->post('institute');
           foreach ($institutes as $key => $value){
+              $datasave = array(
+                  'sender_id'=>$user->id,
+                  'receiver_id'=>$value,
+                  'message'=>$this->input->post('message'),
+                  'message_date'=>date("Y-m-d"),
+                  'is_read'=>0,
+              );
+
+              $this->db->insert($CI->config->item('table_communication'),$datasave);
         $this->load->model("institute/Institute_model");
         $userinfozila=$this->Institute_model->zilausers($value, $CI->config->item('USER_GROUP_INSTITUTE'));
         $user=User_helper::get_user();

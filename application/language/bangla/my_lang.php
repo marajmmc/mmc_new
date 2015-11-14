@@ -336,5 +336,7 @@ $lang['MMC_TOTAL']='এমএমসি ';
 $lang['YESTERDAY']='গতকাল ';
 $lang['NUMBER_OF_UNION_YESTERDAY']='সেরা ইউনিয়ন (গতকাল) ';
 
+$lang['COMMINICATION_MESSAGE']='ম্যাসেজ';
+
 
 

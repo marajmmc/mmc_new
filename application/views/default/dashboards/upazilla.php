@@ -122,6 +122,7 @@ $user=User_helper::get_user();
 <?php
 $union_infos=Dashboard_helper::get_union_wise_income($user->zilla,$user->upazila);
 $total_male_female=Dashboard_helper::get_total_male_female_user_upazila($user->zilla,$user->upazila);
+//print_r($union_infos);
 ?>
 <script>
     $(function () {

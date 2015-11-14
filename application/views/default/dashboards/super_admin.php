@@ -173,6 +173,7 @@ else
 }
 $high_chart_info=Dashboard_helper::get_approved_institute_list();
 $pie_chart_info=Dashboard_helper::get_institute_type_list();
+//print_r($high_chart_info);
 ?>
 
 <script>
@@ -182,11 +183,15 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
             chart: {
                 type: 'column'
             },
+            credits: {
+                enabled: false
+              },
             title: {
                 text: '<?php echo $report_caption;?>'
             },
             xAxis: {
                 categories: [<?php
+                if($high_chart_info):
              $index=0;
              foreach($high_chart_info as $element)
              {
@@ -200,6 +205,9 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
                 }
                 $index++;
              }
+             else:
+               echo "0";   
+         endif;
             ?>]
             },
             yAxis : {
@@ -223,6 +231,7 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
                 {
                     name : ' <?php echo $report_element_caption ?>',
                     data: [<?php
+                   if($high_chart_info):
                     $index=0;
                     foreach($high_chart_info as $element)
                     {
@@ -236,6 +245,9 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
                     }
                     $index++;
                 }
+                else:
+                echo '0';
+            endif;
             ?>]
             }]
         });
@@ -248,6 +260,9 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
                 plotShadow: false,
                 type: 'pie'
             },
+            credits: {
+                enabled: false
+              },
             title: {
                 text: "<?php echo $CI->lang->line('INSTITUTE') ?>"
             },
@@ -265,14 +280,14 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
                 }
             },
             series: [{
-                name: "Brands",
+                name: "শিক্ষা প্রতিষ্ঠান",
                 colorByPoint: true,
                 data: [{
-                    name: "<?php echo $CI->lang->line('INSTITUTE_GENERAL') ?>",
-                    y: <?php echo $pie_chart_info[0]['general'] ?>
+                    name: "<b><?php echo $CI->lang->line('INSTITUTE_GENERAL') ?></b>",
+                    y: <?php if(isset($pie_chart_info[0]['general'])>0) { echo $pie_chart_info[0]['general'];} else echo '0'; ?>
                 }, {
-                    name: "<?php echo $CI->lang->line('INSTITUTE_MADRASHA') ?>",
-                    y: <?php echo $pie_chart_info[0]['madrasha'] ?>,
+                    name: "<b><?php echo $CI->lang->line('INSTITUTE_MADRASHA') ?></b>",
+                    y: <?php if(isset($pie_chart_info[0]['madrasha'])>0) { echo $pie_chart_info[0]['madrasha']; } else echo '0'; ?>,
                     sliced: true,
                     selected: true
                 }]
