@@ -53,7 +53,7 @@ $user=User_helper::get_user();
 </div>-->
 <div class="col-sm-3 text-center" style="margin-top: 5px;">
 
-  <img src="<?php echo base_url().'images/entrepreneur/'.$user->picture_name; ?>" class="profile-img">
+  <img src="<?php echo base_url().'images/teaching-128.png'; ?>" class="profile-img">
   <div class="profile-text">
     <h1 class="profile-name"><?php echo $this->lang->line('NAME');?> : <?php echo $user->name_bn ?></h1>
     
@@ -77,7 +77,7 @@ $user=User_helper::get_user();
 
 			<li colore="emerald">
                 <div class="contenuto">
-                    <span class="titolo">সর্বোচ্চ আয়</span>
+                    <span class="titolo">সর্বশেষ  প্রতিবেদন দাখিল </span>
                     <span class="descrizione"><?php //echo sprintf($CI->lang->line('TAKA_WITH_DATA'),Dashboard_helper::get_max_income_uisc($user->zilla,$user->upazila,$user->unioun)); ?></span>
                     <!-- <span class="valore"></span>	 -->
                 </div>
@@ -85,18 +85,18 @@ $user=User_helper::get_user();
 
             <li colore="red">
                 <div class="contenuto">
-                    <span class="titolo">সর্বনিম্ন আয়</span>
+                    <span class="titolo">মোট  প্রতিবেদন দাখিল  </span>
                     <span class="descrizione"><?php //echo sprintf($CI->lang->line('TAKA_WITH_DATA'),Dashboard_helper::get_min_income_uisc($user->zilla,$user->upazila,$user->unioun)); ?></span>
                 </div>
             </li>
 
             <li colore="yellow">
                 <div class="contenuto">
-                    <span class="titolo">বিনিয়োগকৃত টাকা</span>
+                    <span class="titolo">সর্বশেষ লগইন </span>
                     <span class="descrizione"><?php //echo sprintf($CI->lang->line('TAKA_WITH_DATA'),Dashboard_helper::get_investment_uisc($user->uisc_id,$user->id)); ?></span>
                 </div>
             </li>
-
+<!--
             <li colore="lime">
                 <div class="contenuto">
                     <span class="titolo">সেন্টারের ধরন</span>
@@ -130,7 +130,7 @@ $user=User_helper::get_user();
                     </span>
                 </div>
             </li>
-
+->
             
         </ul>
 

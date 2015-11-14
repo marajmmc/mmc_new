@@ -97,6 +97,8 @@ $user=User_helper::get_user();
 <!--    //for chart libray-->
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/highcharts.js"></script>
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/jquery.highchartTable-min.js"></script>
+    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/js/exporting.js"></script>
+
     <!--    <script type="text/javascript" src="--><?php //echo base_url().'assets/'; ?>
     
 <!--       PHOTO SLIDER HOME PAGE -->
@@ -163,7 +165,7 @@ $user=User_helper::get_user();
                 <div class="row-fluid">
                     <div class="col-lg-8" style="float:left;">
 
-                        <ul class="footer_list">
+                        <ul class="footer_list" style="display: none">
                             <li class="footer_list_button">
                                 <a href="#">আমাদের সম্পর্কে</a>
                             </li>

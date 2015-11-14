@@ -17,7 +17,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
     <div class='login_form'>
    
     <div class='login'>
-        <h2><?php echo $this->lang->line('LOGIN_TITLE');?></h2>
+        <h2>পাসওয়ার্ড ভুলে গেছেন<?php //echo $this->lang->line('LOGIN_TITLE');?></h2>
       <form class="form-inline" id="resetpassword_form" action="<?php echo $CI->get_encoded_url('home/resetpassword'); ?>" method="post">
      
              <div class="form-group">
@@ -25,7 +25,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
                  <input class="form-control" placeholder="ইমেইল" type="text" id="email" name="email" />
   </div>
                
-           <input type="submit" class="btn btn-primary trtr loginuser" value="Reset" />
+           <input type="submit" class="btn btn-primary trtr loginuser" value="পাঠিয়ে দিন " />
         </form>
         
     </div>

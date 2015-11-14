@@ -136,6 +136,7 @@ public function get_listdata(){
         $CI->db->select('institute.*');
         $CI->db->from($CI->config->item('table_institute').' institute');
        $CI->db->where('institute.status', 2);
+    $CI->db->order_by("institute.id", "desc");
  //       $CI->db->join($CI->config->item('table_user_group').' groups', 'groups.id = institute.user_group_id', 'LEFT');   
         $results = $CI->db->get()->result_array();
         
@@ -268,7 +269,8 @@ public function get_listinactive(){
        
         $CI->db->select('institute.*');
         $CI->db->from($CI->config->item('table_institute').' institute');
-    //    $CI->db->where('institute.status', 1);
+        $CI->db->where('institute.status', 1);
+        $CI->db->order_by("institute.id", "desc");
  //       $CI->db->join($CI->config->item('table_user_group').' groups', 'groups.id = institute.user_group_id', 'LEFT');   
         $results = $CI->db->get()->result_array();
         

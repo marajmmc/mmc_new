@@ -9,56 +9,56 @@ $user=User_helper::get_user();
 
 <div id="system_content" class="system_content col-sm-12 text-center" style="margin-top: 5px;">
 
-    <div class="system_content col-sm-2 text-center">
+    <div class="system_content col-md-3 text-center">
         <div class="shadow curved-2">
-            <img src="<?php echo site_url('images/dashboard/1-48.png'); ?>" style="width: 48px; height: 48px;" />
+            <img src="<?php echo site_url('images/dashboard/1-48.png'); ?>" style="" />
 
-            <br>
+
             <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_ALL_INSTITUTE');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'))); ?>)</h4>
         </div>
     </div>
 
-    <div class="system_content col-sm-2 text-center">
+    <div class="system_content col-md-3 text-center">
         <div class="shadow curved-2">
-            <img src="<?php echo site_url('images/dashboard/institutional-icon.png'); ?>" style="width: 48px; height: 48px;" />
+            <img src="<?php echo site_url('images/dashboard/institutional-icon.png'); ?>" style="" />
 
-            <br>
+
             <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_GENERAL_INSTITUTE');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','GENERAL')); ?>)</h4>
         </div>
     </div>
 
-    <div class="system_content col-sm-2 text-center">
+    <div class="system_content col-md-3 text-center">
         <div class="shadow curved-2">
-            <img src="<?php echo site_url('images/dashboard/mosque.png'); ?>" style="width: 48px; height: 48px;" />
+            <img src="<?php echo site_url('images/dashboard/mosque.png'); ?>" style="" />
 
-            <br>
+
             <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_MADRASHA_INSTITUTE');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','MADRASHA')); ?>)</h4>
         </div>
     </div>
 
-    <div class="system_content col-sm-2 text-center">
+    <div class="system_content col-md-3 text-center">
         <div class="shadow curved-2">
-            <img src="<?php echo site_url('images/dashboard/2-48.png'); ?>" style="width: 48px; height: 48px;" />
+            <img src="<?php echo site_url('images/dashboard/2-48.png'); ?>" style="" />
 
-            <br>
+
             <h4><span><?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY")); ?> )</h4>
         </div>
     </div>
 
-    <div class="system_content col-sm-2 text-center">
+    <div class="system_content col-md-3 text-center">
         <div class="shadow curved-2">
-            <img src="<?php echo site_url('images/dashboard/9-48.png'); ?>" style="width: 48px; height: 48px;" />
+            <img src="<?php echo site_url('images/dashboard/9-48.png'); ?>" style="" />
 
-            <br>
+
             <h4><span><?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?> </span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY")); ?> )</h4>
         </div>
     </div>
 
-    <div class="system_content col-sm-2 text-center">
+    <div class="system_content col-md-3 text-center">
         <div class="shadow curved-2">
-            <img src="<?php echo site_url('images/dashboard/3-48.png'); ?>" style="width: 48px; height: 48px;" />
+            <img src="<?php echo site_url('images/dashboard/3-48.png'); ?>" style="" />
 
-            <br>
+
             <h4><span><?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE")); ?> )</h4>
         </div>
     </div>
@@ -66,17 +66,8 @@ $user=User_helper::get_user();
 </div>
 
 <br/>
-<div id="system_content" class="system_content col-sm-12 text-center" style="margin-top: 5px;">
-
-    <div class="system_content col-sm-7 text-center" style="margin-top: 5px;">
-        <div id="container" style="height: 400px"></div>
-    </div>
-
-    <div class="system_content col-sm-3 text-center" style="margin-top: 5px;">
-        <div id="pie_container" style="height: 400px;"></div>
-    </div>
-
-    <div class="system_content col-sm-2 text-center" style="margin-top: 5px;">
+<div id="system_content" class="system_content col-sm-12 text-center" style="margin-top: 15px;">
+    <div class="system_content col-sm-2 text-center" style="margin-top: -13px;">
 
         <ul id="dashboard">
 
@@ -85,7 +76,7 @@ $user=User_helper::get_user();
                     <span class="titolo"><?php echo $this->lang->line('INSTITUTE');?></span>
                     <span class="descrizione"><?php echo $this->lang->line('NUMBER_OF_APPLIED_INSTITUTE');?></span>
                     <span class="valore"><?php
-                     //   echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_INACTIVE'), ""));
+                        //   echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_INACTIVE'), ""));
                         echo sprintf($CI->lang->line('TI'), Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_INACTIVE'), ""))); ?></span>
                 </div>
             </li>
@@ -123,7 +114,17 @@ $user=User_helper::get_user();
         </ul>
 
     </div>
+    <div class="system_content col-sm-7 text-center borderradius" style="margin-top: 5px; background: #fef4e5">
+        <div id="container" style="height: 400px"></div>
+    </div>
+
+    <div class="system_content col-sm-3 text-center " style="margin-top: 5px;">
+        <div id="pie_container" class="borderradius" style="height: 400px;"></div>
+    </div>
+
+
 </div>
+<div class="clearfix"></div>
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
@@ -183,13 +184,18 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
     {
         $('#container').highcharts({
             chart: {
-                type: 'column'
+                type: 'column',
+                backgroundColor: '#fef4e5',
+
+            },
+            exporting: {
+                enabled: true,
             },
             credits: {
                 enabled: false
               },
             title: {
-                text: '<?php echo $report_caption;?>'
+                text: '<?php echo $report_caption;?> বিশ্লেষণ'
             },
             xAxis: {
                 categories: [<?php
@@ -232,6 +238,7 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
             [
                 {
                     name : ' <?php echo $report_element_caption ?>',
+                    color: '#542f6c',
                     data: [<?php
                    if($high_chart_info):
                     $index=0;
@@ -260,13 +267,14 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'pie',
+                backgroundColor: '#fef4e5',
             },
             credits: {
                 enabled: false
               },
             title: {
-                text: "<?php echo $CI->lang->line('INSTITUTE') ?>"
+                text: "<?php echo $CI->lang->line('INSTITUTE') ?> বিশ্লেষণ"
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -282,7 +290,7 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
                 }
             },
             series: [{
-                name: "শিক্ষা প্রতিষ্ঠান",
+                name: "শিক্ষা প্রতিষ্ঠান ",
                 colorByPoint: true,
                 data: [{
                     name: "<b><?php echo $CI->lang->line('INSTITUTE_GENERAL') ?></b>",

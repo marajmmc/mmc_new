@@ -18,7 +18,7 @@ $CI =& get_instance();
     <div class='login'>
         <h2><?php echo $this->lang->line('LOGIN_TITLE');?></h2>
         <form class="form-inline" action="<?php echo $CI->get_encoded_url("home/login");?>" method="post">
-     
+
              <div class="form-group">
 
     <input type="text"  class="form-control" placeholder="<?php echo $this->lang->line('USERNAME');?>" name="username" required autofocus>

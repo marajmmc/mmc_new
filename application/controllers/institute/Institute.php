@@ -86,7 +86,7 @@ class Institute extends Root_Controller{
                 $ajax['system_message']=$this->message;
                 
             }
-           $this->current_action='list';
+           //$this->current_action='list';
           $ajax['status']=true;
             $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("institute/listinactive","",true));

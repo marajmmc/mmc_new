@@ -77,14 +77,14 @@
     -moz-transition:0.5s;
     -o-transition:0.5s;
     -webkit-transition:0.5s;
-    background-color:#683091;
-    border:1px solid #fff;
-    color:#FFF;
+/*    background-color:#53265F;
+    border:1px solid #fff;*/
+    color:#000000;
     display:block;
     font-size:19px;
     line-height:30px;
     /*    padding:0px 25px;*/
-    padding:0px 20px;
+    padding:4px 16px;
     text-decoration:none;
     transition:0.5s;
     font-family: 'Nikosh';
@@ -98,9 +98,9 @@
 }
 
 .nav1 li:hover > a {
-    background:#8dc641;
-    border-color:#8dc641;
-    color:#fff;
+    background:#e7e6e4;
+    border-color:#cfcfcd;
+    color:#000000;
 }
 
 .nav1 li:hover ul.subs {
@@ -141,16 +141,17 @@
 }
 
 .nav1 ul li a {
-    background:#8f52a0;
-    border-color:#fff;
+    background:#e7e6e4;
+    border-color:#cfcfcd;
     border-right:0px;
     border-left:0px;
-    color:#fff;
+    color:#000000;
     line-height:1px;
     -moz-transition:1.5s;
     -o-transition:1.5s;
     -webkit-transition:1.5s;
     transition:1.5s;
+    border-bottom: 1px solid #b8b8b6;
 }
 
 .nav1 li:hover ul li a {
@@ -161,10 +162,10 @@
 }
 
 .nav1 ul li a:hover {
-    background:#8CCA33;
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0)));
-    background-image: -moz-linear-gradient(-90deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-    background-image: -o-linear-gradient(-90deg,rgba(255,255,255,0.5),rgba(255,255,25,0));
+    background:#cfcfcd;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(207, 207, 205, 0.5)), to(rgba(207, 207, 205, 0)));
+    background-image: -moz-linear-gradient(-90deg, rgba(207, 207, 207, 0.5), rgba(207, 207, 205, 0));
+    background-image: -o-linear-gradient(-90deg,rgba(207,207,207,0.5),rgba(207,207,205,0));
 
     -webkit-border-radius: 0px 0px 0 0;
     -moz-border-radius: 0px 0px 0 0;
@@ -5615,7 +5616,7 @@ header .user-profile .caret {
 
 /* Main Navigation starts  */
 .top-nav {
-    margin-bottom: 0px; }
+    margin-bottom: 0px; margin-top: 29px; }
 /*.top-nav ul li {
   float: left;
   margin-right: 1px; }

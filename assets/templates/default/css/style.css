@@ -1065,3 +1065,10 @@ div.zillalist{ width: 183px; float: left}
 div.schools label{padding:3px 9px 0 0}
 div.schools{ margin-left: 20px;}
 div.curved-2 h4 span{ display: block;}
+
+#search::-moz-placeholder { padding-left: 15px; }
+div.shadow img{ float: left; padding-left: 30px;}
+div.contactpage p{ text-align: left;}
+div.contactpage{ text-align: left; height: 350px;}
+div.helopage{ text-align: justify;}
+#system_message{text-align: left}

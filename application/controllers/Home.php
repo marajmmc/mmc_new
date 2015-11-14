@@ -460,19 +460,20 @@ class Home extends Root_Controller
         $this->load->library('form_validation');
        
 
-        $this->form_validation->set_rules('registration[divid]',$this->lang->line('DIVISION_NAME_SELECT'),'required');
-        $this->form_validation->set_rules('registration[zilla]',$this->lang->line('ZILLA_NAME_SELECT_BN'),'required');
-        $this->form_validation->set_rules('registration[upozilla]',$this->lang->line('UPOZILLA_SELECT'),'required');
-        $this->form_validation->set_rules('registration[education_type]',$this->lang->line('EDUCATION_TYPE'),'required');
-        $this->form_validation->set_rules('registration[institute]',$this->lang->line('SCHOOL_NAME'),'required');
-        $this->form_validation->set_rules('registration[email]',$this->lang->line('SCHOOL_EMAIL'),'trim|required|valid_email|callback_isemailExist');
+        $this->form_validation->set_rules('registration[divid]',$this->lang->line('DIVISION_NAME_SELECT'),'required',array('required' => $this->lang->line('DIVISION_NAME_SELECT')));
+        $this->form_validation->set_rules('registration[zilla]',$this->lang->line('ZILLA_NAME_SELECT_BN'),'required',array('required' => $this->lang->line('ZILLA_NAME_SELECT_BN')));
+        $this->form_validation->set_rules('registration[upozilla]',$this->lang->line('UPOZILLA_SELECT'),'required',array('required' => $this->lang->line('UPOZILLA_SELECT')));
+        $this->form_validation->set_rules('registration[education_type]',$this->lang->line('EDUCATION_TYPE'),'required', array('required' => $this->lang->line('EDUCATION_TYPE').' নির্বাচন করুন'));
+        $this->form_validation->set_rules('registration[institute]',$this->lang->line('SCHOOL_NAME'),'required', array('required' => $this->lang->line('SCHOOL_NAME').' লিখুন '));
+        $this->form_validation->set_rules('registration[email]',$this->lang->line('SCHOOL_EMAIL'),'trim|required|valid_email|callback_isemailExist', array('required' => $this->lang->line('SCHOOL_EMAIL').' লিখুন '));
      //   $this->form_validation->set_rules('registration[mobile]',$this->lang->line('SCHOOL_MOBILE'),'required');
-        $this->form_validation->set_rules('registration[mobile]', $this->lang->line('SCHOOL_MOBILE'), 'required|min_length[4]|regex_match[/^0[0-9]{10}$/]'); //{11} for 11 digits number
+        $this->form_validation->set_rules('registration[mobile]', $this->lang->line('SCHOOL_MOBILE'), 'required|min_length[4]|regex_match[/^0[0-9]{10}$/]', array('required' => $this->lang->line('SCHOOL_MOBILE').' লিখুন '));//{11} for 11 digits number
         //
        // $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'required');
-       $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'trim|required|callback_isEMExist');
-        $this->form_validation->set_rules('registration[password]',$this->lang->line('SCHOOL_PASSWORD'),'required');
-
+       $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'trim|required|callback_isEMExist', array('required' => $this->lang->line('SCHOOL_EM').' লিখুন '));
+        $this->form_validation->set_rules('registration[password]',$this->lang->line('SCHOOL_PASSWORD'),'required', array('required' => $this->lang->line('SCHOOL_PASSWORD').' লিখুন '));
+        $this->form_validation->set_rules('registration[repassword]',$this->lang->line('SCHOOL_RE_PASSWORD'),'required', array('required' => $this->lang->line('SCHOOL_RE_PASSWORD').' লিখুন '));
+        $this->form_validation->set_rules('registration[repassword]',$this->lang->line('SCHOOL_RE_PASSWORD'),'required|matches[registration[password]]');
         if($this->form_validation->run() == FALSE)
         {
             $this->message=validation_errors();
@@ -493,7 +494,7 @@ class Home extends Root_Controller
  
         if ($query->num_rows() > 0)
         {
-            $this->form_validation->set_message('isEMExist', 'This %s already registred');
+            $this->form_validation->set_message('isEMExist', 'এই %s ইতিপূর্বে  নিবন্ধিত হয়েছে');
             return FALSE;
         }
         else
@@ -812,5 +813,18 @@ public function getUpazilacheckbox()
         $institutes = $this->Institute_model->get_message_inbox();
         //   }
         $this->jsonReturn($institutes);
+    }
+    public function contact(){
+
+        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/contact",'',true));
+        $this->jsonReturn($ajax);
+    }
+
+    public function help(){
+
+        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/help",'',true));
+        $this->jsonReturn($ajax);
     }
 }

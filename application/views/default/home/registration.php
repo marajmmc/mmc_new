@@ -29,13 +29,13 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
     </td>
      <td width="33%"> 
          <label class="control-label pull-left registrationwidth"><?php echo $CI->lang->line('ZILLA_NAME_SELECT_BN'); ?><span style="color:#FF0000">*</span></label>
-         <select name="registration[zilla]" id="zilla_id" class="selectbox-1 zilla validate[required]">
+         <select name="registration[zilla]" id="zilla_id" class="form-control zilla validate[required]">
          <option value=""><?php echo $this->lang->line('SELECT');?></option>
          </select>
      </td>
     <td width="33%"> 
         <label class="control-label pull-left"><?php echo $CI->lang->line('UPOZILLA_SELECT'); ?><span style="color:#FF0000">*</span></label>
-        <select name="registration[upozilla]" id="upozilla_id" class="selectbox-1 zilla validate[required]">
+        <select name="registration[upozilla]" id="upozilla_id" class="form-control zilla validate[required]">
           <option value=""><?php echo $this->lang->line('SELECT');?></option>
          </select>
     </td>
@@ -162,7 +162,17 @@ echo form_password($data);
     ?>     
       </td>
        <td>
-          
+           <label class="control-label pull-left registrationwidth"><?php echo $CI->lang->line('SCHOOL_RE_PASSWORD'); ?><span style="color:#FF0000">*</span></label>
+           <?php
+           $data = array(
+               'name'          => 'registration[repassword]',
+               'id'            => 'password',
+               'placeholder'   => $this->lang->line('SCHOOL_RE_PASSWORD'),
+               'size'          => '60',
+           );
+
+           echo form_password($data);
+           ?>
       </td>
   </tr>
   

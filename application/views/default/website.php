@@ -69,6 +69,31 @@ body {
           <div class="featured-articles-container" style="background:#fff !important;">
             <h5 class="heading-blue">গুরুত্বপূর্ণ লিঙ্ক</h5>
 
+            <li class="link_cls"> <a class="external" href="http://www.dpe.gov.bd/" target="_blank">
+                <table width="100%">
+                  <tr>
+                    <td width="15%"><img src="<?php echo base_url() ?>/images/primary1.jpg" width="36" height="36"/></td>
+                    <td width="80%" align="left"><span>প্রাথমিক শিক্ষা অধিদপ্তর</span></td>
+                  </tr>
+                </table>
+              </a> </li>
+            <li class="link_cls"> <a class="external" href="http://www.dshe.gov.bd/" target="_blank">
+                <table width="100%">
+                  <tr>
+                    <td width="15%"><img src="<?php echo base_url() ?>/images/secondary1.jpg" width="36" height="36"/></td>
+                    <td width="80%" align="left"><span>মাধ্যমিক ও উচ্চ শিক্ষা অধিদপ্তর</span></td>
+                  </tr>
+                </table>
+              </a> </li>
+            <li class="link_cls"> <a class="external" href="http://www.moedu.gov.bd//" target="_blank">
+                <table width="100%">
+                  <tr>
+                    <td width="15%"><img src="<?php echo base_url() ?>/images/gov.png" width="36" height="36"/></td>
+                    <td width="80%" align="left"><span>শিক্ষা মন্ত্রণালয়</span></td>
+                  </tr>
+                </table>
+              </a> </li>
+
              <li class="link_cls"> <a class="external" href="https://www.teachers.gov.bd/" target="_blank">
               <table width="100%">
                 <tr>
@@ -86,30 +111,7 @@ body {
                 </tr>
               </table>
               </a> </li>
-            <li class="link_cls"> <a class="external" href="http://forms.portal.gov.bd/" target="_blank">
-              <table width="100%">
-                <tr>
-                  <td width="15%"><img src="<?php echo base_url() ?>/images/link/form_logo.png" width="36" height="36"/></td>
-                  <td width="80%" align="left"><span>বাংলাদেশ ফরম</span></td>
-                </tr>
-              </table>
-              </a> </li>
-            <li class="link_cls"> <a class="external" href="http://services.portal.gov.bd/" target="_blank">
-              <table width="100%">
-                <tr>
-                  <td width="15%"><img src="<?php echo base_url() ?>/images/link/service_logo.png" width="36" height="36"/></td>
-                  <td width="80%" align="left"><span>সেবাকুঞ্জ</span></td>
-                </tr>
-              </table>
-              </a> </li>
-              <li class="link_cls"> <a class="external" href="http://www.passport.gov.bd/" target="_blank">
-              <table width="100%">
-                <tr>
-                  <td width="15%"><img src="<?php echo base_url() ?>/images/link/passport.jpg" width="26" height="30"/></td>
-                  <td width="80%" align="left"><span>পাসপোর্ট আবেদন</span></td>
-                </tr>
-              </table>
-              </a> </li>
+
           </div>
         </div>
       </div>
