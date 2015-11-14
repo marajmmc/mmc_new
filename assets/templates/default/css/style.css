@@ -1057,3 +1057,8 @@ div.heloregistration ul { margin-bottom: 20px;}
 #resetpassword_form table tr td{ padding:0; margin: 0;}
 form#resetpassword_form input[type="text"], input[type="password"], input[type="email"]{ float: left;}
 .loginuser{padding: 6px 16px !important;}
+div.division, div.zilla, div.perticularinstitute, div.communicationmesage { margin-left: 10px;}
+div.division h3, div.zilla h3, div.perticularinstitute h3, div.communicationmesage h3 { padding-left: 6px;}
+div.division label{ padding:3px 17px 0 0 }
+div.zilla label{ padding:3px 17px 0 0 }
+div.zillalist{ width: 183px; float: left}

@@ -40,12 +40,15 @@ $CI =& get_instance();
     <?php
     if(isset($zillas)):
         foreach ($zillas as $zillas):
+            echo '<div class="zillalist">';
  echo '<input name="zilla[]" type="checkbox" value="'.$zillas['zillaid'].'" /><label for='.$zillas['zillaname'].'>'.$zillas['zillaname'].'</label>';
+       echo '</div>';
         endforeach;
         
     endif;
     ?>
     </div>
+        <div class="clearfix"></div>
     <div class="zilla">
          <h3>সংশ্লিষ্ট কর্মকর্তা - উপজেলা</h3>
        <div class="col-md-3">
@@ -84,8 +87,11 @@ $CI =& get_instance();
          
      </div>     
     <div class="clearfix"></div>
+        <div class="communicationmesage">
     <textarea name="message" class="textarea" placeholder="ম্যাসেজ লিখুন ..." style="width: 810px; height: 200px"></textarea>
+        </div>
 <div class="clearfix"></div>
+
 <input type="submit" class="btn btn-primary" name="informationsend" value="প্রেরন করুন" id="informationsend">
     </form>    
   </div>
