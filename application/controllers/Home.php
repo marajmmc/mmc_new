@@ -762,5 +762,55 @@ public function getUpazilacheckbox()
         
  
     }
-    
+  //  public function
+
+
+    public function messagesend(){
+
+        //     if($this->permissions['list'])
+        //     {
+
+        $data['page']='dashboard_page';
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",'',true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("website","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/messagesend",'',true));
+        $this->jsonReturn($ajax);
+
+        //      }
+
+    }
+
+
+    public function get_message_send()
+    {
+          $this->load->model("institute/Institute_model");
+        $institutes = array();
+        //   if($this->permissions['list'])
+        //    {
+        $institutes = $this->Institute_model->get_message_sendlistdata();
+        //   }
+        $this->jsonReturn($institutes);
+    }
+
+    public function myinbox(){
+
+        $data['page']='dashboard_page';
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",'',true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("website","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/myinbox",'',true));
+        $this->jsonReturn($ajax);
+    }
+
+    public function get_myinbox()
+    {
+        $this->load->model("institute/Institute_model");
+        $institutes = array();
+        //   if($this->permissions['list'])
+        //    {
+        $institutes = $this->Institute_model->get_message_inbox();
+        //   }
+        $this->jsonReturn($institutes);
+    }
 }

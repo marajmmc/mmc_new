@@ -385,4 +385,32 @@ public function zilausers($zilaid, $groupid){
         return $result;
         
 }
+
+    public function get_message_sendlistdata(){
+        $CI =& get_instance();
+        $user = User_helper::get_user();
+        $this->db->select('communication.*, users.name_en');
+        $this->db->from($CI->config->item('table_communication').' communication');
+        $this->db->join($CI->config->item('table_users').' users', 'users.id=communication.receiver_id', 'left');
+        $this->db->where('communication.sender_id',$user->id);
+        $this->db->order_by('communication.id','DESC');
+        $results = $CI->db->get()->result_array();
+
+        return $results;
+    }
+
+
+    public function get_message_inbox(){
+        $CI =& get_instance();
+        $user = User_helper::get_user();
+        $this->db->select('communication.*, users.name_en');
+        $this->db->from($CI->config->item('table_communication').' communication');
+        $this->db->join($CI->config->item('table_users').' users', 'users.id=communication.sender_id', 'left');
+        $this->db->where('communication.receiver_id',$user->id);
+        $this->db->order_by('communication.id','DESC');
+        $results = $CI->db->get()->result_array();
+
+        return $results;
+    }
+
 }

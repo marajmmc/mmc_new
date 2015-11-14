@@ -61,11 +61,12 @@ $queryCollege = $this->db->get();
 $rowcountCollege = $queryCollege->num_rows();
 ?>
 <div class="system_content col-sm-3 text-center">
+
     <div class="shadow curved-2">
         <img src="<?php echo site_url('images/dashboard/1-48.png'); ?>"/>
 
         <br>
-        <h4>নিবন্ধিত শিক্ষা প্রতিষ্ঠান ( <?php echo $rowcount; ?> )</h4>
+        <h4><span>নিবন্ধিত শিক্ষা প্রতিষ্ঠান </span>( <?php echo $rowcount; ?> )</h4>
     </div>
 </div>
 

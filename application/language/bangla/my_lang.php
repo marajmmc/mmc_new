@@ -337,6 +337,13 @@ $lang['YESTERDAY']='গতকাল ';
 $lang['NUMBER_OF_UNION_YESTERDAY']='সেরা ইউনিয়ন (গতকাল) ';
 
 $lang['COMMINICATION_MESSAGE']='ম্যাসেজ';
+$lang['MESSAGE_RECEIVER']='ম্যাসেজ';
+$lang['MESSAGE_RECEIVER']='বার্তা গ্রাহক';
+$lang['COMMU_MESSAGE']='বার্তা';
+$lang['MESSAGE_DATE']='বার্তা প্রেরণের তারিখ';
+$lang['MESSAGE_SENDER']='বার্তা প্রেরক ';
+
+
 
 
 

@@ -14,7 +14,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/1-48.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><?php echo $this->lang->line('NUMBER_OF_APPROVED_ALL_INSTITUTE');?>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE')); ?>)</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_ALL_INSTITUTE');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE')); ?>)</h4>
         </div>
     </div>
 
@@ -23,7 +23,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/institutional-icon.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><?php echo $this->lang->line('NUMBER_OF_APPROVED_GENERAL_INSTITUTE');?>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','GENERAL'); ?>)</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_GENERAL_INSTITUTE');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','GENERAL'); ?>)</h4>
         </div>
     </div>
 
@@ -32,7 +32,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/mosque.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><?php echo $this->lang->line('NUMBER_OF_APPROVED_MADRASHA_INSTITUTE');?>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','MADRASHA'); ?>)</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_MADRASHA_INSTITUTE');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','MADRASHA'); ?>)</h4>
         </div>
     </div>
 
@@ -41,7 +41,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/2-48.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY"); ?> )</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY"); ?> )</h4>
         </div>
     </div>
 
@@ -50,7 +50,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/9-48.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?> ( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY"); ?> )</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?> </span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY"); ?> )</h4>
         </div>
     </div>
 
@@ -59,7 +59,7 @@ $user=User_helper::get_user();
             <img src="<?php echo site_url('images/dashboard/3-48.png'); ?>" style="width: 48px; height: 48px;" />
 
             <br>
-            <h4><?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE"); ?> )</h4>
+            <h4><span><?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>( <?php echo Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE"); ?> )</h4>
         </div>
     </div>
 

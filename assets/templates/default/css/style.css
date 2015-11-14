@@ -1062,3 +1062,6 @@ div.division h3, div.zilla h3, div.perticularinstitute h3, div.communicationmesa
 div.division label{ padding:3px 17px 0 0 }
 div.zilla label{ padding:3px 17px 0 0 }
 div.zillalist{ width: 183px; float: left}
+div.schools label{padding:3px 9px 0 0}
+div.schools{ margin-left: 20px;}
+div.curved-2 h4 span{ display: block;}
