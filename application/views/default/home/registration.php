@@ -173,6 +173,9 @@ echo form_password($data);
 
            echo form_password($data);
            ?>
+           <?php
+
+           ?>
       </td>
   </tr>
   

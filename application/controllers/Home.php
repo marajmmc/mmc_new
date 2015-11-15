@@ -269,6 +269,7 @@ class Home extends Root_Controller
     {
         //    $this->load->library('form');
         $this->load->library('form_validation');
+
         $ajax['status']=true;
         $data=array();
         $data['title']=$this->lang->line("REGISTRATION_TITLE");
@@ -472,8 +473,9 @@ class Home extends Root_Controller
        // $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'required');
        $this->form_validation->set_rules('registration[em]',$this->lang->line('SCHOOL_EM'),'trim|required|callback_isEMExist', array('required' => $this->lang->line('SCHOOL_EM').' লিখুন '));
         $this->form_validation->set_rules('registration[password]',$this->lang->line('SCHOOL_PASSWORD'),'required', array('required' => $this->lang->line('SCHOOL_PASSWORD').' লিখুন '));
-        $this->form_validation->set_rules('registration[repassword]',$this->lang->line('SCHOOL_RE_PASSWORD'),'required', array('required' => $this->lang->line('SCHOOL_RE_PASSWORD').' লিখুন '));
-        $this->form_validation->set_rules('registration[repassword]',$this->lang->line('SCHOOL_RE_PASSWORD'),'required|matches[registration[password]]');
+        //$this->form_validation->set_rules('registration[repassword]',$this->lang->line('SCHOOL_RE_PASSWORD'),'required', array('required' => $this->lang->line('SCHOOL_RE_PASSWORD').' লিখুন '));
+        $this->form_validation->set_rules('registration[repassword]',$this->lang->line('SCHOOL_RE_PASSWORD'),'required|matches[registration[password]]',array('required' => $this->lang->line('SCHOOL_RE_PASSWORD').' লিখুন '));
+        $this->form_validation->set_message('matches', 'প্রদত্ত  দুই পাসওয়ার্ড একই হয়নি।  ');
         if($this->form_validation->run() == FALSE)
         {
             $this->message=validation_errors();
@@ -578,7 +580,7 @@ public function communicationsave(){
         $this->email->initialize($config);
 
                 $user = User_helper::get_user();
-                echo $user->id;
+        //        echo $user->id;
       //     print_r($division);
       if($this->input->post('division')):
           $divisions=$this->input->post('division');
@@ -759,6 +761,10 @@ public function getUpazilacheckbox()
             }
             //    return $subjects;
             $this->jsonReturn($institutesname); 
+        }
+        else{
+            $institutesname="কোন প্রতিষ্ঠান পাওয়া যায়নি। ";
+            $this->jsonReturn($institutesname);
         }
         
  

@@ -76,7 +76,7 @@ $CI =& get_instance();
     </select>
      </div>
          <div class="col-md-2">
-   <select name="upozilla" id="upozilla_id" class="selectbox-1 zilla validate[required]">
+   <select name="upozilla" id="upozilla_id" class="form-control  zilla validate[required]">
           <option value=""><?php echo $this->lang->line('SELECT');?></option>
     </select>      
      </div>
