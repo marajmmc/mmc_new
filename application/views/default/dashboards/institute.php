@@ -59,7 +59,7 @@ $user=User_helper::get_user();
     
     <h4 class="profile-title"><?php echo $this->lang->line('PHONE');?> : <?php echo $user->mobile ?></h4>
     <h4 class="profile-title"><?php echo $this->lang->line('EMAIL');?> : <?php echo $user->email ?></h4>
-    <h4 class="profile-title"><?php echo $this->lang->line('ADDRESS');?> : <?php echo $user->present_address ?></h4>
+
     
   </div>
     

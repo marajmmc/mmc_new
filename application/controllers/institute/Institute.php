@@ -234,9 +234,9 @@ endif;
     
             }  
             //$ajax['status']=false;
-                $this->message=$this->lang->line("MSG_CREATE_SUCCESS");
+                $this->message=$this->lang->line("MSG_APPROVED_SUCCESS");
                 //$this->jsonReturn($ajax);
-                $this->system_list();
+                $this->system_listinactive();
         
     }
     
@@ -274,7 +274,19 @@ endif;
         $val_class = array();
         $subject_list=array();
         $subjects = array();
-            
+    //   print_r($education_level);
+     //   echo count($education_level);
+    //    echo key($education_level), PHP_EOL ;
+       // echo current($education_level), PHP_EOL ;
+    //    exit();
+    //    if( $classes):
+       // $thgjhj= current($education_level), PHP_EOL;
+
+   //     if(current($education_level), PHP_EOL ):
+      //   echo current($education_level);
+     //   exit();
+       if(current($education_level) >0 ):
+
        for($i=0; $i < count($education_level); $i++)
        {
            
@@ -377,13 +389,19 @@ endif;
                           
         
 
-        } // end count loop
-        
+        }
+
+           $ajax['system_message']=$this->lang->line("SCHOOL_CLASS_INFORMATION_SUBMITED");
+       else:
+           // end count loop
+           $ajax['system_message']=$this->lang->line("SCHOOL_CLASS_INFORMATION_SUBMITED_NOT");
+
+       endif;
         $user=User_helper::get_user();
         $user_id = $user->id;    
         $data['institute']=$this->Institute_model->get_institute_information($user->id);  
        $ajax['status']=true;
-       $ajax['system_message']=$this->lang->line("SCHOOL_CLASS_INFORMATION_SUBMITED");
+
        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("institute/classadd",$data,true));
      //       $this->jsonReturn($ajax);

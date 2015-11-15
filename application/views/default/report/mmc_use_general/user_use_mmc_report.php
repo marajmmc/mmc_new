@@ -19,7 +19,7 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                     <a class="btn btn-primary btn-rect pull-right" href="<?php echo $pdf_link;?>"><?php echo $this->lang->line("BUTTON_PDF"); ?></a>
                     <a class="btn btn-primary btn-rect pull-right" style="margin-right: 10px;" href="javascript:window.print();"><?php echo $this->lang->line("BUTTON_PRINT"); ?></a>
                     <div class="clearfix"></div>
-                    <span class="pull-right"><?php echo $this->lang->line('REPORT_CURRENT_DATE_VIEW');?></span>
+                    <span class="pull-right"><?php echo $this->lang->line('REPORT_CURRENT_DATE_VIEW');?> <br />প্রতিবেদন রিপোট&nbsp;<?php echo System_helper::Get_Eng_to_Bng($_GET["from_date"]).'&nbsp;থেকে &nbsp;'.System_helper::Get_Eng_to_Bng($_GET["to_date"]); ?>&nbsp; পর্যন্ত </span>
                 </div>
                 <div class="col-lg-12">
                     <div class="col-lg-12 text-center">

@@ -1072,3 +1072,13 @@ div.contactpage p{ text-align: left;}
 div.contactpage{ text-align: left; height: 350px;}
 div.helopage{ text-align: justify;}
 #system_message{text-align: left}
+form.report_form{ margin-top: -10px;}
+div.bg1caf9a{ background-color: #1caf9a; color: #ffffff}
+div.bgd9534f{ background-color: #d9534f; color: #ffffff}
+div.bg428bca{ background-color: #428bca; color: #ffffff}
+div.bg1d2939{ background-color: #1d2939; color: #ffffff}
+div.bgf0ad4e{ background-color: #f0ad4e; color: #ffffff}
+div.bgff6c60{ background-color: #ff6c60; color: #ffffff}
+div.bg8175c7{ background-color: #8175c7; color: #ffffff}
+div.bg92cf5c{ background-color: #92cf5c; color: #ffffff}
+div.ui-datepicker{ z-index: 999999 !important;}

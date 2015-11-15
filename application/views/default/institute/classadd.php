@@ -87,7 +87,7 @@ $data = unserialize('a:3:{s:3:"uid";s:11:"a new value";s:3:"pid";s:17:"another n
     <td> <select name="classesid[]" id="classes" class="selectbox-1 zilla validate[required]">
          <option value=""><?php echo $this->lang->line('SELECT');?></option>
          </select></td>
-         <td><input type="text" name="cladddate[]" class="datepicker" value="<?php echo date("Y-m-d"); ?>"/>&nbsp;&nbsp;<a href="javascript:void(0);" class="addCF external btn btn-primary">Add More</a></td>
+         <td><input type="text" name="cladddate[]" class="datepicker" value="<?php echo date("Y-m-d"); ?>"/>&nbsp;&nbsp;<a href="javascript:void(0);" class="addCF external btn btn-primary">যোগ করুন </a></td>
   </tr>
   <tr>
     <td colspan="3"><div class="classesname" id="classesname"></div></td>
@@ -126,7 +126,7 @@ $data = unserialize('a:3:{s:3:"uid";s:11:"a new value";s:3:"pid";s:17:"another n
       echo '<input type="hidden" name="is_secondary" value="0"/>';  
     }
     ?>
-    <input type="submit" name="classsave" value="submit" class="btn btn-default">
+    <input type="submit" name="classsave" value="নিবেদন  দাখিল" class="btn btn-primary">
 </form>
      <?php //echo 'education_type_ids'.$institute['education_type_ids']?>
      <?php //echo 'is_primary'.$institute['is_primary']?>
@@ -208,7 +208,7 @@ $(".addCF").click(function(){
          if($institute['is_higher']==1){
             echo '<option value="7">উচ্চ মাধ্যমিক/ আলীম</option>';
         }
-        ?></select></td><td><select onchange="getclassesubject('+ num +');" name="classesid[]" id="classesid'+ num +'" class="selectbox-1 zilla validate[required]"> <option value=""><?php echo $this->lang->line('SELECT');?></option></select></td><td><input type="text" name="cladddate[]" class="datepicker" value="<?php echo date("Y-m-d"); ?>"/>&nbsp;&nbsp;<a href="javascript:void(0);" class="remCF external btn btn-danger">Remove</a></td></tr><tr><td colspan="3"><div class="classesname" id="classesname'+ num +'"></div></td></tr>');
+        ?></select></td><td><select onchange="getclassesubject('+ num +');" name="classesid[]" id="classesid'+ num +'" class="selectbox-1 zilla validate[required]"> <option value=""><?php echo $this->lang->line('SELECT');?></option></select></td><td><input type="text" name="cladddate[]" class="datepicker" value="<?php echo date("Y-m-d"); ?>"/>&nbsp;&nbsp;<a href="javascript:void(0);" class="remCF external btn btn-danger">বাতিল করুন </a></td></tr><tr><td colspan="3"><div class="classesname" id="classesname'+ num +'"></div></td></tr>');
     num = num + 1;     
     $('.datepicker').Zebra_DatePicker();
 	});

@@ -266,4 +266,103 @@ public static function bn2enNumber ($number){
 
         return $en_number;
     }
+
+
+
+    public static function get_all_mmc_institute($status=null, $level=null,$type=null)
+    {
+
+        $CI = & get_instance();
+        $user=User_helper::get_user();
+        if($user->user_group_id==$CI->config->item('SUPER_ADMIN_GROUP_ID'))
+        {
+            //$CI->db->where('','');
+        }
+        else if($user->user_group_id==$CI->config->item('A_TO_I_GROUP_ID'))
+        {
+            //$CI->db->where('','');
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_1') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_2') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_3') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_4'))
+        {
+            //$CI->db->where('','');
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_DONNER_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_3'))
+        {
+            //$CI->db->where('','');
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_3'))
+        {
+            $CI->db->where('institute.divid='.$user->division);
+        }
+        elseif($user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_3') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_4'))
+        {
+            $CI->db->where('institute.divid='.$user->division);
+            $CI->db->where('institute.zillaid='.$user->zilla);
+        }
+        elseif($user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_1') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_2') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_3'))
+        {
+            $CI->db->where('institute.divid='.$user->division);
+            $CI->db->where('institute.zillaid='.$user->zilla);
+            $CI->db->where('institute.upozillaid='.$user->upazila);
+        }
+        else
+        {
+            //$CI->db->where('','');
+        }
+
+        if($level=="PRIMARY")
+        {
+            $CI->db->where('institute.is_primary', 1);
+        }
+        elseif($level=="SECONDARY")
+        {
+            $CI->db->where('institute.is_secondary', 1);
+        }
+        elseif($level=="INTERMEDIATE")
+        {
+            $CI->db->where('institute.is_higher', 1);
+        }
+        else
+        {
+
+        }
+
+        if($type=="GENERAL")
+        {
+            $CI->db->where('institute.education_type_ids', 1);
+        }
+        elseif($type=="MADRASHA")
+        {
+            $CI->db->where('institute.education_type_ids', 2);
+        }
+        else
+        {
+
+        }
+
+        if($status==$CI->config->item('STATUS_ACTIVE'))
+        {
+            $CI->db->where('institute.status', $CI->config->item('STATUS_ACTIVE'));
+        }
+        elseif($status==$CI->config->item('STATUS_INACTIVE'))
+        {
+            $CI->db->where('institute.status', $CI->config->item('STATUS_INACTIVE'));
+        }
+        else
+        {
+
+        }
+
+     //   $CI->db->from($CI->config->item('table_institute').' institute');
+    //    $total=$CI->db->count_all_results();
+
+        $CI->db->select('mmcsummary.*, institute.*');
+        $CI->db->from($CI->config->item('table_class_summary').' mmcsummary');
+        $CI->db->join($CI->config->item('table_institute').' institute', 'mmcsummary.institude_id=institute.id', 'left');
+     //   $CI->db->where('communication.sender_id',$user->id);
+        $CI->db->group_by('mmcsummary.institude_id');
+        $total=$CI->db->count_all_results();
+        //echo $CI->db->last_query();
+        return $total;
+    }
 }

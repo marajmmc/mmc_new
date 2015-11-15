@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 $lang['REPORT_HEADER_TITLE']		= 'মাল্টিমিডিয়া ক্লাসরুম ম্যানেজমেন্ট সিস্টেম';
-$lang['REPORT_CURRENT_DATE_VIEW']		= 'প্রতিবেদনের তারিখ:  '. System_helper::Get_Eng_to_Bng(date('d-m-Y'));
+$lang['REPORT_CURRENT_DATE_VIEW']		= 'প্রতিবেদনের তারিখ:  '. System_helper::Get_Eng_to_Bng(date('Y-d-m'));
 $lang['DO_DATA_FOUND'] = 'তথ্য খুজে পাওয়া যায়নি।';
 $lang['FROM_DATE'] = 'তারিখ হইতে';
 $lang['TO_DATE'] = 'তারিখ পর্যন্ত';

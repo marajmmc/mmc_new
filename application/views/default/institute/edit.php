@@ -72,7 +72,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
   </tr>
   
   <tr>
-    <td><strong>Status<strong></td>
+    <td><strong>হাল <strong></td>
                 <td>
      <?php
 //echo $institute['status'];
@@ -81,8 +81,8 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
                     <?php
      $options = array(      
-        '0' => ['text'=>'Not Approved','value'=>1],
-        '1' => ['text'=>'Approved','value'=>2]
+       // '0' => ['text'=>'প্রত্যাখ্যান করা','value'=>1],
+        '1' => ['text'=>'অনুমোদন','value'=>2]
 );
    $CI->load_view('dropdown',array('drop_down_options'=>$options,'drop_down_selected'=>$institute['status']));
   ?>     
@@ -91,7 +91,10 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
     <td>
         <input type="hidden" value="<?php echo $institute['id']; ?>" name="instituteid" />
       
-        <input type="submit" style="cursor:pointer; margin-right: 37px !important;" class="myButton" id="saveRegistration" name="saveRegistration" value="<?php echo $this->lang->line('SAVE');?>" /></td>
+        <input type="submit" style="cursor:pointer; margin-right: 37px !important;" class="myButton" id="saveRegistration" name="saveRegistration" value="<?php echo $this->lang->line('APPROVED');?>" />
+        <a href="<?php echo base_url() ?>/institute/institute/index/inactive" class="myButton">বাতিল </a>
+    </td>
+
     <td></td>
   </tr>
 </table>

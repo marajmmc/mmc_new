@@ -10,7 +10,7 @@ $user=User_helper::get_user();
 <div id="system_content" class="system_content col-sm-12 text-center" style="margin-top: 5px;">
 
     <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2">
+        <div class="shadow curved-2 bg1caf9a">
             <img src="<?php echo site_url('images/dashboard/1-48.png'); ?>" style="" />
 
 
@@ -19,8 +19,8 @@ $user=User_helper::get_user();
     </div>
 
     <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2">
-            <img src="<?php echo site_url('images/dashboard/institutional-icon.png'); ?>" style="" />
+        <div class="shadow curved-2 bgd9534f">
+            <img src="<?php echo site_url('images/dashboard/315-48.png'); ?>" style="" />
 
 
             <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_GENERAL_INSTITUTE');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','GENERAL')); ?>)</h4>
@@ -28,8 +28,8 @@ $user=User_helper::get_user();
     </div>
 
     <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2">
-            <img src="<?php echo site_url('images/dashboard/mosque.png'); ?>" style="" />
+        <div class="shadow curved-2 bg428bca">
+            <img src="<?php echo site_url('images/dashboard/114-48.png'); ?>" style="" />
 
 
             <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_MADRASHA_INSTITUTE');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','MADRASHA')); ?>)</h4>
@@ -37,7 +37,7 @@ $user=User_helper::get_user();
     </div>
 
     <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2">
+        <div class="shadow curved-2 bg1d2939">
             <img src="<?php echo site_url('images/dashboard/2-48.png'); ?>" style="" />
 
 
@@ -46,7 +46,7 @@ $user=User_helper::get_user();
     </div>
 
     <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2">
+        <div class="shadow curved-2 bgff6c60">
             <img src="<?php echo site_url('images/dashboard/9-48.png'); ?>" style="" />
 
 
@@ -55,11 +55,61 @@ $user=User_helper::get_user();
     </div>
 
     <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2">
+        <div class="shadow curved-2 bgf0ad4e">
             <img src="<?php echo site_url('images/dashboard/3-48.png'); ?>" style="" />
 
 
             <h4><span><?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>( <?php echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE")); ?> )</h4>
+        </div>
+    </div>
+
+    <div class="system_content col-md-3 text-center">
+        <div class="shadow curved-2 bg8175c7">
+            <img src="<?php echo site_url('images/dashboard/mmc.png'); ?>" style="" />
+<?php
+ $primary= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'PRIMARY','GENERAL');
+
+ $mmcPRIMARY= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY", 'GENERAL');
+$percentPRIMARY= $primary*$mmcPRIMARY;
+
+ $mmcSECONDARY= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY", 'GENERAL');
+ $SECONDARY= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'SECONDARY','GENERAL');
+$percentSECONDARY= $SECONDARY*$mmcSECONDARY;
+
+$mmcINTERMEDIATE= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE", 'GENERAL');
+$INTERMEDIATE= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'INTERMEDIATE','GENERAL');
+
+$percenINTERMEDIATE=$INTERMEDIATE*$mmcINTERMEDIATE;
+?>
+            <h4><span>এমএমসি  ব্যবহারকারি সাধারন<?php //echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>  </h4>
+            প্রাথমিক স্তর <?php echo Dashboard_helper::bn2enNumber(number_format($percentPRIMARY/100, 2)).'%'; ?><br />
+            মাধ্যমিক স্তর <?php echo Dashboard_helper::bn2enNumber(number_format($percentSECONDARY/100, 2)).'%'; ?><br />
+            উচ্চমাধ্যমিক স্তর <?php echo Dashboard_helper::bn2enNumber(number_format($percenINTERMEDIATE/100, 2)).'%'; ?><br />
+        </div>
+    </div>
+    <div class="system_content col-md-3 text-center">
+        <div class="shadow curved-2 bg92cf5c">
+            <img src="<?php echo site_url('images/dashboard/mmc.png'); ?>" style="" />
+            <?php
+            $primary= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'PRIMARY','MADRASHA');
+
+            $mmcPRIMARY= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY", 'MADRASHA');
+            $percentPRIMARY= $primary*$mmcPRIMARY;
+
+            $mmcSECONDARY= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY", 'MADRASHA');
+            $SECONDARY= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'SECONDARY','MADRASHA');
+            $percentSECONDARY= $SECONDARY*$mmcSECONDARY;
+
+            $mmcINTERMEDIATE= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE", 'MADRASHA');
+            $INTERMEDIATE= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'INTERMEDIATE','MADRASHA');
+
+            $percenINTERMEDIATE=$INTERMEDIATE*$mmcINTERMEDIATE;
+            ?>
+
+            <h4><span>এমএমসি  ব্যবহারকারি সাধারন<?php //echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>  </h4>
+            প্রাথমিক স্তর <?php echo Dashboard_helper::bn2enNumber(number_format($percentPRIMARY/100, 2)).'%'; ?><br />
+            মাধ্যমিক স্তর <?php echo Dashboard_helper::bn2enNumber(number_format($percentSECONDARY/100, 2)).'%'; ?><br />
+            উচ্চমাধ্যমিক স্তর <?php echo Dashboard_helper::bn2enNumber(number_format($percenINTERMEDIATE/100, 2)).'%'; ?><br />
         </div>
     </div>
 

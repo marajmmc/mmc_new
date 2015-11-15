@@ -12,7 +12,7 @@ $user=User_helper::get_user();
     </div>
     <div class="col-lg-8">
 
-        <div class="clearfix"></div>
+
         <form class="report_form" id="system_save_form" action="<?php echo $CI->get_encoded_url('report/institute/approved_institute_report/index/list'); ?>" method="get">
             <div class="row widget">
                 <div class="widget-header">
