@@ -235,7 +235,8 @@ else
 <script>
     var resizeElements;
 
-    $(document).ready(function() {
+    $(document).ready(function()
+    {
 
         // Set up common variables
         // --------------------------------------------------
@@ -302,7 +303,8 @@ else
         // Activate new dropdown option and show tray if applicable
         // --------------------------------------------------
 
-        $(dropdownListItems).click(function() {
+        $(dropdownListItems).click(function()
+        {
             $(this).siblings("li.selected").removeClass("selected");
             $(this).addClass("selected");
 
@@ -326,7 +328,8 @@ else
     });
 
     // NAVIGATION MENU /// JQUERY UNDERLINE
-    $('.main_nav li').hover(function() {
+    $('.main_nav li').hover(function()
+    {
         var x = $(this);
         $('.menuUnderline').stop().animate({
             'width': x.width(),
