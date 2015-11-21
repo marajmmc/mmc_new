@@ -179,7 +179,7 @@ class Dashboard_helper
         $CI->db->join($CI->config->item('table_zillas').' zillas','zillas.divid = institute.divid AND zillas.zillaid = institute.zillaid', 'INNER');
         $CI->db->join($CI->config->item('table_upazilas').' upa_zilas','upa_zilas.zillaid = institute.zillaid AND upa_zilas.upazilaid = institute.upozillaid', 'INNER');
         $CI->db->where('institute.status', $CI->config->item('STATUS_ACTIVE'));
-        //$CI->db->where("institute_class_details.class_date between '$from_date' AND '$to_date'");
+        $CI->db->where("institute_class_details.class_date between '$from_date' AND '$to_date'");
         $result = $CI->db->get()->result_array();
         //echo $CI->db->last_query();
         $result_array=array();
