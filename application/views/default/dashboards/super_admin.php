@@ -66,21 +66,21 @@ $user=User_helper::get_user();
     <div class="system_content col-md-3 text-center">
         <div class="shadow curved-2 bg8175c7">
             <img src="<?php echo site_url('images/dashboard/mmc.png'); ?>" style="" />
-<?php
- $primary= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'PRIMARY','GENERAL');
+            <?php
+            $primary = Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), 'PRIMARY', 'GENERAL');
 
- $mmcPRIMARY= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY", 'GENERAL');
-$percentPRIMARY= $primary*$mmcPRIMARY;
+            $mmcPRIMARY = Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY", 'GENERAL');
+            $percentPRIMARY = $primary * $mmcPRIMARY;
 
- $mmcSECONDARY= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY", 'GENERAL');
- $SECONDARY= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'SECONDARY','GENERAL');
-$percentSECONDARY= $SECONDARY*$mmcSECONDARY;
+            $mmcSECONDARY = Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY", 'GENERAL');
+            $SECONDARY = Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), 'SECONDARY', 'GENERAL');
+            $percentSECONDARY = $SECONDARY * $mmcSECONDARY;
 
-$mmcINTERMEDIATE= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE", 'GENERAL');
-$INTERMEDIATE= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'INTERMEDIATE','GENERAL');
+            $mmcINTERMEDIATE = Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE", 'GENERAL');
+            $INTERMEDIATE = Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), 'INTERMEDIATE', 'GENERAL');
 
-$percenINTERMEDIATE=$INTERMEDIATE*$mmcINTERMEDIATE;
-?>
+            $percenINTERMEDIATE = $INTERMEDIATE * $mmcINTERMEDIATE;
+            ?>
             <h4><span>এমএমসি  ব্যবহারকারি সাধারন<?php //echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>  </h4>
             প্রাথমিক স্তর <?php echo Dashboard_helper::bn2enNumber(number_format($percentPRIMARY/100, 2)).'%'; ?><br />
             মাধ্যমিক স্তর <?php echo Dashboard_helper::bn2enNumber(number_format($percentSECONDARY/100, 2)).'%'; ?><br />
@@ -226,7 +226,7 @@ else
 }
 $high_chart_info=Dashboard_helper::get_approved_institute_list();
 $pie_chart_info=Dashboard_helper::get_institute_type_list();
-//print_r($high_chart_info);
+
 ?>
 
 <script>
@@ -281,7 +281,7 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
             },
             tooltip: {
                 formatter: function() {
-                    return this.x + this.series.name+ ' এর মোট নিবন্ধিত শিক্ষা প্রতিষ্ঠান ' + this.y;
+                    return this.x + this.series.name+ ' এর মোট এম এম সি ব্যবহৃত শিক্ষা প্রতিষ্ঠান ' + this.y;
                 }
             },
             series:

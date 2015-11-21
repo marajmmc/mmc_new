@@ -126,8 +126,7 @@ class Dashboard_helper
         if($user->user_group_id==$CI->config->item('SUPER_ADMIN_GROUP_ID'))
         {
             $CI->db->select('divisions.divname element_name, COUNT(divisions.divname) element_value');
-            $CI->db->group_by('institute.divid');
-
+            $CI->db->group_by('institute_class_details.institude_id, institute.divid');
         }
         else if($user->user_group_id==$CI->config->item('A_TO_I_GROUP_ID'))
         {
@@ -170,14 +169,33 @@ class Dashboard_helper
             //$CI->db->where('','');
         }
 
+        $year_month=date('Y-m', time());
+        $from_date=$year_month."-01";
+        $to_date=$year_month."-31";
+        //$CI->db->select('institute.divid, institute.zillaid, institute.upozillaid');
         $CI->db->from($CI->config->item('table_institute').' institute');
+        $CI->db->join($CI->config->item('table_class_details').' institute_class_details','institute_class_details.institude_id = institute.id', 'INNER');
         $CI->db->join($CI->config->item('table_divisions').' divisions','divisions.divid = institute.divid', 'INNER');
         $CI->db->join($CI->config->item('table_zillas').' zillas','zillas.divid = institute.divid AND zillas.zillaid = institute.zillaid', 'INNER');
         $CI->db->join($CI->config->item('table_upazilas').' upa_zilas','upa_zilas.zillaid = institute.zillaid AND upa_zilas.upazilaid = institute.upozillaid', 'INNER');
         $CI->db->where('institute.status', $CI->config->item('STATUS_ACTIVE'));
+        //$CI->db->where("institute_class_details.class_date between '$from_date' AND '$to_date'");
         $result = $CI->db->get()->result_array();
         //echo $CI->db->last_query();
-        return $result;
+        $result_array=array();
+        foreach($result as $row)
+        {
+            $result_array[$row['element_name']]['element_name']=$row['element_name'];
+            if(isset($result_array[$row['element_name']]['element_value']))
+            {
+                $result_array[$row['element_name']]['element_value']++;
+            }
+            else
+            {
+                $result_array[$row['element_name']]['element_value']=1;
+            }
+        }
+        return $result_array;
     }
 
     public static function get_institute_type_list()
