@@ -51,18 +51,26 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                         )
                     </h5>
                     <hr />
-                    <div class="col-lg-4 text-center text-danger">
-                        <?php echo $this->lang->line('TOTAL_REGISTERED_INSTITUTE').": ".System_helper::Get_Eng_to_Bng(count($number_of_institute));?>
-                    </div>
-                    <div class="col-lg-4 text-center text-danger">
-                        <?php echo $this->lang->line('TOTAL_USING_USER').": ". System_helper::Get_Eng_to_Bng(count($number_of_user));?>
-                    </div>
-                    <div class="col-lg-4 text-center text-danger">
                         <?php
-                        $percent=count($number_of_user)/count($number_of_institute);
-                        echo $this->lang->line('TOTAL_PARENTED').": ". System_helper::Get_Eng_to_Bng(number_format($percent*100, 2)).'%';
+                        if($channel==2)
+                        {
+                            ?>
+                            <div class="col-lg-4 text-center text-danger">
+                                <?php echo $this->lang->line('TOTAL_REGISTERED_INSTITUTE').": ".System_helper::Get_Eng_to_Bng(count($number_of_institute));?>
+                            </div>
+                            <div class="col-lg-4 text-center text-danger">
+                                <?php echo $this->lang->line('TOTAL_USING_USER').": ". System_helper::Get_Eng_to_Bng(count($number_of_user));?>
+                            </div>
+                            <div class="col-lg-4 text-center text-danger">
+                                <?php
+                                $percent=count($number_of_user)/count($number_of_institute);
+                                echo $this->lang->line('TOTAL_PARENTED').": ". System_helper::Get_Eng_to_Bng(number_format($percent*100, 2)).'%';
+                                ?>
+                            </div>
+
+                            <?php
+                        }
                         ?>
-                    </div>
 
                 </div>
 
@@ -81,13 +89,21 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                             <!--                            --><?php
                             //                            }
                             //                            ?>
-                            <th><?php echo $this->lang->line('DATE');?></th>
-                            <th><?php echo $this->lang->line('CLASS_NAME');?></th>
-                            <th><?php echo $this->lang->line('SUBJECT');?></th>
+                            <?php
+                            if($channel==2)
+                            {
+                                ?>
+                                <th><?php echo $this->lang->line('DATE');?></th>
+                                <th><?php echo $this->lang->line('CLASS_NAME');?></th>
+                                <th><?php echo $this->lang->line('SUBJECT');?></th>
+                                <?php
+                            }
+                            ?>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
+
                     if(!empty($reports))
                     {
                         $division_name='';
@@ -96,6 +112,273 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                         $institute_name='';
                         $class_name='';
                         $class_date='';
+                        if($channel==1)
+                        {
+                            foreach($reports as $division) {
+                                foreach ($division['zilla'] as $zilla) {
+                                    foreach ($zilla['upazilla'] as $upazilla) {
+                                        foreach ($upazilla['institute'] as $institute) {
+                                        ?>
+                                            <tr>
+                                            <td>
+                                                <?php
+                                                if ($division_name == '')
+                                                {
+                                                    echo $division['division_name'];
+                                                    $division_name = $division['division_name'];
+                                                    //$currentDate = $preDate;
+                                                }
+                                                else if ($division_name == $division['division_name'])
+                                                {
+                                                    //exit;
+                                                    echo "&nbsp;";
+                                                }
+                                                else
+                                                {
+                                                    echo $division['division_name'];
+                                                    $division_name = $division['division_name'];
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($zilla_name == '')
+                                                {
+                                                    echo $zilla['zilla_name'];
+                                                    $zilla_name = $zilla['zilla_name'];
+                                                    //$currentDate = $preDate;
+                                                }
+                                                else if ($zilla_name == $zilla['zilla_name'])
+                                                {
+                                                    //exit;
+                                                    echo "&nbsp;";
+                                                }
+                                                else
+                                                {
+                                                    echo $zilla['zilla_name'];
+                                                    $zilla_name = $zilla['zilla_name'];
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($upazilla_name == '')
+                                                {
+                                                    echo $upazilla['upazlla_name'];
+                                                    $upazilla_name =$upazilla['upazlla_name'];
+                                                    //$currentDate = $preDate;
+                                                }
+                                                else if ($upazilla_name == $upazilla['upazlla_name'])
+                                                {
+                                                    //exit;
+                                                    echo "&nbsp;";
+                                                }
+                                                else
+                                                {
+                                                    echo $upazilla['upazlla_name'];
+                                                    $upazilla_name = $upazilla['upazlla_name'];
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($institute_name == '')
+                                                {
+                                                    echo $institute['institute_name'];
+                                                    $institute_name = $institute['institute_name'];
+                                                    //$currentDate = $preDate;
+                                                }
+                                                else if ($institute_name == $institute['institute_name'])
+                                                {
+                                                    //exit;
+                                                    echo "&nbsp;";
+                                                }
+                                                else
+                                                {
+                                                    echo $institute['institute_name'];
+                                                    $institute_name = $institute['institute_name'];
+                                                }
+                                                ?>
+                                            </td>
+                                            <?php
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach($reports as $division)
+                            {
+                                foreach($division['zilla'] as $zilla)
+                                {
+                                    foreach($zilla['upazilla'] as $upazilla)
+                                    {
+                                        foreach($upazilla['institute'] as $institute)
+                                        {
+                                            foreach($institute['date'] as $date)
+                                            {
+                                                foreach($date['class'] as $class)
+                                                {
+                                                    ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php
+                                                            if ($division_name == '')
+                                                            {
+                                                                echo $division['division_name'];
+                                                                $division_name = $division['division_name'];
+                                                                //$currentDate = $preDate;
+                                                            }
+                                                            else if ($division_name == $division['division_name'])
+                                                            {
+                                                                //exit;
+                                                                echo "&nbsp;";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo $division['division_name'];
+                                                                $division_name = $division['division_name'];
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            if ($zilla_name == '')
+                                                            {
+                                                                echo $zilla['zilla_name'];
+                                                                $zilla_name = $zilla['zilla_name'];
+                                                                //$currentDate = $preDate;
+                                                            }
+                                                            else if ($zilla_name == $zilla['zilla_name'])
+                                                            {
+                                                                //exit;
+                                                                echo "&nbsp;";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo $zilla['zilla_name'];
+                                                                $zilla_name = $zilla['zilla_name'];
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            if ($upazilla_name == '')
+                                                            {
+                                                                echo $upazilla['upazlla_name'];
+                                                                $upazilla_name =$upazilla['upazlla_name'];
+                                                                //$currentDate = $preDate;
+                                                            }
+                                                            else if ($upazilla_name == $upazilla['upazlla_name'])
+                                                            {
+                                                                //exit;
+                                                                echo "&nbsp;";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo $upazilla['upazlla_name'];
+                                                                $upazilla_name = $upazilla['upazlla_name'];
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            if ($institute_name == '')
+                                                            {
+                                                                echo $institute['institute_name'];
+                                                                $institute_name = $institute['institute_name'];
+                                                                //$currentDate = $preDate;
+                                                            }
+                                                            else if ($institute_name == $institute['institute_name'])
+                                                            {
+                                                                //exit;
+                                                                echo "&nbsp;";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo $institute['institute_name'];
+                                                                $institute_name = $institute['institute_name'];
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            if ($class_date == '')
+                                                            {
+                                                                echo $date['class_date'];
+                                                                $class_date = $date['class_date'];
+                                                                //$class_date = $preDate;
+                                                            }
+                                                            else if ($class_date == $date['class_date'])
+                                                            {
+                                                                //exit;
+                                                                echo "&nbsp;";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo $date['class_date'];
+                                                                $class_date = $date['class_date'];
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            if ($class_name == '')
+                                                            {
+                                                                echo $class['class_name'];
+                                                                $class_name = $class['class_name'];
+                                                                //$class_date = $preDate;
+                                                            }
+                                                            else if ($class_name == $class['class_name'])
+                                                            {
+                                                                //exit;
+                                                                echo "&nbsp;";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo $class['class_name'];
+                                                                $class_name = $class['class_name'];
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            for($i=0;$i<count($class['subject_name']);$i++)
+                                                            {
+                                                                echo $class['subject_name'][$i].", ";
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        //                        echo "<pre>";
+                        //                        print_r($reports);
+                        //                        echo "</pre>";
+
+
+
+                        die();
+                        foreach($reports as $row)
+                        {
+                            if (isset($subject_name[$row['divname']][$row['zillaname']][$row['upazilaname']][$row['name']][$row['class_date']]))
+                            {
+                                $subject_name[$row['divname']][$row['zillaname']][$row['upazilaname']][$row['name']][$row['class_date']] = $subject_name[$row['divname']][$row['zillaname']][$row['upazilaname']][$row['name']][$row['class_date']] . ", " . $row['subject_name'];
+                            }
+                            else
+                            {
+                                $subject_name[$row['divname']][$row['zillaname']][$row['upazilaname']][$row['name']][$row['class_date']] = $row['subject_name'];
+                            }
+                        }
                         foreach($reports as $row)
                         {
                         ?>
@@ -220,7 +503,27 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
                                     }
                                     ?>
                                 </td>
-                                <td><?php echo $row['subject_name'];?></td>
+                                <td>
+                                    <?php
+                                    if ($class_name == '')
+                                    {
+                                        echo $row['subject_name'];
+                                        $class_name = $row['class_name'];
+                                        //$class_date = $preDate;
+                                    }
+                                    else if ($class_name == $row['class_name'])
+                                    {
+                                        //exit;
+                                        echo "&nbsp;";
+                                    }
+                                    else
+                                    {
+                                        echo $row['class_name'];
+                                        $class_name = $row['class_name'];
+                                    }
+                                    ?>
+                                </td>
+                                <td><?php echo $subject_name[$row['divname']][$row['zillaname']][$row['upazilaname']][$row['name']][$row['class_date']];?></td>
                             <!--                                --><?php
                             //                                if(empty($report_status))
                             //                                {

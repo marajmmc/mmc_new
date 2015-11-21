@@ -47,6 +47,9 @@ $lang['SUBJECT'] = 'বিষয়';
 $lang['CLASS_NAME'] = 'শ্রেণী';
 
 $lang['ALL'] = 'সকল';
+$lang['CHANNEL'] = 'ব্যবহারকারীর ধরন';
+$lang['MMC_NON_USER_LIST'] = 'এমএমসি অ-ব্যবহারকারীর তালিকা';
+$lang['MMC_USER_LIST'] = 'এমএমসি ব্যবহারকারীর তালিকা';
 $lang['LEVEL_PRIMARY'] = 'প্রাথমিক';
 $lang['LEVEL_SECONDARY'] = 'মাধ্যমিক';
 $lang['LEVEL_HIGHER'] = 'উচ্চমাধ্যমিক';

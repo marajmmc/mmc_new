@@ -11,7 +11,7 @@ class User_use_mmc_report_model extends CI_Model
         // all load model
     }
 
-    public function get_user_use_mmc_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, $education_type)
+    public function get_user_use_mmc_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, $education_type, $channel, $class_number)
     {
         $CI =& get_instance();
         //$user=User_helper::get_user();
@@ -50,6 +50,35 @@ class User_use_mmc_report_model extends CI_Model
 
         }
 
+        $result=array();
+
+        if($channel==1)
+        {
+
+            $this->db->where("institute.id not in (select institute_class_details.institude_id from institute_class_details where institute_class_details.class_date between '$from_date' AND '$to_date' )");
+            $this->db->order_by('divisions.divid, zillas.zillaid, upa_zilas.upazilaid, institute.id','ASC');
+        }
+        elseif($channel==2)
+        {
+            $this->db->select('
+            institute_class_details.class_name,
+            institute_class_details.subject_name,
+            institute_class_details.class_date
+            ', false);
+            $this->db->join($CI->config->item('table_class_details').' institute_class_details','institute_class_details.institude_id = institute.id', 'INNER');
+            $this->db->where("institute_class_details.class_date between '$from_date' AND '$to_date' ");
+            $this->db->order_by('divisions.divid, zillas.zillaid, upa_zilas.upazilaid, institute.id, institute_class_details.class_id','ASC');
+
+            if(!empty($class_number))
+            {
+                $this->db->where("institute.id IN (select institute_class_details.institude_id from institute_class_details where institute_class_details.class_date between '$from_date' AND '$to_date' GROUP BY institude_id HAVING COUNT(institute_class_details.institude_id)>$class_number)");
+            }
+        }
+        else
+        {
+            return false;
+        }
+
         $this->db->select
         ("
             institute.id,
@@ -66,27 +95,42 @@ class User_use_mmc_report_model extends CI_Model
             institute.`status`,
             divisions.divname,
             zillas.zillaname,
-            upa_zilas.upazilaname,
-            institute_class_details.class_name,
-            institute_class_details.subject_name,
-            institute_class_details.class_date
+            upa_zilas.upazilaname
         ", false);
         $CI->db->from($CI->config->item('table_institute').' institute');
 
         $this->db->join($CI->config->item('table_divisions').' divisions','divisions.divid = institute.divid', 'LEFT');
         $this->db->join($CI->config->item('table_zillas').' zillas','zillas.divid = institute.divid AND zillas.zillaid = institute.zillaid', 'LEFT');
         $this->db->join($CI->config->item('table_upazilas').' upa_zilas','upa_zilas.zillaid = institute.zillaid AND upa_zilas.upazilaid = institute.upozillaid', 'LEFT');
-        $this->db->join($CI->config->item('table_class_details').' institute_class_details','institute_class_details.institude_id = institute.id', 'INNER');
 
         $this->db->where('institute.education_type_ids',$education_type);
         $this->db->where('institute.status', $this->config->item('STATUS_ACTIVE'));
-        $this->db->where("institute_class_details.class_date between '$from_date' AND '$to_date' ");
-
         //$this->db->group_by('divisions.divid, zillas.zillaid, upa_zilas.upazilaid');
-        $this->db->order_by('divisions.divid, zillas.zillaid, upa_zilas.upazilaid, institute.id, institute_class_details.class_id','ASC');
         $result = $this->db->get()->result_array();
+        $result_array=array();
+        for($i=0; $i<count($result); $i++) {
+            // echo $result[$i]['class_date']."--".$result[$i]['class_name'].'--'.$result[$i]['subject_name'].'<br />';
+            if (!isset($result[$i]['class_date'])) {
+                $result[$i]['class_date'] = '--';
+                $result[$i]['class_name'] = '--';
+                $result[$i]['subject_name'] = '--';
+            }
+            $result_array[$result[$i]['divid']]['division_id'] = $result[$i]['divid'];
+            $result_array[$result[$i]['divid']]['division_name'] = $result[$i]['divname'];
+            $result_array[$result[$i]['divid']]['zilla'][$result[$i]['zillaid']]['zilla_id'] = $result[$i]['zillaid'];
+            $result_array[$result[$i]['divid']]['zilla'][$result[$i]['zillaid']]['zilla_name'] = $result[$i]['zillaname'];
+            $result_array[$result[$i]['divid']]['zilla'][$result[$i]['zillaid']]['upazilla'][$result[$i]['upozillaid']]['upazlla_id'] = $result[$i]['upozillaid'];
+            $result_array[$result[$i]['divid']]['zilla'][$result[$i]['zillaid']]['upazilla'][$result[$i]['upozillaid']]['upazlla_name'] = $result[$i]['upazilaname'];
+            $result_array[$result[$i]['divid']]['zilla'][$result[$i]['zillaid']]['upazilla'][$result[$i]['upozillaid']]['institute'][$result[$i]['id']]['institute_id'] = $result[$i]['id'];
+            $result_array[$result[$i]['divid']]['zilla'][$result[$i]['zillaid']]['upazilla'][$result[$i]['upozillaid']]['institute'][$result[$i]['id']]['institute_name'] = $result[$i]['name'];
+            $result_array[$result[$i]['divid']]['zilla'][$result[$i]['zillaid']]['upazilla'][$result[$i]['upozillaid']]['institute'][$result[$i]['id']]['date'][$result[$i]['class_date']]['class_date']=$result[$i]['class_date'];
+            $result_array[$result[$i]['divid']]['zilla'][$result[$i]['zillaid']]['upazilla'][$result[$i]['upozillaid']]['institute'][$result[$i]['id']]['date'][$result[$i]['class_date']]['class'][$result[$i]['class_name']]['class_name']=$result[$i]['class_name'];
+            $result_array[$result[$i]['divid']]['zilla'][$result[$i]['zillaid']]['upazilla'][$result[$i]['upozillaid']]['institute'][$result[$i]['id']]['date'][$result[$i]['class_date']]['class'][$result[$i]['class_name']]['subject_name'][]=$result[$i]['subject_name'];
+
+
+        }
         //echo $this->db->last_query();
-        return $result;
+        return $result_array;
     }
 
     public function get_total_user_use_mmc($division, $zilla, $upazila, $union, $from_date, $to_date, $status, $education_type)

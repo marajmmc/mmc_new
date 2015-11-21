@@ -72,10 +72,29 @@ $user=User_helper::get_user();
                 <!--                </div>-->
                 <div class="row show-grid ">
                     <div class="col-xs-4">
+                        <label class="control-label pull-right"><?php echo $CI->lang->line('CHANNEL'); ?><span style="color:#FF0000">*</span></label>
+                    </div>
+                    <div class="col-sm-8 col-xs-8">
+                        <select name="channel" id="channel" class="form-control" style="float:left; width: 47%">
+                            <?php
+                            $report_type=array
+                            (
+                                array("value"=>"1", "text"=>$this->lang->line('MMC_NON_USER_LIST')),
+                                array("value"=>"2", "text"=>$this->lang->line('MMC_USER_LIST')),
+                            );
+                            $CI->load_view('dropdown',array('drop_down_options'=>$report_type));
+                            ?>
+                        </select>
+                        &nbsp;&nbsp;&nbsp;
+                        <input type="text" id="class_number" name="class_number" style="width: 20%;display: none" />
+                    </div>
+                </div>
+                <div class="row show-grid ">
+                    <div class="col-xs-4">
                         <label class="control-label pull-right"><?php echo $CI->lang->line('TYPE'); ?><span style="color:#FF0000">*</span></label>
                     </div>
                     <div class="col-sm-4 col-xs-8">
-                        <select name="status" id="status" class="form-control">
+                        <select name="status" id="status" class="form-control validate[require]">
                             <?php
                             $report_type=array
                             (
@@ -87,6 +106,7 @@ $user=User_helper::get_user();
                             $CI->load_view('dropdown',array('drop_down_options'=>$report_type));
                             ?>
                         </select>
+
                     </div>
                 </div>
                 <div class="row show-grid ">
@@ -127,6 +147,19 @@ $user=User_helper::get_user();
     {
         turn_off_triggers();
         $( ".report_date" ).datepicker({dateFormat : display_date_format});
+
+        $(document).on("change","#channel",function()
+        {
+            $("#class_number").val('');
+            if(this.value==2)
+            {
+                $("#class_number").fadeIn();
+            }
+            else
+            {
+                $("#class_number").fadeOut();
+            }
+        })
         $(document).on("change","#user_division_id",function()
         {
             $("#union_option").hide();
