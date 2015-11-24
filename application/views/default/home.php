@@ -39,4 +39,6 @@ elseif($user->user_group_id==$CI->config->item('USER_GROUP_INSTITUTE'))
 else{
     echo '<br><br><br><br><br>';
 }
+
+echo '<br><br><br><br><br>';
 ?>

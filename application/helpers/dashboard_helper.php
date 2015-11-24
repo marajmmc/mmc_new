@@ -125,44 +125,45 @@ class Dashboard_helper
         $user=User_helper::get_user();
         if($user->user_group_id==$CI->config->item('SUPER_ADMIN_GROUP_ID'))
         {
-            $CI->db->select('divisions.divname element_name, COUNT(divisions.divname) element_value');
-            $CI->db->group_by('institute_class_details.institude_id, institute.divid');
+            $CI->db->select('institute_class_summary.divid element_name,COUNT(institute_class_summary.divid) element_value');
+            $CI->db->group_by('institute_class_summary.institude_id, institute_class_summary.divid');
         }
         else if($user->user_group_id==$CI->config->item('A_TO_I_GROUP_ID'))
         {
-            $CI->db->select('divisions.divname element_name, COUNT(divisions.divname) element_value');
-            $CI->db->group_by('institute.divid');
+            $CI->db->select('institute_class_summary.divid element_name,COUNT(institute_class_summary.divid) element_value');
+            $CI->db->group_by('institute_class_summary.institude_id, institute_class_summary.divid');
         }
         else if($user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_1') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_2') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_3') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_4'))
         {
-            $CI->db->select('divisions.divname element_name, COUNT(divisions.divname) element_value');
-            $CI->db->group_by('institute.divid');
+            $CI->db->select('institute_class_summary.divid element_name,COUNT(institute_class_summary.divid) element_value');
+            $CI->db->group_by('institute_class_summary.institude_id, institute_class_summary.divid');
         }
         else if($user->user_group_id==$CI->config->item('USER_GROUP_DONNER_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_3'))
         {
-            $CI->db->select('divisions.divname element_name, COUNT(divisions.divname) element_value');
-            $CI->db->group_by('institute.divid');
+            $CI->db->select('institute_class_summary.divid element_name,COUNT(institute_class_summary.divid) element_value');
+            $CI->db->group_by('institute_class_summary.institude_id, institute_class_summary.divid');
         }
         else if($user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_3'))
         {
-            $CI->db->select('zillas.zillaname element_name, COUNT(zillas.zillaname) element_value');
-            $CI->db->group_by('institute.divid, institute.zillaid');
-            $CI->db->where('institute.divid='.$user->division);
+            $CI->db->select('institute_class_summary.zillaid element_name,COUNT(institute_class_summary.zillaid) element_value');
+            $CI->db->group_by('institute_class_summary.institude_id, institute_class_summary.divid, institute_class_summary.zillaid');
+            $CI->db->where('institute_class_summary.divid='.$user->division);
+
         }
         elseif($user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_3') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_4'))
         {
-            $CI->db->select('upa_zilas.upazilaname element_name, COUNT(upa_zilas.upazilaname) element_value');
-            $CI->db->group_by('institute.divid, institute.zillaid, institute.upozillaid');
-            $CI->db->where('institute.divid='.$user->division);
-            $CI->db->where('institute.zillaid='.$user->zilla);
+            $CI->db->select('institute_class_summary.upazillaid element_name,COUNT(institute_class_summary.upazillaid) element_value');
+            $CI->db->group_by('institute_class_summary.institude_id, institute_class_summary.divid, institute_class_summary.zillaid, institute_class_summary.upazillaid');
+            $CI->db->where('institute_class_summary.divid='.$user->division);
+            $CI->db->where('institute_class_summary.zillaid='.$user->zilla);
         }
         elseif($user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_1') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_2') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_3'))
         {
-            $CI->db->select('upa_zilas.upazilaname element_name, COUNT(upa_zilas.upazilaname) element_value');
-            $CI->db->group_by('institute.divid, institute.zillaid, institute.upozillaid');
-            $CI->db->where('institute.divid='.$user->division);
-            $CI->db->where('institute.zillaid='.$user->zilla);
-            $CI->db->where('institute.upozillaid ='.$user->upazila);
+            $CI->db->select('institute_class_summary.upazillaid element_name,COUNT(institute_class_summary.upazillaid) element_value');
+            $CI->db->group_by('institute_class_summary.institude_id, institute_class_summary.divid, institute_class_summary.zillaid, institute_class_summary.upazillaid');
+            $CI->db->where('institute_class_summary.divid='.$user->division);
+            $CI->db->where('institute_class_summary.zillaid='.$user->zilla);
+            $CI->db->where('institute_class_summary.upazillaid='.$user->upazila);
         }
         else
         {
@@ -172,30 +173,74 @@ class Dashboard_helper
         $year_month=date('Y-m', time());
         $from_date=$year_month."-01";
         $to_date=$year_month."-31";
-        //$CI->db->select('institute.divid, institute.zillaid, institute.upozillaid');
-        $CI->db->from($CI->config->item('table_institute').' institute');
-        $CI->db->join($CI->config->item('table_class_details').' institute_class_details','institute_class_details.institude_id = institute.id', 'INNER');
-        $CI->db->join($CI->config->item('table_divisions').' divisions','divisions.divid = institute.divid', 'INNER');
-        $CI->db->join($CI->config->item('table_zillas').' zillas','zillas.divid = institute.divid AND zillas.zillaid = institute.zillaid', 'INNER');
-        $CI->db->join($CI->config->item('table_upazilas').' upa_zilas','upa_zilas.zillaid = institute.zillaid AND upa_zilas.upazilaid = institute.upozillaid', 'INNER');
-        $CI->db->where('institute.status', $CI->config->item('STATUS_ACTIVE'));
-        $CI->db->where("institute_class_details.class_date between '$from_date' AND '$to_date'");
+        $CI->db->from($CI->config->item('table_class_summary').' institute_class_summary');
+        $CI->db->where("institute_class_summary.date between '$from_date' AND '$to_date'");
         $result = $CI->db->get()->result_array();
         //echo $CI->db->last_query();
         $result_array=array();
         foreach($result as $row)
         {
-            $result_array[$row['element_name']]['element_name']=$row['element_name'];
-            if(isset($result_array[$row['element_name']]['element_value']))
+            if(!empty($row['element_name']))
             {
-                $result_array[$row['element_name']]['element_value']++;
+                $result_array[$row['element_name']]['element_name']=$row['element_name'];
+                if(isset($result_array[$row['element_name']]['element_value']))
+                {
+                    $result_array[$row['element_name']]['element_value']++;
+                }
+                else
+                {
+                    $result_array[$row['element_name']]['element_value']=1;
+                }
             }
-            else
-            {
-                $result_array[$row['element_name']]['element_value']=1;
-            }
+
         }
         return $result_array;
+    }
+
+    public static function get_div_zilla_upazilla($element_id)
+    {
+        $CI = & get_instance();
+        $user=User_helper::get_user();
+        if($user->user_group_id==$CI->config->item('SUPER_ADMIN_GROUP_ID'))
+        {
+            $element = Query_helper::get_info($CI->config->item('table_divisions'),array('divname name'), array('divid = '.$element_id));
+            if(isset($element[0]['name'])){$name=  $element[0]['name'];}else{$name=  '';};
+        }
+        else if($user->user_group_id==$CI->config->item('A_TO_I_GROUP_ID'))
+        {
+            $element = Query_helper::get_info($CI->config->item('table_divisions'),array('divname name'), array('divid = '.$element_id));
+            if(isset($element[0]['name'])){$name=  $element[0]['name'];}else{$name=  '';};
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_1') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_2') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_3') || $user->user_group_id==$CI->config->item('USER_GROUP_MINISTRY_4'))
+        {
+            $element = Query_helper::get_info($CI->config->item('table_divisions'),array('divname name'), array('divid = '.$element_id));
+            if(isset($element[0]['name'])){$name=  $element[0]['name'];}else{$name=  '';};
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_DONNER_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DONNER_3'))
+        {
+            $element = Query_helper::get_info($CI->config->item('table_divisions'),array('divname name'), array('divid = '.$element_id));
+            if(isset($element[0]['name'])){$name=  $element[0]['name'];}else{$name=  '';};
+        }
+        else if($user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DIVISION_3'))
+        {
+            $element = Query_helper::get_info($CI->config->item('table_zillas'),array('zillaname name'), array('divid = '.$user->division, 'zillaid = '.$element_id));
+            if(isset($element[0]['name'])){$name=  $element[0]['name'];}else{$name=  '';};
+        }
+        elseif($user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_1') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_2') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_3') || $user->user_group_id==$CI->config->item('USER_GROUP_DISTRICT_4'))
+        {
+            $element = Query_helper::get_info($CI->config->item('table_upazilas'),array('upazilaname name'), array('zillaid = '.$user->zilla, 'upazilaid = '.$element_id));
+            if(isset($element[0]['name'])){$name=  $element[0]['name'];}else{$name=  '';};
+        }
+        elseif($user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_1') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_2') || $user->user_group_id==$CI->config->item('USER_GROUP_UPOZILA_3'))
+        {
+            $element = Query_helper::get_info($CI->config->item('table_upazilas'),array('upazilaname name'), array('zillaid = '.$user->zilla, 'upazilaid = '.$element_id));
+            if(isset($element[0]['name'])){$name=  $element[0]['name'];}else{$name=  '';};
+        }
+        else
+        {
+            $name='';
+        }
+        return $name?$name:'';
     }
 
     public static function get_institute_type_list()

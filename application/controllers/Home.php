@@ -323,8 +323,12 @@ class Home extends Root_Controller
         }
         $data['divisions']=Query_helper::get_info($this->config->item('table_divisions'),array('divid value', 'divname text'), array());
         $data['education_type']=Query_helper::get_info($this->config->item('table_education_type'),array('id value', 'name text'), array());
+
+        $data['page']="inner_page";
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",$data,true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/registration",$data,true));
+        $ajax['system_page_url']=$this->get_encoded_url('home/registration');
         $this->jsonReturn($ajax);
     }
 
@@ -457,6 +461,25 @@ class Home extends Root_Controller
     
     private function check_validation()
     {
+        $location=$this->input->post("registration");
+        //$division_id = $this->input->post("registration[divid]");
+        //$zilla_id=$this->input->post("zilla");
+        //$upazilla_id=$this->input->post("upazilla");
+        if(!$this->Institute_model->check_division($location['divid']))
+        {
+            $this->message=$this->lang->line('DIVISION_NOT_MATCH');
+            return false;
+        }
+        if(!$this->Institute_model->check_zilla($location['divid'], $location['zilla']))
+        {
+            $this->message=$this->lang->line('DISTRICT_NOT_MATCH');
+            return false;
+        }
+        if(!$this->Institute_model->check_upazilla($location['zilla'],$location['upozilla']))
+        {
+            $this->message=$this->lang->line('UPAZILLA_NOT_MATCH');
+            return false;
+        }
 
         $this->load->library('form_validation');
        

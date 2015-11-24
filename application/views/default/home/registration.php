@@ -16,235 +16,232 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
     <div class="row"  style="margin-top: 30px;">
         <div class="col-md-8 borderradius">
             <h3 style="text-align: left;padding-left: 15px;">বিদ্যালয়ের নিবন্ধন</h3>
-         <form id="registration_save_form" action="<?php echo $CI->get_encoded_url('home/registration'); ?>" method="post">
-        <table width="100%" border="0">
-  <tr>
-    <td width="33%">
-        <label class="control-label pull-left registrationwidth"><?php echo $CI->lang->line('DIVISION_NAME_SELECT'); ?><span style="color:#FF0000">*</span></label>
-     <select name="registration[divid]" class="form-control" id="division_id">
-      <?php
-      $CI->load_view('dropdown',array('drop_down_options'=>$divisions,'drop_down_selected'=>''));
-      ?>
-    </select>
-    </td>
-     <td width="33%"> 
-         <label class="control-label pull-left registrationwidth"><?php echo $CI->lang->line('ZILLA_NAME_SELECT_BN'); ?><span style="color:#FF0000">*</span></label>
-         <select name="registration[zilla]" id="zilla_id" class="form-control zilla validate[required]">
-         <option value=""><?php echo $this->lang->line('SELECT');?></option>
-         </select>
-     </td>
-    <td width="33%"> 
-        <label class="control-label pull-left"><?php echo $CI->lang->line('UPOZILLA_SELECT'); ?><span style="color:#FF0000">*</span></label>
-        <select name="registration[upozilla]" id="upozilla_id" class="form-control zilla validate[required]">
-          <option value=""><?php echo $this->lang->line('SELECT');?></option>
-         </select>
-    </td>
-  </tr>
+            <form id="registration_save_form" action="<?php echo $CI->get_encoded_url('home/registration'); ?>" method="post">
+                <table width="100%" border="0">
+                    <tr>
+                        <td width="33%">
+                            <label class="control-label pull-left registrationwidth" style="text-align: left;"><?php echo $CI->lang->line('DIVISION_NAME_SELECT'); ?><span style="color:#FF0000">*</span></label>
+                            <select name="registration[divid]" class="form-control" id="division_id">
+                            <?php
+                            $CI->load_view('dropdown',array('drop_down_options'=>$divisions,'drop_down_selected'=>''));
+                            ?>
+                            </select>
+                        </td>
+                        <td width="33%">
+                            <label class="control-label pull-left registrationwidth" style="text-align: left;"><?php echo $CI->lang->line('ZILLA_NAME_SELECT_BN'); ?><span style="color:#FF0000">*</span></label>
+                            <select name="registration[zilla]" id="zilla_id" class="form-control zilla validate[required]">
+                            <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                            </select>
+                        </td>
+                        <td width="33%">
+                            <label class="control-label pull-left" style="text-align: left;"><?php echo $CI->lang->line('UPOZILLA_SELECT'); ?><span style="color:#FF0000">*</span></label>
+                            <select name="registration[upozilla]" id="upozilla_id" class="form-control zilla validate[required]">
+                                <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%">
+                            <label class="control-label pull-left"><?php echo $CI->lang->line('EDUCATION_TYPE'); ?><span style="color:#FF0000">*</span></label>
+                            <select name="registration[education_type]" class="form-control" id="education_type">
+                                 <?php
+                                   $CI->load_view('dropdown',array('drop_down_options'=>$education_type,'drop_down_selected'=>''));
+                                  ?>
+                            </select>
+                        </td>
+                        <td  width="33%">
+                            <label class="control-label pull-left" style="margin-left: 30px;">       বিদ্যালয়ের স্তর     </label>
+                            <br />
+                            <br />
+                            <?php
+                            $dataa = array(
+                            'name'        => 'registration[primary]',
+                            'id'          => 'is_primary',
+                            'value'       => '1',
+                            'checked'     => TRUE,
+                            'style'       => '',
+                            );
+
+                            echo form_checkbox($dataa);
+                            echo $CI->lang->line('PRIMARY');
+
+                            $dataa = array(
+                            'name'        => 'registration[secondary]',
+                            'id'          => 'is_secondary',
+                            'value'       => '1',
+                            'checked'     => FALSE,
+                            'style'       => '',
+                            );
+
+                            echo form_checkbox($dataa);
+                            echo $CI->lang->line('SECONDARY');
+
+
+                            $dataa = array(
+                            'name'        => 'registration[higher]',
+                            'id'          => 'is_higher',
+                            'value'       => '1',
+                            'checked'     => FALSE,
+                            'style'       => '',
+                            );
+
+                            echo form_checkbox($dataa);
+                            echo $CI->lang->line('HIGHER');
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label pull-left"><?php echo $CI->lang->line('SCHOOL_NAME'); ?><span style="color:#FF0000">*</span></label>
+                                <?php
+                                $data = array(
+                                    'name'          => 'registration[institute]',
+                                    'id'            => 'institute',
+                                    'class'            => 'form-control',
+                                    'placeholder'   => $this->lang->line('SCHOOL_NAME'),
+                                    'size'          => '60',
+                                );
+
+                                echo form_input($data);
+                                ?>
+                        </td>
+                        <td>
+                            <label class="control-label pull-left"><?php echo $CI->lang->line('SCHOOL_EMAIL'); ?><span style="color:#FF0000">*</span></label>
+                            <?php
+                            $data = array(
+                            'name'          => 'registration[email]',
+                            'id'            => 'email',
+                            'class'            => 'form-control',
+                            'placeholder'   => $this->lang->line('SCHOOL_EMAIL'),
+                            'size'          => '60',
+                            );
+
+                            echo form_input($data);
+                            ?>
+                        </td>
+                        <td>
+
+                            <label class="control-label pull-left"><?php echo $CI->lang->line('SCHOOL_MOBILE'); ?><span style="color:#FF0000">*</span></label>
+                            <?php
+                            $data = array(
+                            'name'          => 'registration[mobile]',
+                            'id'            => 'mobile',
+                            'class'            => 'form-control',
+                            'placeholder'   => $this->lang->line('SCHOOL_MOBILE'),
+                            'size'          => '60',
+                            );
+
+                            echo form_input($data);
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label pull-left"><?php echo $CI->lang->line('SCHOOL_EM'); ?><span style="color:#FF0000">*</span></label>
+                            <?php
+                            $data = array(
+                            'name'          => 'registration[em]',
+                            'id'            => 'mobile',
+                            'class'            => 'form-control',
+                            'placeholder'   => $this->lang->line('SCHOOL_EM'),
+                            'size'          => '60',
+                            );
+
+                            echo form_input($data);
+                            ?>
+                        </td>
+                        <td>
+                            <label class="control-label pull-left "><?php echo $CI->lang->line('SCHOOL_PASSWORD'); ?><span style="color:#FF0000">*</span></label>
+                            <?php
+                            $data = array(
+                            'name'          => 'registration[password]',
+                            'id'            => 'password',
+                            'class'            => 'form-control',
+                            'placeholder'   => $this->lang->line('SCHOOL_PASSWORD'),
+                            'size'          => '60',
+                            );
+
+                            echo form_password($data);
+                            ?>
+                        </td>
+                        <td>
+                            <label class="control-label pull-left "><?php echo $CI->lang->line('SCHOOL_RE_PASSWORD'); ?><span style="color:#FF0000">*</span></label>
+                            <?php
+                            $data = array(
+                            'name'          => 'registration[repassword]',
+                            'id'            => 'password',
+                            'class'            => 'form-control',
+                            'placeholder'   => $this->lang->line('SCHOOL_RE_PASSWORD'),
+                            'size'          => '60',
+                            );
+
+                            echo form_password($data);
+                        ?>
+                        </td>
+                    </tr>
   
-   <tr>
-    <td>
-        <label class="control-label pull-left"><?php echo $CI->lang->line('EDUCATION_TYPE'); ?><span style="color:#FF0000">*</span></label>
-        <select name="registration[education_type]" class="form-control" id="education_type">
- <?php
-   $CI->load_view('dropdown',array('drop_down_options'=>$education_type,'drop_down_selected'=>''));
-  ?>
-       </select>
-    </td>
-              <td colspan="2">
-                  <label class="control-label pull-left">       বিদ্যালয়ের স্তর     </label>
-     <?php           
-             $dataa = array(
-    'name'        => 'registration[primary]',
-    'id'          => 'is_primary',
-    'value'       => '1',
-    'checked'     => TRUE,
-    'style'       => 'margin:3px',
-    );
+                </table>
 
- echo form_checkbox($dataa);
- echo $CI->lang->line('PRIMARY');
- 
- $dataa = array(
-    'name'        => 'registration[secondary]',
-    'id'          => 'is_secondary',
-    'value'       => '1',
-    'checked'     => FALSE,
-    'style'       => 'margin:3px',
-    );
+                 <?php
 
- echo form_checkbox($dataa);
- echo $CI->lang->line('SECONDARY');
- 
- 
- $dataa = array(
-    'name'        => 'registration[higher]',
-    'id'          => 'is_higher',
-    'value'       => '1',
-    'checked'     => FALSE,
-    'style'       => 'margin:3px',
-    );
+                 /*
 
- echo form_checkbox($dataa);
- echo $CI->lang->line('HIGHER'); 
- ?>
-              
-   </td>
-  </tr>
-  
-   <tr>
-       <td>
-           <label class="control-label pull-left"><?php echo $CI->lang->line('SCHOOL_NAME'); ?><span style="color:#FF0000">*</span></label>
-    <?php
-    $data = array(
-        'name'          => 'registration[institute]',
-        'id'            => 'institute',
-        'placeholder'   => $this->lang->line('SCHOOL_NAME'),
-        'size'          => '60',
-);
+                 $dataa = array(
+                 'name'        => 'registration[primary]',
+                 'id'          => 'is_primary',
+                 'value'       => '1',
+                 'checked'     => TRUE,
+                 'style'       => 'margin:3px',
+                 );
 
-echo form_input($data);
-    ?>
-       </td>
-       <td>
- <label class="control-label pull-left"><?php echo $CI->lang->line('SCHOOL_EMAIL'); ?><span style="color:#FF0000">*</span></label>
-    <?php
-    $data = array(
-        'name'          => 'registration[email]',
-        'id'            => 'email',
-        'placeholder'   => $this->lang->line('SCHOOL_EMAIL'),
-        'size'          => '60',
-);
+                 echo form_checkbox($dataa);
+                 echo $CI->lang->line('PRIMARY');
 
-echo form_input($data);
-    ?>          
-       </td>
-       <td>
-           
-   <label class="control-label pull-left"><?php echo $CI->lang->line('SCHOOL_MOBILE'); ?><span style="color:#FF0000">*</span></label>
-    <?php
-    $data = array(
-        'name'          => 'registration[mobile]',
-        'id'            => 'mobile',
-        'placeholder'   => $this->lang->line('SCHOOL_MOBILE'),
-        'size'          => '60',
-);
+                 $dataa = array(
+                 'name'        => 'registration[secondary]',
+                 'id'          => 'is_secondary',
+                 'value'       => '1',
+                 'checked'     => FALSE,
+                 'style'       => 'margin:3px',
+                 );
 
-echo form_input($data);
-    ?>        
-       </td>
-  </tr>
-  
-  <tr>
-      <td>
-     <label class="control-label pull-left"><?php echo $CI->lang->line('SCHOOL_EM'); ?><span style="color:#FF0000">*</span></label>
-    <?php
-    $data = array(
-        'name'          => 'registration[em]',
-        'id'            => 'mobile',
-        'placeholder'   => $this->lang->line('SCHOOL_EM'),
-        'size'          => '60',
-);
+                 echo form_checkbox($dataa);
+                 echo $CI->lang->line('SECONDARY');
 
-echo form_input($data);
-    ?>     
-      </td>
-     <td>
-     <label class="control-label pull-left registrationwidth"><?php echo $CI->lang->line('SCHOOL_PASSWORD'); ?><span style="color:#FF0000">*</span></label>
-    <?php
-    $data = array(
-        'name'          => 'registration[password]',
-        'id'            => 'password',
-        'placeholder'   => $this->lang->line('SCHOOL_PASSWORD'),
-        'size'          => '60',
-);
 
-echo form_password($data);
-    ?>     
-      </td>
-       <td>
-           <label class="control-label pull-left registrationwidth"><?php echo $CI->lang->line('SCHOOL_RE_PASSWORD'); ?><span style="color:#FF0000">*</span></label>
-           <?php
-           $data = array(
-               'name'          => 'registration[repassword]',
-               'id'            => 'password',
-               'placeholder'   => $this->lang->line('SCHOOL_RE_PASSWORD'),
-               'size'          => '60',
-           );
+                 $dataa = array(
+                 'name'        => 'registration[higher]',
+                 'id'          => 'is_higher',
+                 'value'       => '1',
+                 'checked'     => FALSE,
+                 'style'       => 'margin:3px',
+                 );
 
-           echo form_password($data);
-           ?>
-           <?php
+                 echo form_checkbox($dataa);
+                 echo $CI->lang->line('HIGHER');
+                 */
 
-           ?>
-      </td>
-  </tr>
-  
-</table>
-
-             
-             
-
-              
-             <?php
+                 ?>
+                <input type="submit" style="cursor:pointer; margin-right: 37px !important; float: left; margin-left: 10px;" class="myButton" id="submitRegistration" name="submitRegistration" value="আবেদন করুন<?php //echo $this->lang->line('SAVE');?>" />
+            </form>
             
-     /*      
-             
-             $dataa = array(
-    'name'        => 'registration[primary]',
-    'id'          => 'is_primary',
-    'value'       => '1',
-    'checked'     => TRUE,
-    'style'       => 'margin:3px',
-    );
-
-echo form_checkbox($dataa);
- echo $CI->lang->line('PRIMARY');
- 
- $dataa = array(
-    'name'        => 'registration[secondary]',
-    'id'          => 'is_secondary',
-    'value'       => '1',
-    'checked'     => FALSE,
-    'style'       => 'margin:3px',
-    );
-
-echo form_checkbox($dataa);
- echo $CI->lang->line('SECONDARY');
- 
- 
- $dataa = array(
-    'name'        => 'registration[higher]',
-    'id'          => 'is_higher',
-    'value'       => '1',
-    'checked'     => FALSE,
-    'style'       => 'margin:3px',
-    );
-
-echo form_checkbox($dataa);
- echo $CI->lang->line('HIGHER');
- */
- 
-             ?>
-         <input type="submit" style="cursor:pointer; margin-right: 37px !important; float: left; margin-left: 10px;" class="myButton" id="submitRegistration" name="submitRegistration" value="আবেদন করুন<?php //echo $this->lang->line('SAVE');?>" />
-      </form> 
-            
-            </div>
+        </div>
         <div class="col-md-4 ">
             <div class="control-group heloregistration">
-                 <h3 style="text-align: left;padding-left: 15px;">বিদ্যালয় নিবন্ধনের নির্দেশাবলীঃ</h3>
-                            <ul>
-                                <li>১ম ধাপঃ প্রথমে বিভাগ নির্বাচন করুন।</li>
-                                <li>২য় ধাপঃ জেলা নির্বাচন করুন।।</li>
-                                <li>৩য় ধাপঃ উপজেলা নির্বাচন করুন।</li>
-                                <li>৪র্থ ধাপঃ বিদ্যালয়ের ধরন নির্বাচন করুন।</li>
-                                <li>৫ম ধাপঃ বিদ্যালয়ের স্তর নির্বাচন করুন।।</li>
-                                <li>৬ষ্ঠ ধাপঃ বিদ্যালয়ের নাম লিখুন।</li>
-                                <li>৭ম ধাপঃ বিদ্যালয়ের ইমেইল ঠিকানা লিখুন। এই ইমেইলটি পরবর্তিতে ইউজার আইডি হিসাবে গণ্য হবে ।</li>
-                                <li>৮ম ধাপঃ মোবাইল নম্বর লিখুন।</li>
-                                <li>৯ম ধাপঃ পাসওয়ার্ড লিখুন।</li>
-                                <li>১০ম ধাপঃ "আবেদন করুন" এ ক্লিক করুন ।</li>
-                            </ul>
-                        </div>
+                <h3 style="text-align: left;padding-left: 15px;">বিদ্যালয় নিবন্ধনের নির্দেশাবলীঃ</h3>
+                <ul>
+                    <li>১ম ধাপঃ প্রথমে বিভাগ নির্বাচন করুন।</li>
+                    <li>২য় ধাপঃ জেলা নির্বাচন করুন।।</li>
+                    <li>৩য় ধাপঃ উপজেলা নির্বাচন করুন।</li>
+                    <li>৪র্থ ধাপঃ বিদ্যালয়ের ধরন নির্বাচন করুন।</li>
+                    <li>৫ম ধাপঃ বিদ্যালয়ের স্তর নির্বাচন করুন।।</li>
+                    <li>৬ষ্ঠ ধাপঃ বিদ্যালয়ের নাম লিখুন।</li>
+                    <li>৭ম ধাপঃ বিদ্যালয়ের ইমেইল ঠিকানা লিখুন। এই ইমেইলটি পরবর্তিতে ইউজার আইডি হিসাবে গণ্য হবে ।</li>
+                    <li>৮ম ধাপঃ মোবাইল নম্বর লিখুন।</li>
+                    <li>৯ম ধাপঃ পাসওয়ার্ড লিখুন।</li>
+                    <li>১০ম ধাপঃ "আবেদন করুন" এ ক্লিক করুন ।</li>
+                </ul>
+            </div>
         </div>
     </div>
     

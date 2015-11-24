@@ -60,6 +60,8 @@ class Institute extends Root_Controller
         }
         $this->current_action = 'list';
         $ajax['status'] = true;
+        $data['page']="inner_page";
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",$data,true));
         $ajax['system_content'][] = array("id" => "#system_wrapper_top_menu", "html" => $this->load_view("top_menu", "", true));
         $ajax['system_content'][] = array("id" => "#system_wrapper", "html" => $this->load_view("institute/list", "", true));
 
@@ -72,21 +74,19 @@ class Institute extends Root_Controller
 
     private function system_listinactive()
     {
-
-        //     if($this->permissions['list'])
-        //     {
-        if ($this->message) {
+        if ($this->message)
+        {
             $ajax['system_message'] = $this->message;
 
         }
         //$this->current_action='list';
         $ajax['status'] = true;
+        $data['page']="inner_page";
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",$data,true));
         $ajax['system_content'][] = array("id" => "#system_wrapper_top_menu", "html" => $this->load_view("top_menu", "", true));
         $ajax['system_content'][] = array("id" => "#system_wrapper", "html" => $this->load_view("institute/listinactive", "", true));
+        $ajax['system_page_url']=$this->get_encoded_url('institute/institute/index/inactive');
         $this->jsonReturn($ajax);
-
-        //      }
-
     }
 
     private function system_edit($id)
@@ -106,9 +106,11 @@ class Institute extends Root_Controller
         //     $data['title'] = $this->lang->line('QUESTION_DETAIL');
         $data['institute'] = $this->Institute_model->get_institute_data($id);
         $ajax['status'] = true;
-
+        $data['page']="inner_page";
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header",$data,true));
         $ajax['system_content'][] = array("id" => "#system_wrapper_top_menu", "html" => $this->load_view("top_menu", "", true));
         $ajax['system_content'][] = array("id" => "#system_wrapper", "html" => $this->load_view("institute/edit", $data, true));
+        $ajax['system_page_url']=$this->get_encoded_url('institute/institute/index/edit/'.$id);
         $this->jsonReturn($ajax);
         //      }
 
@@ -144,7 +146,14 @@ class Institute extends Root_Controller
         $user = User_helper::get_user();
         $user_id = $user->id;
         $id = $this->input->post("instituteid");
-        if ($id > 0) {
+        if(!$this->check_validation_registration_approved())
+        {
+            $ajax['status']=false;
+            $ajax['system_message']=$this->message;
+            $this->jsonReturn($ajax);
+        }
+        if ($id > 0)
+        {
 
             $data = array(
                 'status' => $this->input->post('registration[status]'),
@@ -160,12 +169,12 @@ class Institute extends Root_Controller
             if ($this->input->post('registration[status]') == 2):
                 $CI =& get_instance();
                 $this->db->where('id', $id);
-//here we select every clolumn of the table
+                //here we select every clolumn of the table
                 $q = $this->db->get($CI->config->item('table_institute'));
                 $datainstitute = $q->result_array();
-//print_r($datainstitute);
-//echo $datainstitute->name;
-//$datainstitute[0]['name'];
+                //print_r($datainstitute);
+                //echo $datainstitute->name;
+                //$datainstitute[0]['name'];
                 $datauser = array(
                     'username' => $datainstitute[0]['email'],
                     'password' => md5($datainstitute[0]['inipassword']),
@@ -220,12 +229,10 @@ class Institute extends Root_Controller
                 $this->db->update($CI->config->item('table_institute'), $datalast);
             endif;
 
-//$ajax['system_message']=$this->lang->line("SUCESS_MESSAGE");
+            //$ajax['system_message']=$this->lang->line("SUCESS_MESSAGE");
             //$this->message=$this->lang->line("SUCESS_MESSAGE");
 
             //$this->message=$this->lang->line("SUCESS_MESSAGE");
-
-
         }
         //$ajax['status']=false;
         $this->message = $this->lang->line("MSG_APPROVED_SUCCESS");
@@ -236,7 +243,6 @@ class Institute extends Root_Controller
 
     public function classadd()
     {
-
         $user = User_helper::get_user();
         //   print_r($user);
         $user_id = $user->id;
@@ -379,6 +385,20 @@ class Institute extends Root_Controller
         $this->jsonReturn($ajax);
         //  redirect('/institute/institute/classadd', 'refresh');
 
+    }
+
+    private function check_validation_registration_approved()
+    {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('registration[status]',$this->lang->line('APPROVED'),'required');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->message=validation_errors();
+            return false;
+        }
+        return true;
     }
 
 }

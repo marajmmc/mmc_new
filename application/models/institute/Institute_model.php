@@ -415,4 +415,55 @@ public function zilausers($zilaid, $groupid){
         return $results;
     }
 
+    public function check_division($division_id)
+    {
+        $CI =& get_instance();
+        $CI->db->from($CI->config->item('table_divisions'));
+        $CI->db->where('divid', $division_id);
+        $results = $CI->db->get()->result_array();
+        if(!$results)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public function check_zilla($division_id, $zilla_id)
+    {
+        $CI =& get_instance();
+        $CI->db->from($CI->config->item('table_zillas'));
+        $CI->db->where('divid', $division_id);
+        $CI->db->where('zillaid', $zilla_id);
+        $results = $CI->db->get()->result_array();
+        if(!$results)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public function check_upazilla($zilla_id, $upazilla_id)
+    {
+        $CI =& get_instance();
+        $CI->db->from($CI->config->item('table_upazilas'));
+        $CI->db->where('zillaid', $zilla_id);
+        $CI->db->where('upazilaid', $upazilla_id);
+        $results = $CI->db->get()->result_array();
+
+        if(!$results)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
 }

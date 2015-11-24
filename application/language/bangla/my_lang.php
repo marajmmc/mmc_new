@@ -344,6 +344,7 @@ $lang['COMMU_MESSAGE']='বার্তা';
 $lang['MESSAGE_DATE']='বার্তা প্রেরণের তারিখ';
 $lang['MESSAGE_SENDER']='বার্তা প্রেরক ';
 $lang['APPROVED']='অনুমোদন ';
+$lang['DISCARD']='বাতিল';
 $lang['MSG_APPROVED_SUCCESS'] = 'সফল ভাবে অনুমোদন হয়েছে। ';
 $lang['SCHOOL_CLASS_INFORMATION_SUBMITED_NOT'] = 'আপনার প্রতিবেদন দাখিল  হয়েছে হয়নি । ';
 
