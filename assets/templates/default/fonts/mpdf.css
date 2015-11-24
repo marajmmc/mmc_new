@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Nikosh';
+    src: url('Nikosh.eot');
+    src: local('Nikosh'),
+    url('Nikosh.woff') format('woff'),
+    url('Nikosh.svg#svgFontName') format('svg');
+}
+@font-face {
+    font-family: 'NikoshBAN';
+    src: url('NikoshBAN.eot');
+    src: local('NikoshBAN'),
+    url('NikoshBAN.woff') format('woff'),
+    url('NikoshBAN.svg#svgFontName') format('svg');
+}
