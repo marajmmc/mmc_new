@@ -15,7 +15,7 @@ $user = User_helper::get_user();
 ?>
 <div class="constant">
     <div class="row" style="margin-top: 30px;">
-        
+
         <?php
      //   echo $user->user_group_id;
         if($user->user_group_id==$this->config->item('USER_GROUP_DIVISION_1'))

@@ -208,15 +208,15 @@ $(".addCF").click(function(){
          if($institute['is_higher']==1){
             echo '<option value="7">উচ্চ মাধ্যমিক/ আলীম</option>';
         }
-        ?></select></td><td><select onchange="getclassesubject('+ num +');" name="classesid[]" id="classesid'+ num +'" class="selectbox-1 zilla validate[required]"> <option value=""><?php echo $this->lang->line('SELECT');?></option></select></td><td><input type="text" name="cladddate[]" class="datepicker" value="<?php echo date("Y-m-d"); ?>"/>&nbsp;&nbsp;<a href="javascript:void(0);" class="remCF external btn btn-danger">বাতিল করুন </a></td></tr><tr><td colspan="3"><div class="classesname" id="classesname'+ num +'"></div></td></tr>');
-    num = num + 1;     
+        ?></select></td><td><select onchange="getclassesubject('+ num +');" name="classesid[]" id="classesid'+ num +'" class="selectbox-1 zilla validate[required]"> <option value=""><?php echo $this->lang->line('SELECT');?></option></select></td><td><input type="text" name="cladddate[]" class="datepicker" value="<?php echo date("Y-m-d"); ?>"/>&nbsp;&nbsp;<a href="javascript:void(0);" class="remCF external btn btn-danger">বাতিল করুন </a></td></tr><tr class="removeclas'+ num +'"><td colspan="3"><div class="classesname" id="classesname'+ num +'"></div></td></tr>');
+    num = num + 1;
     $('.datepicker').Zebra_DatePicker();
 	});
         
     $("#customFields").on('click','.remCF',function(){
         $(this).parent().parent().remove();
     });
-    
+
       $('.datepicker').Zebra_DatePicker();
 });
 

@@ -16,7 +16,7 @@ $config['dcms_upload']['notice']='images/notice';
 
 $config['SUPER_ADMIN_GROUP_ID'] = 1; 
 
-$config['USER_GROUP_A2I'] = 2;  // A2i Group
+$config['A_TO_I_GROUP_ID'] = 2;  // A2i Group
 
 $config['USER_GROUP_MINISTRY_1'] = 3;  // Ministry 1 Group
 $config['USER_GROUP_MINISTRY_2'] = 4;  // Ministry 2 Group

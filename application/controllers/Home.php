@@ -856,4 +856,11 @@ public function getUpazilacheckbox()
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/help",'',true));
         $this->jsonReturn($ajax);
     }
+
+    public function monthlyreport(){
+
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home/monthlyreport",'',true));
+        $this->jsonReturn($ajax);
+
+    }
 }
