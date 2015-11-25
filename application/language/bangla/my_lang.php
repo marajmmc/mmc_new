@@ -347,6 +347,10 @@ $lang['APPROVED']='অনুমোদন ';
 $lang['DISCARD']='বাতিল';
 $lang['MSG_APPROVED_SUCCESS'] = 'সফল ভাবে অনুমোদন হয়েছে। ';
 $lang['SCHOOL_CLASS_INFORMATION_SUBMITED_NOT'] = 'আপনার প্রতিবেদন দাখিল  হয়েছে হয়নি । ';
+$lang['MMC_USE_GENERAL_LAST_MONTH'] = 'গত মাসে এম এম সি ব্যবহারকারী (সাধারন) ';
+$lang['MMC_USE_MADRASHA_LAST_MONTH'] = 'গত মাসে এম এম সি ব্যবহারকারী (মাদ্রাসা) ';
+$lang['MMC_USE_GENERAL_LAST_DAY'] = 'গতকালের এম এম সি ব্যবহারকারী (সাধারন) ';
+$lang['MMC_USE_MADRASHA_LAST_DAY'] = 'গতকালের এম এম সি ব্যবহারকারী (মাদ্রাসা) ';
 
 
 

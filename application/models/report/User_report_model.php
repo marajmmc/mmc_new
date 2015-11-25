@@ -11,7 +11,7 @@ class User_report_model extends CI_Model
         // all load model
     }
 
-    public function get_general_institute_user_list($division, $zilla, $upazila, $union, $status, $education_type)
+    public function get_approved_institute_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, $education_type)
     {
         $CI =& get_instance();
         //$user=User_helper::get_user();
@@ -56,8 +56,6 @@ class User_report_model extends CI_Model
             institute.`name`,
             institute.`code`,
             institute.education_type_ids,
-            institute.mobile,
-            institute.email,
             institute.divid,
             institute.zillaid,
             institute.upozillaid,
@@ -78,7 +76,7 @@ class User_report_model extends CI_Model
 
         $this->db->where('institute.education_type_ids',$education_type);
         $this->db->where('institute.status', $this->config->item('STATUS_ACTIVE'));
-        //$this->db->where("institute.applied_date between '$from_date' AND '$to_date' ");
+        $this->db->where("institute.applied_date between '$from_date' AND '$to_date' ");
 
         //$this->db->group_by('divisions.divid, zillas.zillaid, upa_zilas.upazilaid');
         $this->db->order_by('divisions.divid, zillas.zillaid, upa_zilas.upazilaid','ASC');

@@ -4,6 +4,24 @@ $user=User_helper::get_user();
 //echo "<pre>";
 //print_r($user);
 //echo "</pre>";
+$month_ini = new DateTime("first day of last month");
+$month_end = new DateTime("last day of last month");
+$from_date=$month_ini->format('Y-m-d');
+$to_date=$month_end->format('Y-m-d');
+
+
+$general_institute=Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','GENERAL');
+$madrasha_institute=Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','MADRASHA');
+$total_institute=$general_institute+$madrasha_institute;
+
+$general_institute_primary=Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'PRIMARY','GENERAL');
+$general_institute_secondary=Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'SECONDARY','GENERAL');
+$general_institute_intermediate=Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'INTERMEDIATE','GENERAL');
+
+$madrasha_institute_primary=Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'PRIMARY','MADRASHA');
+$madrasha_institute_secondary=Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'SECONDARY','MADRASHA');
+$madrasha_institute_intermediate=Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'INTERMEDIATE','MADRASHA');
+
 ?>
 
 <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/dashboard.css">
@@ -11,106 +29,81 @@ $user=User_helper::get_user();
 <div id="system_content" class="system_content col-sm-12 text-center" style="margin-top: 5px;">
 
     <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2 bg1caf9a">
+        <div class="shadow curved-2 bg8175c7">
             <img src="<?php echo site_url('images/dashboard/1-48.png'); ?>" style="" />
 
+            <h4><span><?php echo $this->lang->line('INSTITUTE');?></span>  </h4>
+            <?php echo $this->lang->line('NUMBER_OF_APPROVED_ALL_INSTITUTE');?>: <?php echo Dashboard_helper::bn2enNumber($total_institute); ?><br />
+            <?php echo $this->lang->line('NUMBER_OF_APPROVED_GENERAL_INSTITUTE');?>: <?php echo Dashboard_helper::bn2enNumber($general_institute); ?><br />
+            <?php echo $this->lang->line('NUMBER_OF_APPROVED_MADRASHA_INSTITUTE');?>: <?php echo Dashboard_helper::bn2enNumber($madrasha_institute); ?><br />
+        </div>
+    </div>
 
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_ALL_INSTITUTE');?></span>( <?php //echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'))); ?>)</h4>
+
+    <div class="system_content col-md-3 text-center">
+        <div class="shadow curved-2 bgd9534f">
+            <img src="<?php echo site_url('images/dashboard/mmc.png'); ?>" style="" />
+            <?php
+            $general_primary_level=Dashboard_helper::get_mmc_use_general_level_wise('GENERAL','PRIMARY',$from_date,$to_date);
+            $general_secondary_level=Dashboard_helper::get_mmc_use_general_level_wise('GENERAL','SECONDARY',$from_date,$to_date);
+            $general_intermediate_level=Dashboard_helper::get_mmc_use_general_level_wise('GENERAL','INTERMEDIATE',$from_date,$to_date);
+
+            ?>
+            <h4><span><?php echo $this->lang->line('MMC_USE_GENERAL_LAST_MONTH');?></span>  </h4>
+            <?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($general_primary_level*100)/$general_institute_primary,2)); ?> %<br />
+            <?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($general_secondary_level*100)/$general_institute_secondary,2)); ?> %<br />
+            <?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($general_intermediate_level*100)/$general_institute_intermediate,2)); ?> %<br />
         </div>
     </div>
 
     <div class="system_content col-md-3 text-center">
         <div class="shadow curved-2 bgd9534f">
-            <img src="<?php echo site_url('images/dashboard/315-48.png'); ?>" style="" />
-
-
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_GENERAL_INSTITUTE');?></span>( <?php //echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','GENERAL')); ?>)</h4>
-        </div>
-    </div>
-
-    <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2 bg428bca">
-            <img src="<?php echo site_url('images/dashboard/114-48.png'); ?>" style="" />
-
-
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_APPROVED_MADRASHA_INSTITUTE');?></span>( <?php //echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'','MADRASHA')); ?>)</h4>
-        </div>
-    </div>
-
-    <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2 bg1d2939">
-            <img src="<?php echo site_url('images/dashboard/2-48.png'); ?>" style="" />
-
-
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?></span>( <?php //echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY")); ?> )</h4>
-        </div>
-    </div>
-
-    <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2 bgff6c60">
-            <img src="<?php echo site_url('images/dashboard/9-48.png'); ?>" style="" />
-
-
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?> </span>( <?php //echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY")); ?> )</h4>
-        </div>
-    </div>
-
-    <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2 bgf0ad4e">
-            <img src="<?php echo site_url('images/dashboard/3-48.png'); ?>" style="" />
-
-
-            <h4><span><?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>( <?php //echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE")); ?> )</h4>
-        </div>
-    </div>
-
-    <div class="system_content col-md-3 text-center">
-        <div class="shadow curved-2 bg8175c7">
             <img src="<?php echo site_url('images/dashboard/mmc.png'); ?>" style="" />
             <?php
-            //$primary = Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), 'PRIMARY', 'GENERAL');
+            $madrasha_primary_level=Dashboard_helper::get_mmc_use_general_level_wise('MADRASHA','PRIMARY',$from_date,$to_date);
+            $madrasha_secondary_level=Dashboard_helper::get_mmc_use_general_level_wise('MADRASHA','SECONDARY',$from_date,$to_date);
+            $madrasha_intermediate_level=Dashboard_helper::get_mmc_use_general_level_wise('MADRASHA','INTERMEDIATE',$from_date,$to_date);
 
-            //$mmcPRIMARY = Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY", 'GENERAL');
-            //$percentPRIMARY = $primary * $mmcPRIMARY;
-
-            //$mmcSECONDARY = Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY", 'GENERAL');
-            //$SECONDARY = Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), 'SECONDARY', 'GENERAL');
-            //$percentSECONDARY = $SECONDARY * $mmcSECONDARY;
-            //
-            //$mmcINTERMEDIATE = Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE", 'GENERAL');
-            //$INTERMEDIATE = Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'), 'INTERMEDIATE', 'GENERAL');
-            //
-            //$percenINTERMEDIATE = $INTERMEDIATE * $mmcINTERMEDIATE;
             ?>
-            <h4><span>এমএমসি  ব্যবহারকারি সাধারন<?php //echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>  </h4>
-            প্রাথমিক স্তর <?php //echo Dashboard_helper::bn2enNumber(number_format($percentPRIMARY/100, 2)).'%'; ?><br />
-            মাধ্যমিক স্তর <?php //echo Dashboard_helper::bn2enNumber(number_format($percentSECONDARY/100, 2)).'%'; ?><br />
-            উচ্চমাধ্যমিক স্তর <?php //echo Dashboard_helper::bn2enNumber(number_format($percenINTERMEDIATE/100, 2)).'%'; ?><br />
+            <h4><span><?php echo $this->lang->line('MMC_USE_MADRASHA_LAST_MONTH');?></span>  </h4>
+            <?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($madrasha_primary_level*100)/$madrasha_institute_primary,2)); ?> %<br />
+            <?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($madrasha_secondary_level*100)/$madrasha_institute_secondary,2)); ?> %<br />
+            <?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($madrasha_intermediate_level*100)/$madrasha_institute_intermediate,2)); ?> %<br />
         </div>
     </div>
+    <?php
+    $from_date_day=date('Y-m-d',strtotime("-1 days"));
+    $to_date_day=date('Y-m-d',strtotime("-1 days"));
+    ?>
     <div class="system_content col-md-3 text-center">
         <div class="shadow curved-2 bg92cf5c">
             <img src="<?php echo site_url('images/dashboard/mmc.png'); ?>" style="" />
             <?php
-            //$primary= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'PRIMARY','MADRASHA');
-            //
-            //$mmcPRIMARY= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "PRIMARY", 'MADRASHA');
-            //$percentPRIMARY= $primary*$mmcPRIMARY;
-            //
-            //$mmcSECONDARY= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "SECONDARY", 'MADRASHA');
-            //$SECONDARY= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'SECONDARY','MADRASHA');
-            //$percentSECONDARY= $SECONDARY*$mmcSECONDARY;
-            //
-            //$mmcINTERMEDIATE= Dashboard_helper::get_all_mmc_institute($CI->config->item('STATUS_ACTIVE'), "INTERMEDIATE", 'MADRASHA');
-            //$INTERMEDIATE= Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_ACTIVE'),'INTERMEDIATE','MADRASHA');
-            //
-            //$percenINTERMEDIATE=$INTERMEDIATE*$mmcINTERMEDIATE;
-            ?>
+            $general_primary_level=Dashboard_helper::get_mmc_use_general_level_wise('GENERAL','PRIMARY',$from_date_day,$to_date_day);
+            $general_secondary_level=Dashboard_helper::get_mmc_use_general_level_wise('GENERAL','SECONDARY',$from_date_day,$to_date_day);
+            $general_intermediate_level=Dashboard_helper::get_mmc_use_general_level_wise('GENERAL','INTERMEDIATE',$from_date_day,$to_date_day);
 
-            <h4><span>এমএমসি  ব্যবহারকারি সাধারন<?php //echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?></span>  </h4>
-            প্রাথমিক স্তর <?php //echo Dashboard_helper::bn2enNumber(number_format($percentPRIMARY/100, 2)).'%'; ?><br />
-            মাধ্যমিক স্তর <?php //echo Dashboard_helper::bn2enNumber(number_format($percentSECONDARY/100, 2)).'%'; ?><br />
-            উচ্চমাধ্যমিক স্তর <?php //echo Dashboard_helper::bn2enNumber(number_format($percenINTERMEDIATE/100, 2)).'%'; ?><br />
+            ?>
+            <h4><span><?php echo $this->lang->line('MMC_USE_GENERAL_LAST_DAY');?></span>  </h4>
+            <?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($general_primary_level*100)/$general_institute_primary,2)); ?> %<br />
+            <?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($general_secondary_level*100)/$general_institute_secondary,2)); ?> %<br />
+            <?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($general_intermediate_level*100)/$general_institute_intermediate,2)); ?> %<br />
+        </div>
+    </div>
+
+    <div class="system_content col-md-3 text-center">
+        <div class="shadow curved-2 bg92cf5c">
+            <img src="<?php echo site_url('images/dashboard/mmc.png'); ?>" style="" />
+            <?php
+            $madrasha_primary_level=Dashboard_helper::get_mmc_use_general_level_wise('MADRASHA','PRIMARY',$from_date_day,$to_date_day);
+            $madrasha_secondary_level=Dashboard_helper::get_mmc_use_general_level_wise('MADRASHA','SECONDARY',$from_date_day,$to_date_day);
+            $madrasha_intermediate_level=Dashboard_helper::get_mmc_use_general_level_wise('MADRASHA','INTERMEDIATE',$from_date_day,$to_date_day);
+
+            ?>
+            <h4><span><?php echo $this->lang->line('MMC_USE_MADRASHA_LAST_DAY');?></span>  </h4>
+            <?php echo $this->lang->line('NUMBER_OF_PRIMARY_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($madrasha_primary_level*100)/$madrasha_institute_primary,2)); ?> %<br />
+            <?php echo $this->lang->line('NUMBER_OF_SECONDARY_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($madrasha_secondary_level*100)/$madrasha_institute_secondary,2)); ?> %<br />
+            <?php echo $this->lang->line('NUMBER_OF_INTERMEDIATE_LEVEL');?>: <?php echo System_helper::Get_Eng_to_Bng(number_format(($madrasha_intermediate_level*100)/$madrasha_institute_intermediate,2)); ?> %<br />
         </div>
     </div>
 
@@ -118,54 +111,8 @@ $user=User_helper::get_user();
 
 <br/>
 <div id="system_content" class="system_content col-sm-12 text-center" style="margin-top: 15px;">
-    <div class="system_content col-sm-2 text-center" style="margin-top: -13px;">
 
-        <ul id="dashboard">
-
-            <li colore="red">
-                <div class="contenuto">
-                    <span class="titolo"><?php echo $this->lang->line('INSTITUTE');?></span>
-                    <span class="descrizione"><?php echo $this->lang->line('NUMBER_OF_APPLIED_INSTITUTE');?></span>
-                    <span class="valore"><?php
-                        //   echo Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_INACTIVE'), ""));
-                        //echo sprintf($CI->lang->line('TI'), Dashboard_helper::bn2enNumber(Dashboard_helper::get_all_applied_institute($CI->config->item('STATUS_INACTIVE'), ""))); ?></span>
-                </div>
-            </li>
-
-            <li colore="yellow">
-                <div class="contenuto">
-                    <span class="titolo"><?php echo $this->lang->line('TOTAL');?></span>
-                    <span class="descrizione"><?php echo $this->lang->line('NUMBER_OF_USERS');?></span>
-                    <span class="valore"><?php //echo sprintf($CI->lang->line('TI'), Dashboard_helper::bn2enNumber(Dashboard_helper::get_number_of_user())); ?></span>
-                </div>
-            </li>
-
-            <li colore="lime">
-                <div class="contenuto">
-                    <span class="titolo"><?php echo $this->lang->line('MMC_TOTAL');?></span>
-                    <span class="descrizione"><?php echo $this->lang->line('NUMBER_OF_USERS');?></span>
-                    <span class="valore"><?php //echo sprintf($CI->lang->line('TI'), Dashboard_helper::bn2enNumber(Dashboard_helper::get_number_of_mmc_user())); ?></span>
-                </div>
-            </li>
-            <li colore="orange">
-                <div class="contenuto">
-                    <span class="titolo"><?php echo $this->lang->line('YESTERDAY');?></span>
-                    <span class="descrizione"><?php echo $this->lang->line('NUMBER_OF_USERS');?></span>
-                    <span class="valore"><?php //echo sprintf($CI->lang->line('TI'), Dashboard_helper::bn2enNumber(Dashboard_helper::get_number_of_mmc_user("YESTERDAY"))); ?></span>
-                </div>
-            </li>
-
-            <!--            <li colore="emerald">-->
-            <!--                <div class="contenuto">-->
-            <!--                    <span class="titolo">--><?php //echo $this->lang->line('NUMBER_OF_UNION_YESTERDAY');?><!--</span>-->
-            <!--                    <span class="descrizione">কলমাকান্দা ডিজিটাল সেন্টার </span>-->
-            <!--                    <!-- <span class="valore"></span>	 -->
-            <!--                </div>-->
-            <!--            </li>-->
-        </ul>
-
-    </div>
-    <div class="system_content col-sm-7 text-center borderradius" style="margin-top: 5px; background: #fef4e5">
+    <div class="system_content col-sm-9 text-center borderradius" style="margin-top: 5px; background: #fef4e5">
         <div id="container" style="height: 400px"></div>
     </div>
 
@@ -230,6 +177,44 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
 <script>
     $(function ()
     {
+        Highcharts.theme = {
+            colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+            chart: {
+                backgroundColor: {
+                    linearGradient: [0, 0, 500, 500],
+                    stops: [
+                        [0, 'rgb(255, 255, 255)'],
+                        [1, 'rgb(240, 240, 255)']
+                    ]
+                },
+            },
+            title: {
+                style: {
+                    color: '#000',
+                    font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+                }
+            },
+            subtitle: {
+                style: {
+                    color: '#666666',
+                    font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+                }
+            },
+
+            legend: {
+                itemStyle: {
+                    font: '9pt Trebuchet MS, Verdana, sans-serif',
+                    color: 'black'
+                },
+                itemHoverStyle:{
+                    color: 'gray'
+                }
+            }
+        };
+
+        // Apply the theme
+        Highcharts.setOptions(Highcharts.theme);
+
         $('#container').highcharts({
             chart: {
                 type: 'column',
@@ -249,8 +234,10 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
                 categories: [<?php
                 if($high_chart_info):
              $index=0;
+             $total_value=0;
              foreach($high_chart_info as $element)
              {
+                $total_value+=$element['element_value'];
                 $element_name = Dashboard_helper::get_div_zilla_upazilla($element['element_name']);
                 if($index==0)
                 {
@@ -354,5 +341,7 @@ $pie_chart_info=Dashboard_helper::get_institute_type_list();
         });
 
     });
+
+    //$(document).ready(function(){$("#general_primary_level").html("<?php //echo $total_value;?>");})
 
 </script>

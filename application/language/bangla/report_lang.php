@@ -68,3 +68,6 @@ $lang['TOTAL_PARENTED'] = 'শতকরা';
 
 $lang['REPORT_GENERAL_INSTITUTE_USER_TITLE'] = 'সাধারণ শিক্ষা প্রতিষ্ঠানের ব্যবহারকারীর তালিকা';
 $lang['REPORT_MADRASHA_INSTITUTE_USER_TITLE'] = ' মাদ্রাসা  শিক্ষা প্রতিষ্ঠানের ব্যবহারকারীর তালিকা';
+$lang['REPORT_MONTHLY_MMC_USER_TITLE'] = ' মাসিক প্রতিবেদন ';
+$lang['TOTAL_SCHOOL'] = 'মোট স্কুল';
+$lang['TOTAL_MMC_USE'] = 'এম এম সি  ব্যবহার করেছে';
