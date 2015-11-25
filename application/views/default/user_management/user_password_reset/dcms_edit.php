@@ -52,32 +52,6 @@ $CI=& get_instance();
                                 <input type="password" name="user_detail[confirm_password]" value="" />
                             </td>
                         </tr>
-                        <tr>
-                            <td class="labelcell">
-                                <label><?php echo $this->lang->line('SECRET_QUESTION').': ' ;?></label>
-                            </td>
-                            <td class="fieldcell">
-                                <select name="user_detail[ques_id]" class="selectbox-1">
-                                    <option value=""><?php echo $CI->lang->line('SELECT');?></option>
-                                    <?php
-                                    foreach($questions as $question)
-                                    {
-                                        ?>
-                                        <option value="<?php echo $question['value'];?>" <?php if($question['value']==$password_detail['ques_id']){echo 'selected';}?>><?php echo $question['text'];?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="labelcell">
-                                <label><?php echo $this->lang->line('ANSWER').': ' ;?></label>
-                            </td>
-                            <td class="fieldcell">
-                                <input type="text" name="user_detail[ques_ans]" value="<?php echo $password_detail['ques_ans'];?>" />
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
                 <table class="signup table" width="100%">

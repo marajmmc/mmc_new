@@ -10,22 +10,13 @@ class User_password_reset_model extends CI_Model
         parent::__construct();
     }
 
-    public function get_users($uisc_type, $division, $zilla, $upazilla, $municipal, $municipalward, $citycorporation, $citycorporationward, $union, $user_id)
+    public function get_users($division, $zilla, $upazilla, $user_id)
     {
         $CI =& get_instance();
 
         $CI->db->from($CI->config->item('table_users').' users');
         $CI->db->select('users.*');
-        $CI->db->select('uiscinfos.uisc_name');
-        $CI->db->select('entrepreneur.entrepreneur_email, entrepreneur.entrepreneur_mobile, entrepreneur.entrepreneur_name');
 
-        $CI->db->join($CI->config->item('table_uisc_infos').' uiscinfos','uiscinfos.id = users.uisc_id','LEFT');
-        $CI->db->join($CI->config->item('table_entrepreneur_infos').' entrepreneur','entrepreneur.user_id = users.id','LEFT');
-
-        if($uisc_type>0)
-        {
-            $CI->db->where('users.uisc_type', $uisc_type);
-        }
         if($division>0)
         {
             $CI->db->where('users.division', $division);
@@ -38,32 +29,13 @@ class User_password_reset_model extends CI_Model
         {
             $CI->db->where('users.upazila', $upazilla);
         }
-        if($union>0)
-        {
-            $CI->db->where('users.union', $union);
-        }
-        if($municipal>0)
-        {
-            $CI->db->where('users.municipal', $municipal);
-        }
-        if($municipalward>0)
-        {
-            $CI->db->where('users.municipalward', $municipalward);
-        }
-        if($citycorporation>0)
-        {
-            $CI->db->where('users.citycorporation', $citycorporation);
-        }
-        if($citycorporationward>0)
-        {
-            $CI->db->where('users.citycorporationward', $citycorporationward);
-        }
-        if(strlen($user_id)>1)
+
+        if(!empty($user_id))
         {
             $CI->db->where('users.username', $user_id);
         }
 
-        $CI->db->where('users.user_group_id', $CI->config->item('UISC_GROUP_ID'));
+        $CI->db->where('users.user_group_id', $CI->config->item('USER_GROUP_INSTITUTE'));
 
         $results = $this->db->get()->result_array();
 

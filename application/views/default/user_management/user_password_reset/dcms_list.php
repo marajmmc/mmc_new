@@ -27,10 +27,10 @@ $CI=& get_instance();
             dataFields: [
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
-                { name: 'uisc_name', type: 'string' },
-                { name: 'entrepreneur_name', type: 'string' },
-                { name: 'entrepreneur_email', type: 'string' },
-                { name: 'entrepreneur_mobile', type: 'string' }
+                { name: 'username', type: 'string' },
+                { name: 'name_bn', type: 'string' },
+                { name: 'email', type: 'string' },
+                { name: 'mobile', type: 'string' }
             ],
             id: 'id',
             url: url
@@ -54,10 +54,10 @@ $CI=& get_instance();
                 altrows: true,
                 autoheight: true,
                 columns: [
-                    { text: '<?php echo $CI->lang->line('UISC_NAME'); ?>', dataField: 'uisc_name',width:'30%'},
-                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'entrepreneur_name',width:'30%'},
-                    { text: '<?php echo $CI->lang->line('EMAIL'); ?>', dataField: 'entrepreneur_email',width:'19%'},
-                    { text: '<?php echo $CI->lang->line('MOBILE'); ?>', dataField: 'entrepreneur_mobile',width:'19%'}
+                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'username',width:'30%'},
+                    { text: '<?php echo $CI->lang->line('INSTITUTE_NAME'); ?>', dataField: 'name_bn',width:'30%'},
+                    { text: '<?php echo $CI->lang->line('EMAIL'); ?>', dataField: 'email',width:'19%'},
+                    { text: '<?php echo $CI->lang->line('MOBILE'); ?>', dataField: 'mobile',width:'19%'}
                 ]
             });
         <?php
