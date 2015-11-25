@@ -50,12 +50,17 @@ class User_use_mmc_report_model extends CI_Model
 
         }
 
+
+
+
+        return true;
+
         $result=array();
 
         if($channel==1)
         {
 
-            $this->db->where("institute.id not in (select institute_class_details.institude_id from institute_class_details where institute_class_details.class_date between '$from_date' AND '$to_date' )");
+            $this->db->where("institute.id not in (select institute_class_summary.institude_id from institute_class_summary where institute_class_summary.date between '$from_date' AND '$to_date' )");
             $this->db->order_by('divisions.divid, zillas.zillaid, upa_zilas.upazilaid, institute.id','ASC');
         }
         elseif($channel==2)
@@ -71,7 +76,7 @@ class User_use_mmc_report_model extends CI_Model
 
             if(!empty($class_number))
             {
-                $this->db->where("institute.id IN (select institute_class_details.institude_id from institute_class_details where institute_class_details.class_date between '$from_date' AND '$to_date' GROUP BY institude_id HAVING COUNT(institute_class_details.institude_id)>$class_number)");
+                $this->db->where("institute.id IN (select institute_class_summary.institude_id from institute_class_summary where institute_class_summary.date between '$from_date' AND '$to_date' GROUP BY institude_id HAVING COUNT(institute_class_summary.institude_id)>$class_number)");
             }
         }
         else

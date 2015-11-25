@@ -54,8 +54,8 @@ class User_use_mmc_report extends CI_Controller
             $data['title']=$this->lang->line("REPORT_USER_USE_MMC_TITLE");
 
             $data['reports']=$this->user_use_mmc_report_model->get_user_use_mmc_list($division, $zilla, $upazila, $union, $from_date, $to_date, $status, $this->config->item('INSTITUTE_GENERAL'), $channel, $class_number);
-            $data['number_of_user']=$this->user_use_mmc_report_model->get_total_user_use_mmc($division, $zilla, $upazila, $union, $from_date, $to_date, $status, $this->config->item('INSTITUTE_GENERAL'));
-            $data['number_of_institute']=$this->user_use_mmc_report_model->get_total_institute($division, $zilla, $upazila, $union, $status, $this->config->item('INSTITUTE_GENERAL'));
+            $data['number_of_user']='';//$this->user_use_mmc_report_model->get_total_user_use_mmc($division, $zilla, $upazila, $union, $from_date, $to_date, $status, $this->config->item('INSTITUTE_GENERAL'));
+            $data['number_of_institute']='';//$this->user_use_mmc_report_model->get_total_institute($division, $zilla, $upazila, $union, $status, $this->config->item('INSTITUTE_GENERAL'));
             $this->load->view('default/report/mmc_use_general/user_use_mmc_report',$data);
         }
         else
