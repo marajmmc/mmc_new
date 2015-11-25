@@ -51,12 +51,6 @@ class User_use_mmc_report_model extends CI_Model
         }
 
 
-
-
-        return true;
-
-        $result=array();
-
         if($channel==1)
         {
 

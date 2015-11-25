@@ -32,7 +32,7 @@ class User_password_reset_model extends CI_Model
 
         if(!empty($user_id))
         {
-            $CI->db->where('users.username', $user_id);
+            $CI->db->where("users.username like '%$user_id%'");
         }
 
         $CI->db->where('users.user_group_id', $CI->config->item('USER_GROUP_INSTITUTE'));
