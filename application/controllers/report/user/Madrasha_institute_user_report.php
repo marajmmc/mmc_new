@@ -50,7 +50,7 @@ class Madrasha_institute_user_report extends CI_Controller
 
             $data['title']=$this->lang->line("REPORT_MADRASHA_INSTITUTE_USER_TITLE");
 
-            $data['reports']=$this->user_report_model->get_general_institute_user_list($division, $zilla, $upazila, $union, $status, $this->config->item('INSTITUTE_MADRASHA'));
+            $data['reports']=$this->user_report_model->get_general_institute_user_list($division, $zilla, $upazila, $status, $this->config->item('INSTITUTE_MADRASHA'));
             $this->load->view('default/report/user/madrasha_institute_user_report',$data);
         }
         else
@@ -69,7 +69,7 @@ class Madrasha_institute_user_report extends CI_Controller
             //            $data['to_date']=$to_date;
             $data['report_status']=$status;
 
-            $data['reports']=$this->user_report_model->get_general_institute_user_list($division, $zilla, $upazila, $union, $status, $this->config->item('INSTITUTE_MADRASHA'));
+            $data['reports']=$this->user_report_model->get_general_institute_user_list($division, $zilla, $upazila, $status, $this->config->item('INSTITUTE_MADRASHA'));
             $html=$this->load->view('default/report/user/madrasha_institute_user_report',$data,true);
             //echo $html;
             System_helper::get_pdf($html);

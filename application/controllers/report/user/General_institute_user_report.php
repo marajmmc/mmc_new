@@ -50,7 +50,7 @@ class General_institute_user_report extends CI_Controller
 
             $data['title']=$this->lang->line("REPORT_GENERAL_INSTITUTE_USER_TITLE");
 
-            $data['reports']=$this->user_report_model->get_general_institute_user_list($division, $zilla, $upazila, $union, $status, $this->config->item('INSTITUTE_GENERAL'));
+            $data['reports']=$this->user_report_model->get_general_institute_user_list($division, $zilla, $upazila, $status, $this->config->item('INSTITUTE_GENERAL'));
             $this->load->view('default/report/user/general_institute_user_report',$data);
         }
         else
